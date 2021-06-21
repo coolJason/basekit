@@ -1,0 +1,2 @@
+include ':app',':base_kit'
+rootProject.name = "MGBase"

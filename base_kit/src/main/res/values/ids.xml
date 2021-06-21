@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="item_click_flag" type="id" />
+    <item name="tv_title_name" type="id" />
+    <item name="tv_left_text" type="id" />
+    <item name="iv_left_image" type="id" />
+    <item name="iv_right_image" type="id" />
+    <item name="iv_right_image_two" type="id" />
+    <item name="tv_right_text" type="id" />
+    <item name="tv_right_text_two" type="id" />
+    <item name="app_bar_layout" type="id" />
+    <item name="toolbar_title" type="id" />
+    <item name="toolbar_right" type="id" />
+    <item name="toolbar_right1" type="id" />
+    <item name="toolbar_right_text" type="id" />
+    <item name="toolbar_right_text1" type="id" />
+    <item name="pager" type="id" />
+    <item name="tabs" type="id" />
+    <item name="btn_back" type="id" />
+    <item name="fold_position" type="id" />
+    <item name="fold_data" type="id" />
+    <item name="facebook_app_id" type="string" />
+
+
+<!--    <item name="key_256" type="string" />-->
+<!--    <item name="key_970" type="string" />-->
+<!--    <item name="key_966" type="string" />-->
+<!--    <item name="key_66" type="string" />-->
+    <item name="accelarate_detail_high_end" type="color" />
+
+</resources>

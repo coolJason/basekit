@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="holo_red_light">#ffff4444</color>
+
+    <!--白色以及其百分比透明度-->
+    <color name="white">#FFFFFF</color>
+    <color name="color_white10">#1AFFFFFF</color>
+    <color name="color_white20">#33FFFFFF</color>
+    <color name="color_white30">#4DFFFFFF</color>
+    <color name="color_white40">#66FFFFFF</color>
+    <color name="color_white50">#80FFFFFF</color>
+    <color name="color_white60">#99FFFFFF</color>
+    <color name="color_white70">#B3FFFFFF</color>
+    <color name="color_white80">#CCFFFFFF</color>
+    <color name="color_white90">#E6FFFFFF</color>
+    <!--黑色以及其百分比透明度-->
+    <color name="black">#000000</color>
+    <color name="color_black10">#1A000000</color>
+    <color name="color_black20">#33000000</color>
+    <color name="color_black30">#4D000000</color>
+    <color name="color_black40">#66000000</color>
+    <color name="color_black50">#80000000</color>
+    <color name="color_black60">#99000000</color>
+    <color name="color_black70">#B3000000</color>
+    <color name="color_black80">#CC000000</color>
+    <color name="color_black85">#D9000000</color>
+    <color name="color_black90">#E6000000</color>
+</resources>

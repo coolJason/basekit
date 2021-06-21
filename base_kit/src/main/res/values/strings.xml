@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_choose_image">打开相册</string>
+    <string name="app_language_pref_key" translatable="false">app_language_pref_key</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="none_vip">VIP not opened</string>
+
+
+<!--    <string-array name="pref_language_titles" translatable="false">-->
+<!--        <item>@string/Language_ar</item>-->
+<!--        <item>@string/Language_cn</item>-->
+<!--        <item>@string/Language_cn_tw</item>-->
+<!--        <item>@string/Language_de</item>-->
+<!--        <item>@string/Language_en</item>-->
+<!--        <item>@string/Language_es</item>-->
+<!--        <item>@string/Language_es_la</item>-->
+<!--        <item>@string/Language_fr</item>-->
+<!--        <item>@string/Language_hi</item>-->
+<!--        <item>@string/Language_in</item>-->
+<!--        <item>@string/Language_it</item>-->
+<!--        <item>@string/Language_ja</item>-->
+<!--        <item>@string/Language_ko</item>-->
+<!--        <item>@string/Language_ms</item>-->
+<!--        <item>@string/Language_ph</item>-->
+<!--        <item>@string/Language_pt</item>-->
+<!--        <item>@string/Language_ru</item>-->
+<!--        <item>@string/Language_th</item>-->
+<!--        <item>@string/Language_tr</item>-->
+<!--        <item>@string/Language_vi</item>-->
+<!--    </string-array>-->
+
+
+    <string-array name="pref_language_titles" translatable="false">
+        <item>@string/Language_en</item>
+        <item>@string/Language_cn</item>
+        <item>@string/Language_cn_tw</item>
+        <item>@string/Language_de</item>
+        <item>@string/Language_es</item>
+        <!--        <item>@string/Language_es_la</item>-->
+        <item>@string/Language_fr</item>
+        <!--        <item>@string/Language_hi</item>-->
+        <item>@string/Language_in</item>
+        <item>@string/Language_it</item>
+        <!--        <item>@string/Language_ja</item>-->
+        <!--        <item>@string/Language_ko</item>-->
+        <item>@string/Language_ms</item>
+        <!--        <item>@string/Language_ph</item>-->
+        <item>@string/Language_pt</item>
+        <item>@string/Language_ru</item>
+        <item>@string/Language_th</item>
+        <!--        <item>@string/Language_tr</item>-->
+        <!--        <item>@string/Language_vi</item>-->
+
+    </string-array>
+
+<!--    <string-array name="pref_language_values" translatable="false">-->
+<!--        <item>ar</item>-->
+<!--        <item>zh</item>-->
+<!--        <item>zh-hant</item>-->
+<!--        <item>de</item>-->
+<!--        <item>en</item>-->
+<!--        <item>es</item>-->
+<!--        <item>es-la</item>-->
+<!--        <item>fr</item>-->
+<!--        <item>hi</item>-->
+<!--        <item>in</item>-->
+<!--        <item>it</item>-->
+<!--        <item>ja</item>-->
+<!--        <item>ko</item>-->
+<!--        <item>ms</item>-->
+<!--        <item>ph</item>-->
+<!--        <item>pt</item>-->
+<!--        <item>ru</item>-->
+<!--        <item>th</item>-->
+<!--        <item>tr</item>-->
+<!--        <item>vi</item>-->
+<!--    </string-array>-->
+
+    <string-array name="pref_language_values" translatable="false">
+        <item>en</item>
+        <item>zh</item>
+        <item>zh-hant</item>
+        <item>de</item>
+        <item>es</item>
+        <!--        <item>es-la</item>-->
+        <item>fr</item>
+        <!--        <item>hi</item>-->
+        <item>in</item>
+        <item>it</item>
+        <!--        <item>ja</item>-->
+        <!--        <item>ko</item>-->
+        <item>ms</item>
+        <!--        <item>ph</item>-->
+        <item>pt</item>
+        <item>ru</item>
+        <item>th</item>
+        <!--        <item>tr</item>-->
+        <!--        <item>vi</item>-->
+    </string-array>
+
+</resources>
