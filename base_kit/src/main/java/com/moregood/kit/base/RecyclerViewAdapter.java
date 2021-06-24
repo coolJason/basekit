@@ -31,6 +31,11 @@ public class RecyclerViewAdapter<T extends RecyclerViewHolder<D>, D> extends Rec
         notifyDataSetChanged();
     }
 
+    public void addDatas(List<D> datas) {
+        this.datas.addAll(datas);
+        notifyDataSetChanged();
+    }
+
     public List<D> getDatas() {
         return datas;
     }
