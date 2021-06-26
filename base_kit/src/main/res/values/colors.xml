@@ -3,7 +3,6 @@
     <color name="holo_red_light">#ffff4444</color>
 
     <!--白色以及其百分比透明度-->
-    <color name="white">#FFFFFF</color>
     <color name="color_white10">#1AFFFFFF</color>
     <color name="color_white20">#33FFFFFF</color>
     <color name="color_white30">#4DFFFFFF</color>
@@ -14,7 +13,6 @@
     <color name="color_white80">#CCFFFFFF</color>
     <color name="color_white90">#E6FFFFFF</color>
     <!--黑色以及其百分比透明度-->
-    <color name="black">#000000</color>
     <color name="color_black10">#1A000000</color>
     <color name="color_black20">#33000000</color>
     <color name="color_black30">#4D000000</color>
@@ -25,4 +23,74 @@
     <color name="color_black80">#CC000000</color>
     <color name="color_black85">#D9000000</color>
     <color name="color_black90">#E6000000</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="gray1">#FF111111</color>
+    <color name="gray2">#FF222222</color>
+    <color name="gray3">#FF333333</color>
+    <color name="gray4">#FF444444</color>
+    <color name="gray5">#FF555555</color>
+    <color name="gray6">#FF666666</color>
+    <color name="gray7">#FF777777</color>
+    <color name="gray8">#FF888888</color>
+    <color name="gray9">#FF999999</color>
+    <color name="graya">#FFAAAAAA</color>
+    <color name="grayb">#FFBBBBBB</color>
+    <color name="grayc">#FFCCCCCC</color>
+    <color name="grayd">#FFDDDDDD</color>
+    <color name="graye">#FFEEEEEE</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="green">#22BB9B</color>
+    <color name="black_3">#333333</color>
+
+    <color name="color_stroke">#e8e8e8</color>
+    <color name="line">#44000000</color>
+
+    <color name="color1">#f7f7f7</color>
+    <color name="color2">#FDFDFE</color>
+    <color name="color3">#EFEFEF</color>
+    <color name="color4">#f5f6f7</color>
+    <color name="color5">#888888</color>
+    <color name="color6">#EAF8F5</color>
+    <color name="color7">#00A47C</color>
+    <color name="color8">#2C3347</color>
+    <color name="color9">#FEE6E6</color>
+    <color name="color10">#FF5C5B</color>
+    <color name="color11">#9EA6AA</color>
+    <color name="color12">#FFE1DC</color>
+    <color name="color13">#E3F3F0</color>
+    <color name="color14">#6EC679</color>
+    <color name="color15">#FAEEE2</color>
+    <color name="color16">#F6F6F8</color>
+
+
+    <color name="color100">#C4CCD0</color>
+    <color name="color101">#B3FFFFFF</color>
+    <color name="color102">#FF3F3F3F</color>
+    <color name="color103">#FFF6D6A9</color>
+    <color name="color104">#ffbbbbbb</color>
+    <color name="color105">#FF8100</color>
+    <color name="color106">#1500A47C</color>
+    <color name="color107">#FF5C5B</color>
+    <color name="color108">#111111</color>
+    <color name="color109">#666666</color>
+    <color name="color110">#ABE5DA</color>
+    <color name="color111">#FF6EC679</color>
+    <color name="color112">#979797</color>
+    <color name="color113">#FFF9F9F9</color>
+
+
+    <color name="m40FE5002">#66FE5002</color>
+    <color name="m08FE5002">#14FE5002</color>
+    <color name="m042F2F39">#0A2F2F39</color>
+    <color name="mFE5002">#FE5002</color>
+    <color name="m202F2F39">#332F2F39</color>
+    <color name="m2F2F39">#2f2f39</color>
+
 </resources>

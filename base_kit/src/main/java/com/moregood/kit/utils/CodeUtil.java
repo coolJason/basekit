@@ -27,6 +27,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -393,5 +394,11 @@ public class CodeUtil {
         nf.setMinimumFractionDigits(2);
         nf.setGroupingUsed(isGroup);  //是否用逗号隔开
         return nf.format(money);
+    }
+
+    public static <T> List<T> toList(T one){
+        List<T> list = new ArrayList<>();
+        list.add(one);
+        return list;
     }
 }

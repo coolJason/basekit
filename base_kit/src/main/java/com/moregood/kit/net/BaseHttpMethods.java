@@ -147,6 +147,18 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
                     || p.second instanceof Short
                     || p.second instanceof Byte) {
                 sb.append(p.second);
+            } else if(p.second instanceof List){
+                List secondList = (List) p.second;
+                if(secondList.size()>0){
+                    sb.append("[");
+                    for(Object o:secondList){
+                        if(sb.length()>1){
+                            sb.append(",");
+                        }
+                        sb.append(o.toString());
+                    }
+                    sb.append("]");
+                }
             } else {
                 sb.append("\"").append(p.second).append("\"");
             }
