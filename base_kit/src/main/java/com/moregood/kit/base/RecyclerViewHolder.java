@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moregood.kit.bean.item.BindViewItemData;
@@ -75,5 +76,13 @@ public abstract class RecyclerViewHolder<D> extends RecyclerView.ViewHolder {
     }
 
     public void onViewDetachedFromWindow() {
+    }
+
+    protected String getString(@StringRes int id){
+        return itemView.getContext().getString(id);
+    }
+
+    public final String getString(@StringRes int resId, Object... formatArgs) {
+        return itemView.getContext().getString(resId, formatArgs);
     }
 }
