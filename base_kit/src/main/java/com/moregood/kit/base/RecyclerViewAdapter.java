@@ -26,6 +26,9 @@ public class RecyclerViewAdapter<T extends RecyclerViewHolder<D>, D> extends Rec
         setDatas(datas);
     }
 
+    public RecyclerViewAdapter() {
+    }
+
     public void setDatas(List<D> datas) {
         this.datas = datas;
         notifyDataSetChanged();
