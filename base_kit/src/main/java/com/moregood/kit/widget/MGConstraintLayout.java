@@ -43,7 +43,10 @@ public abstract class MGConstraintLayout extends ConstraintLayout {
     protected void init() {
         LayoutInflater.from(getContext()).inflate(getLayoutId(),this);
         ButterKnife.bind(this);
+        initData();
     }
+
+    protected abstract void initData();
 
     protected abstract int getLayoutId();
 }
