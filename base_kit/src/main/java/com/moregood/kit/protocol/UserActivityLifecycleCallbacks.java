@@ -211,4 +211,21 @@ public class UserActivityLifecycleCallbacks implements Application.ActivityLifec
             }
         }
     }
+
+    /**
+     * 结束除当前Activity之外的所有栈底的activity
+     *
+     * @param activityClazz
+     */
+    public void popBeforeActivity(Class activityClazz) {
+        if (activityList != null && !activityList.isEmpty()) {
+            for (Activity activity : activityList) {
+                if (activity.getClass().equals(activityClazz)) {
+                    break;
+                } else {
+                    activity.finish();
+                }
+            }
+        }
+    }
 }
