@@ -27,13 +27,14 @@ public class BaseViewModel extends ViewModel {
 
     /**
      * 获取所需要的MutableLiveData
+     * with注册监听
      *
      * @param key
      * @param t
      * @param <T>
      * @return
      */
-    public <T> MutableLiveData<T> getMutable(String key, Class<T> t) {
+    public <T> MutableLiveData<T> withMutable(String key, Class<T> t) {
         if (mMutableMap != null && !TextUtils.isEmpty(key) && t != null) {
             if (mMutableMap.containsKey(key)) {
                 return mMutableMap.get(key);
@@ -42,6 +43,18 @@ public class BaseViewModel extends ViewModel {
             mMutableMap.put(key, mutableLiveData);
             return mutableLiveData;
         }
+        return null;
+    }
+
+    /**
+     * 处理发送
+     *
+     * @param key
+     * @return
+     */
+    public MutableLiveData getMutable(String key) {
+        if (!TextUtils.isEmpty(key) && mMutableMap != null && mMutableMap.containsKey(key))
+            return mMutableMap.get(key);
         return null;
     }
 
