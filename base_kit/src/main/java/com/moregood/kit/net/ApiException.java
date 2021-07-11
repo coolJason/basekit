@@ -1,5 +1,7 @@
 package com.moregood.kit.net;
 
+import androidx.annotation.Nullable;
+
 /**
  * description :
  * author : yexifeng
@@ -7,13 +9,20 @@ package com.moregood.kit.net;
  * date : 2019/5/22 10:51
  */
 public class ApiException extends RuntimeException {
-    private int errorCode;
+    private int code;
+    private String message;
     public ApiException(int code, String message) {
         super(message);
-        this.errorCode = code;
+        this.code = code;
+        this.message = message;
     }
 
     public int getErrorCode() {
-        return errorCode;
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 }

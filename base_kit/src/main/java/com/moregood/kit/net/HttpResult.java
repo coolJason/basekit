@@ -35,9 +35,9 @@ public class HttpResult<T> {
      * 令牌无效或非法，需要重新调用REGISTER接口请求Token
      */
     public static final int HTTP_RESULT_CODE_TOKEN_INVALID = 20102;
-    private int errorCode;
+    private int code;
     private long timestamp;
-    private String errorMsg;
+    private String message;
 
     private T data;
 
@@ -53,7 +53,7 @@ public class HttpResult<T> {
     }
 
     public int getErrorCode() {
-        return errorCode;
+        return code;
     }
 
     public long getTimestamp() {
@@ -61,23 +61,26 @@ public class HttpResult<T> {
     }
 
     public String getErrorMsg() {
-        return errorMsg;
+        return message;
     }
 
     public boolean isSuccess() {
-        return errorCode == 0;
+        return code == 0;
     }
 
-    public String getMessage() {
-        return errorMsg;
+    public int getCode() {
+        return code;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     @Override
     public String toString() {
         return "{" +
-                "\"errorCode\":\"" + errorCode + "\"" +
-                ", \"errorMsg\":\"" + errorMsg + "\"" +
+                "\"errorCode\":\"" + code + "\"" +
+                ", \"errorMsg\":\"" + message + "\"" +
                 ", \"data\":" + data +
                 '}';
     }

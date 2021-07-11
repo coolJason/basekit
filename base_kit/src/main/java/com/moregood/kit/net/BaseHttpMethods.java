@@ -162,7 +162,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
                     || p.second instanceof Byte) {
                 sb.append(p.second);
             } else if(p.second instanceof List){
-
+                sb.append(createArrayBody((List<Object>) p.second));
             } else {
                 sb.append("\"").append(p.second).append("\"");
             }
@@ -171,6 +171,24 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         return RequestBody.create(JSON, sb.toString());
 
+    }
+
+    protected String createArrayBody(List<Object> mList){
+        StringBuilder sb1 = new StringBuilder("[");
+        if (mList == null || mList.size() == 0) {
+            sb1.append("]");
+            return sb1.toString();
+        }
+        for (int i = 0; i < mList.size(); i++) {
+            if (i == mList.size() - 1) {
+                sb1.append(mList.get(i));
+            } else {
+                sb1.append(mList.get(i) + ",");
+            }
+
+        }
+        sb1.append("]");
+        return sb1.toString();
     }
 
 

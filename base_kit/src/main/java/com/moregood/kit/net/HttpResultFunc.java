@@ -36,7 +36,7 @@ public class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
 
         Logger.e("%s 请求结果：%s", url, json);
         if (!tHttpResult.isSuccess()) {
-            throw new ApiException(tHttpResult.getErrorCode(), tHttpResult.getMessage());
+            throw new ApiException(tHttpResult.getErrorCode(), tHttpResult.getErrorMsg());
         }
         overrideData(tHttpResult);
         return tHttpResult.getData();
