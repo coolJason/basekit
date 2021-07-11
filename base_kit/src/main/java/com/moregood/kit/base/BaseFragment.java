@@ -57,7 +57,6 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
         return mView;
     }
 
-
     public void getInstanceBundle(Bundle bundle) {
     }
 
@@ -129,7 +128,6 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
     Unbinder initBinder(View view) {
         return ButterKnife.bind(this, view);
     }
-
 
     @Override
     public void onDestroyView() {

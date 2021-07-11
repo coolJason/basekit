@@ -41,6 +41,27 @@ public abstract class FoldViewAdapter<H extends FoldRecyclerViewHolder<D>, VH ex
     }
 
     /**
+     * 根据D获取相应的position
+     *
+     * @param data
+     * @return
+     */
+    public int getPositionWithSectionData(D data) {
+        int position = -1;
+        if (data == null || !mDataList.contains(data)) return position;
+
+        int length = mDataList.size();
+        for (int i = 0; i < length; i++) {
+            boolean equal = mDataList.get(i) == data;
+            if (equal) {
+                position++;
+                break;
+            } else position = position + getItemCountForSection(i) + 1;
+        }
+        return position;
+    }
+
+    /**
      * 设置item点击事件
      *
      * @param onFoldItemClickListener
@@ -179,7 +200,6 @@ public abstract class FoldViewAdapter<H extends FoldRecyclerViewHolder<D>, VH ex
                         mRelationCarriersArray.put(itemRelationer.hashCode(), foldRelationCarrier);
                     } else foldRelationCarrier.setSection(section);
                     mRelationerSparseArray.get(section).addItem(position, foldRelationCarrier);
-//            Logger.d("mRelationerSparseArray size>>"+mRelationerSparseArray.size()+" ,mRelationCarriersArray size>>"+mRelationCarriersArray.size());
                 }
                 holder.setData(subList.get(position), subList.size(), position);
                 if (onFoldItemClickListener != null) {

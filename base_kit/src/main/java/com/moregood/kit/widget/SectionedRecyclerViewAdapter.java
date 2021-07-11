@@ -256,7 +256,6 @@ public abstract class SectionedRecyclerViewAdapter<H extends RecyclerView.ViewHo
 
     public int getSectionPosition(int position) {
         return sectionForPosition[position];
-
     }
 
     public int getItemPosition(int position) {
