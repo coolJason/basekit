@@ -12,6 +12,8 @@ import com.moregood.kit.utils.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.http.PUT;
+
 /**
  * Author: Devin.Ding
  * Date: 2020/11/16 16:12
@@ -57,6 +59,29 @@ public class BaseViewModel extends ViewModel {
             return mMutableMap.get(key);
         return null;
     }
+
+    /**
+     * setValue
+     *
+     * @param key
+     * @param value
+     */
+    public void setValue(String key, Object value) {
+        MutableLiveData mutableLiveData = getMutable(key);
+        if (mutableLiveData != null) mutableLiveData.setValue(value);
+    }
+
+    /**
+     * postValue
+     *
+     * @param key
+     * @param value
+     */
+    public void postValue(String key, Object value) {
+        MutableLiveData mutableLiveData = getMutable(key);
+        if (mutableLiveData != null) mutableLiveData.postValue(value);
+    }
+
 
     @Override
     protected void onCleared() {
