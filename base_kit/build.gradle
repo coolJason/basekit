@@ -95,6 +95,8 @@ dependencies {
 //    api 'androidx.vectordrawable:vectordrawable:1.1.0'
 
     api 'com.google.android.play:core:1.9.1'
+
+    api 'pub.devrel:easypermissions:1.0.1'
 }
 
 
