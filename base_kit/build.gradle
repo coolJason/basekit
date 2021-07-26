@@ -97,6 +97,8 @@ dependencies {
     api 'com.google.android.play:core:1.9.1'
 
     api 'pub.devrel:easypermissions:1.0.1'
+    //评价星级 https://github.com/bengyuan25/StarView
+    api 'com.c.gaoyuan.StarView:StarViewLib:1.0.0'
 }
 
 
