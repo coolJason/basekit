@@ -34,7 +34,7 @@ public class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
         String json = gson.toJson(tHttpResult);
 
 
-        Logger.e("%s 请求结果：%s", url, json);
+        Logger.e("%s 请求结果：%s", url, tHttpResult.toString());
         if (!tHttpResult.isSuccess()) {
             throw new ApiException(tHttpResult.getErrorCode(), tHttpResult.getErrorMsg());
         }

@@ -11,12 +11,35 @@
 
     <!--涟漪控件属性-->
     <declare-styleable name="RippleView">
-        <attr name="cColor" format="color"/>
-        <attr name="cSpeed" format="float"/>
-        <attr name="cDensity" format="integer"/>
-        <attr name="cIsFill" format="boolean"/>
-        <attr name="cIsAlpha" format="boolean"/>
-        <attr name="cFromRadius" format="reference"/>
-        <attr name="cToRadius" format="reference"/>
+        <attr name="cColor" format="color" />
+        <attr name="cSpeed" format="float" />
+        <attr name="cDensity" format="integer" />
+        <attr name="cIsFill" format="boolean" />
+        <attr name="cIsAlpha" format="boolean" />
+        <attr name="cFromRadius" format="reference" />
+        <attr name="cToRadius" format="reference" />
+    </declare-styleable>
+
+    <!--行文本内容-->
+    <declare-styleable name="RowView">
+        <attr name="rowTitle" format="string" />
+        <attr name="rowTitleSize" format="dimension" />
+        <attr name="rowValueSize" format="dimension" />
+        <attr name="rowIconSize" format="dimension" />
+        <attr name="rowValue" format="string" />
+        <attr name="rowTitleColor" format="reference" />
+        <attr name="rowIconColor" format="reference" />
+        <attr name="rowValueColor" format="reference" />
+        <attr name="rowStartTitleIcon" format="reference" />
+        <attr name="rowTitleIconPadding" format="dimension" />
+        <attr name="rowValueIconPadding" format="dimension" />
+        <attr name="rowEndTitleIcon" format="reference" />
+        <attr name="rowStartValueIcon" format="reference" />
+        <attr name="rowEndValueIcon" format="reference" />
+        <attr name="rowIconText" format="string" />
+        <attr name="rowIconBg" format="reference" />
+        <attr name="rowIconWidth" format="dimension" />
+        <attr name="rowIconPadding" format="dimension" />
+
     </declare-styleable>
 </resources>

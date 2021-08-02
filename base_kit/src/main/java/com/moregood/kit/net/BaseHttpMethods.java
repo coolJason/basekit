@@ -30,6 +30,7 @@ import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -81,24 +82,24 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
             }
 
         });
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-//            String url;
-//
-//            @Override
-//            public void log(String message) {
-//                if (message != null) {
-//                    if (message.contains("-->") && !message.contains("--> END")) {
-//                        url = message;
-//                    } else if (message.contains("{\"data\":")) {
-//                        LogUtils.logNetResponse(url, message);
-//
-//                    }
-//                }
-//                Logger.e("请求原始结果： %s", message);
-//            }
-//        });
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        client.addInterceptor(loggingInterceptor);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            String url;
+
+            @Override
+            public void log(String message) {
+                if (message != null) {
+                    if (message.contains("-->") && !message.contains("--> END")) {
+                        url = message;
+                    } else if (message.contains("{\"data\":")) {
+                    }
+                }
+                if(message.startsWith("{\"code")) {
+                    Logger.d("请求原始结果： %s", message);
+                }
+            }
+        });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client.addInterceptor(loggingInterceptor);
         OkHttpClient httpClient = client.build();
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);

@@ -155,4 +155,8 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
     @CallSuper
     public void onDismissSelected() {
     }
+
+    public VM getViewModel() {
+        return mViewModel;
+    }
 }
