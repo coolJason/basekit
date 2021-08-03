@@ -189,6 +189,25 @@ public class FileUtils {
     }
 
     /**
+     * 删除多个文件
+     *
+     * @param filePath
+     * @return
+     */
+    public static boolean deleteFiles(List<File> filePath) {
+        boolean deleteSuccess = false;
+        if (filePath != null && filePath.size() > 0) {
+            for (int i = 0; i < filePath.size(); i++) {
+                deleteSuccess = deleteFile(filePath.get(i));
+                if (!deleteSuccess) {
+                    break;
+                }
+            }
+        }
+        return deleteSuccess;
+    }
+
+    /**
      * 删除单个文件
      *
      * @param file
