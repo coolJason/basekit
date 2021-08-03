@@ -32,6 +32,23 @@
         <item name="android:windowFrame">@null</item>
     </style>
 
+    <!--底部弹框属性设置-->
+    <style name="WhiteDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <!--无标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--键盘状态-->
+        <item name="android:windowSoftInputMode">stateUnspecified</item>
+        <!--dialog弹出时activity的背景-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
     <style name="pop_add">
         <item name="android:windowEnterAnimation">@anim/pop_add_show</item>
         <item name="android:windowExitAnimation">@anim/pop_add_hide</item>
