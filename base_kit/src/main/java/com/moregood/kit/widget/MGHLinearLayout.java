@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,24 +19,24 @@ import butterknife.ButterKnife;
  * @创建时间 2021/6/26 15:58
  * @邮箱 ye_xi_feng@163.com
  */
-public abstract class MGVLinearLayout extends LinearLayout {
-    public MGVLinearLayout(@NonNull @NotNull Context context) {
+public abstract class MGHLinearLayout extends LinearLayout {
+    public MGHLinearLayout(@NonNull @NotNull Context context) {
         super(context);
         init();
     }
 
-    public MGVLinearLayout(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs) {
+    public MGHLinearLayout(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public MGVLinearLayout(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs, int defStyleAttr) {
+    public MGHLinearLayout(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     protected void init() {
-        setOrientation(VERTICAL);
+        setOrientation(HORIZONTAL);
         LayoutInflater.from(getContext()).inflate(getLayoutId(),this);
         ButterKnife.bind(this);
         initData();
