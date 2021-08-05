@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/emptyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:visibility="visible"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/line">
+
+    <ImageView
+        android:id="@+id/emptyImageView"
+        android:layout_width="@dimen/dp_222"
+        android:layout_height="@dimen/dp_222"
+        app:srcCompat="@drawable/ic_common_empty" />
+
+    <TextView
+        android:id="@+id/emptyContentTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="暂无数据"
+        android:textColor="#444444"
+        android:textSize="13sp" />
+
+</LinearLayout>
