@@ -99,4 +99,5 @@
         <!--        <item>vi</item>-->
     </string-array>
 
+    <string name="no_comment">无评论记录</string>
 </resources>
