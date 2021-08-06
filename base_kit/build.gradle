@@ -99,6 +99,7 @@ dependencies {
     api 'pub.devrel:easypermissions:1.0.1'
     //评价星级 https://github.com/williamyyu/SimpleRatingBar
     api 'com.github.ome450901:SimpleRatingBar:1.5.1'
+    api 'com.github.tbruyelle:rxpermissions:0.12'
 }
 
 
