@@ -160,7 +160,7 @@ public class Logger {
         int max_str_length = 2001 - tag.length();
         //大于4000时
         while (msg.length() > max_str_length) {
-            Log.i(tag, msg.substring(0, max_str_length));
+            Log.e(tag, msg.substring(0, max_str_length));
             msg = msg.substring(max_str_length);
         }
         //剩余部分
