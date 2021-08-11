@@ -85,6 +85,14 @@
             android:layout_marginRight="@dimen/dp_30"
             android:layout_marginBottom="@dimen/dp_45"
             android:orientation="vertical">
+            <com.moregood.kit.widget.MyProgress
+                android:visibility="gone"
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:progressDrawable="@drawable/progressbar_horizontal"
+                ></com.moregood.kit.widget.MyProgress>
             <TextView
                 android:id="@+id/tv_update"
                 android:gravity="center"

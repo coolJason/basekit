@@ -61,7 +61,6 @@ public class FileDownloader {
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, e.getMessage());
-            Log.i(TAG, "DownloadFile: ========3333333333333333=============="+e);
             onDownloadProcessListener.onDownloadDone(DOWNLOAD_ERROR_CODE);
         }
     }
