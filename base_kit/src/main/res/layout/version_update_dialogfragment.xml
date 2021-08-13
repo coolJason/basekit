@@ -36,7 +36,7 @@
         android:layout_marginTop="@dimen/dp_58"
         android:layout_marginLeft="@dimen/dp_38"
         android:textSize="@dimen/dp_40"
-        android:text="发现新版本"></TextView>
+        tools:text="发现新版本"></TextView>
     <TextView
         android:id="@+id/tv_version_name"
         android:layout_below="@+id/tv_title"

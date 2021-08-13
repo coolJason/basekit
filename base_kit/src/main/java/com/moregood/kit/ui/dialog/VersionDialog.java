@@ -12,6 +12,7 @@ import android.os.Environment;
 
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,16 +41,19 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
     private String sdcardPath ;
     private String fileName;
     private boolean isShow=false;//是否显示取消按钮
+    private boolean isBack=true;//系统返回键返回是否关闭弹窗
     private View view;
     private ImageView iv_finish;
     private TextView tv_no_update;
     private TextView tv_content;
     private TextView tv_update;
+    private TextView tv_title;
     private TextView tv_version_name;
     private ProgressBar progress_bar;
+    private String title;
 
 
-    public VersionDialog(Context context,String apkUrl,String content,String versionName,boolean isShow) {
+    public VersionDialog(Context context,String apkUrl,String content,String versionName,String title,boolean isShow,boolean isBack) {
         super(context);
         this.context=context;
         this.content = content;
@@ -58,6 +62,8 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         this.versionName=versionName;
         sdcardPath=context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/";
         fileName= context.getPackageName()+".apk";
+        this.isBack=isBack;
+        this.title=title;
         initview();
     }
 
@@ -81,11 +87,18 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         tv_update=view.findViewById(R.id.tv_update);
         tv_version_name=view.findViewById(R.id.tv_version_name);
         progress_bar=view.findViewById(R.id.progress_bar);
-        tv_content.setText(content);
+        tv_title=view.findViewById(R.id.tv_title);
+        tv_title.setText(title);
+        tv_content.setText(content.replace("\\n", "\n"));
         tv_version_name.setText(versionName);
         iv_finish.setOnClickListener(this);
         tv_no_update.setOnClickListener(this);
         tv_update.setOnClickListener(this);
+        if(isBack){
+            setCancelable(true);
+        }else {
+            setCancelable(false);
+        }
         if(isShow){
             iv_finish.setVisibility(View.VISIBLE);
             tv_no_update.setVisibility(View.VISIBLE);
@@ -106,7 +119,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
             progress_bar.setVisibility(View.VISIBLE);
             tv_no_update.setVisibility(View.GONE);
             tv_update.setVisibility(View.GONE);
-            updateApp("https://imtt.dd.qq.com/16891/apk/B2F80997F09F5F8F1251C0587E59DF26.apk");
+            updateApp(apkUrl);
         }
     }
 
