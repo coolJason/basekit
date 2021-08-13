@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -37,6 +38,19 @@ public class AppUtils {
 
 
     final static String TAG = "AppUtils";
+    /**
+     * 获取渠道名
+     * @return 如果没有获取成功，那么返回值为空
+     */
+    public static String getChannelName(Context mContext) {
+        try {
+            PackageManager pm = mContext.getPackageManager();
+            ApplicationInfo appInfo = pm.getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA);
+            return appInfo.metaData.getString("InstallChannel");
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return "";
+    }
 
     /**
      * 检查手机上是否安装了指定的软件
