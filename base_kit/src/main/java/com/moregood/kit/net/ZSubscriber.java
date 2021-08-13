@@ -30,6 +30,8 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                     case HttpResult.HTTP_RESULT_CODE_TOKEN_INVALID:
                         onTokenInvalid();
                         break;
+                    case 80106:// 请求频繁
+                        onRetry();
                     default:
                         handlerApiError(apiException.getErrorCode(), apiException.getMessage());
                         break;
@@ -51,6 +53,13 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
         }catch (Exception ee){
             ee.printStackTrace();
         }
+    }
+
+    /**
+     * 请求频繁,可以重试
+     */
+    protected void onRetry(){
+
     }
 
     /**
