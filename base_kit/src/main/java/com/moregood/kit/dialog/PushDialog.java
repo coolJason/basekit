@@ -24,6 +24,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import butterknife.BindView;
 
@@ -48,6 +49,11 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     }
 
     @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         Window window = getDialog().getWindow();
@@ -56,6 +62,7 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+         getDialog().getWindow().setDimAmount(0);
     }
 
     @Override
@@ -73,6 +80,13 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         tv_title.setText(title);
         tv_content.setText(content);
         iv_image.setBackground(getResources().getDrawable(R.drawable.ic_merchant_push_icon));
+        final Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                dismiss();
+                t.cancel();
+            }
+        }, 5000);
         return builder.create();
     }
 
