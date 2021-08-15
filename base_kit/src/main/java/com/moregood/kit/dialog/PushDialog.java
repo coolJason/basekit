@@ -8,9 +8,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +45,17 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     public PushDialog(Context context, String content, String title) {
         this.title=title;
         this.content=content;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.gravity = Gravity.TOP;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(params);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override
