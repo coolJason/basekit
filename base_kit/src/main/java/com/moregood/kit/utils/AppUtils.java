@@ -1,6 +1,7 @@
 package com.moregood.kit.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -408,6 +409,25 @@ public class AppUtils {
         } catch (ActivityNotFoundException activityNotFoundException1) {
             Log.d("startToGooglePlay", "GoogleMarket Intent not found");
         }
+    }
+    /**
+     * 获取进程名
+     * @param cxt
+     * @param pid
+     * @return
+     */
+    public static String getProcessName(Context cxt, int pid) {
+        ActivityManager am = (ActivityManager) cxt.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+        if (runningApps == null) {
+            return null;
+        }
+        for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
+            if (procInfo.pid == pid) {
+                return procInfo.processName;
+            }
+        }
+        return null;
     }
 
 }

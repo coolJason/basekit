@@ -1,5 +1,8 @@
 package com.moregood.kit.net;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.utils.Logger;
 
@@ -32,25 +35,27 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                         break;
                     case 80106:// 请求频繁
                         onRetry();
+                    case 80115:// 顶号操作
+                        onTokenInvalid();
                     default:
                         handlerApiError(apiException.getErrorCode(), apiException.getMessage());
                         break;
                 }
-            }else if(e instanceof HttpException){
+            } else if (e instanceof HttpException) {
                 HttpException httpException = (HttpException) e;
-                switch (httpException.code()){
+                switch (httpException.code()) {
                     case 401:
                         onTokenInvalid();
                         break;
                 }
-            }else if(e instanceof ConnectException || e instanceof UnknownHostException){
+            } else if (e instanceof ConnectException || e instanceof UnknownHostException) {
                 onConnectException();
-            }else if(e instanceof SocketTimeoutException){
+            } else if (e instanceof SocketTimeoutException) {
                 onSocketTimeoutException();
-            }else {
+            } else {
                 handlerThrowable(e);
             }
-        }catch (Exception ee){
+        } catch (Exception ee) {
             ee.printStackTrace();
         }
     }
@@ -58,32 +63,32 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
     /**
      * 请求频繁,可以重试
      */
-    protected void onRetry(){
+    protected void onRetry() {
 
     }
 
     /**
      * 连接错误，可能是连接了一个未连网的Wifi
      */
-    protected void onConnectException(){
+    protected void onConnectException() {
         Logger.e("onConnectException");
     }
 
     /**
      * 连接超时，可能是弱网
      */
-    protected void onSocketTimeoutException(){
+    protected void onSocketTimeoutException() {
         Logger.e("网络超时");
     }
 
-    protected void onTokenInvalid(){
+    protected void onTokenInvalid() {
         BaseApplication.getInstance().onTokenInvalid();
     }
 
 
     protected void handlerApiError(int errorCode, String msg) {
-        String error = String.format("%s",msg);
-        if(errorCode == HttpResult.HTTP_RESULT_CODE_ALREADY_SUBSCRIPT){
+        String error = String.format("%s", msg);
+        if (errorCode == HttpResult.HTTP_RESULT_CODE_ALREADY_SUBSCRIPT) {
 
         }
 //        Toast.makeText(ActivityManager.getManager().getCurrentActivity(),error, Toast.LENGTH_SHORT).show();
@@ -94,7 +99,6 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
 //        Toast.makeText(ActivityManager.getManager().getCurrentActivity(),e.getMessage(), Toast.LENGTH_SHORT).show();
         Logger.e(e.getMessage());
     }
-
 
 
 }
