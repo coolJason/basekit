@@ -61,8 +61,8 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         params.gravity = Gravity.TOP;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
-        window.getDecorView().setPadding(20, 20, 20, 20);
-//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+         getDialog().getWindow().setDimAmount(0);
     }
 
     @Override
@@ -80,6 +80,13 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         tv_title.setText(title);
         tv_content.setText(content);
         iv_image.setBackground(getResources().getDrawable(R.drawable.ic_merchant_push_icon));
+        final Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                dismiss();
+                t.cancel();
+            }
+        }, 5000);
         return builder.create();
     }
 
