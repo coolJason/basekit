@@ -24,6 +24,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import butterknife.BindView;
 
@@ -48,6 +49,11 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     }
 
     @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         Window window = getDialog().getWindow();
@@ -55,7 +61,8 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         params.gravity = Gravity.TOP;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.getDecorView().setPadding(20, 20, 20, 20);
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override

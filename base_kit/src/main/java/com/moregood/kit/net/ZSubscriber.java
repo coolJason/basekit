@@ -3,6 +3,7 @@ package com.moregood.kit.net;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.utils.Logger;
 
@@ -37,6 +38,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                         onRetry();
                     case 80115:// 顶号操作
                         onTokenInvalid();
+                        LiveEventBus.get("STORT_LOCATION").post("");
                     default:
                         handlerApiError(apiException.getErrorCode(), apiException.getMessage());
                         break;
