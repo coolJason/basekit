@@ -36,9 +36,11 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                         break;
                     case 80106:// 请求频繁
                         onRetry();
+                        break;
                     case 80115:// 顶号操作
                         onTokenInvalid();
                         LiveEventBus.get("STORT_LOCATION").post("");
+                        break;
                     default:
                         handlerApiError(apiException.getErrorCode(), apiException.getMessage());
                         break;
