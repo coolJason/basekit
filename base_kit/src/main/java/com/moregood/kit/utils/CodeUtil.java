@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
@@ -37,7 +38,7 @@ import java.util.TimerTask;
 
 public class CodeUtil {
 
-    private static String filePath;
+    public static String takePhotoSavePath;
 
     public static boolean isEmpty(Collection collection) {
         return collection == null || collection.isEmpty();
@@ -295,6 +296,9 @@ public class CodeUtil {
 
 
     private static void takePhoto(Activity activity, int requestChoosePhotoCode) {
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            Toast.makeText(activity, "SD卡不可用~", Toast.LENGTH_SHORT).show();
+        }
         // 步骤一：创建存储照片的文件
         File file = getDefaultTakePhotoFile(activity);
         if (!file.getParentFile().exists()) {
