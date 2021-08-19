@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -45,6 +46,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        Crashlytics.log(Log.DEBUG, getClass().getName(), "Crash");
         if (!BaseApplication.getInstance().isFollowSystemLanguage()) {
             AppLanguageUtils.changeAppLanguage(this, BaseApplication.getInstance().getAppLanguage(this));
         }
