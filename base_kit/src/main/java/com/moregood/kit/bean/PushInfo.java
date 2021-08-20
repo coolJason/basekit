@@ -2,13 +2,20 @@ package com.moregood.kit.bean;
 
 public class PushInfo {
     private String type="";
-    private String phoneNum;
-    private String countryNo;
-    private String orderNo;
-    private String userName;
+    private String phoneNum;//用户电话号码
+    private String countryNo;//区域编号
+    private String orderNo;//订单编号
+    private String userName;//用户名称
+    private String huangXinId;//用户环信id
 
 
+    public String getHuangXinId() {
+        return huangXinId;
+    }
 
+    public void setHuangXinId(String huangXinId) {
+        this.huangXinId = huangXinId;
+    }
 
     public String getType() {
         return type;
