@@ -45,7 +45,7 @@ import java.util.Locale;
  * @创建时间 2020/11/17 20:48
  * @邮箱 ye_xi_feng@163.com
  */
-public abstract class BaseApplication<Flavor extends IFlavors> extends Application {
+public abstract class BaseApplication<Flavor extends IFlavors> extends Application  {
     private PackageManager packageManager;
     private static BaseApplication instance;
     protected UserActivityLifecycleCallbacks mLifecycleCallbacks;
@@ -73,6 +73,8 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
 
     public void onActivitysDestory(Activity activity) {
     }
+
+
 
     protected void initUserActivityLifecycleCallbacks() {
         mLifecycleCallbacks = new UserActivityLifecycleCallbacks();
@@ -114,6 +116,8 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         }
     }
+
+
 
     /**
      * 解决androidP 第一次打开程序出现莫名弹窗
