@@ -45,7 +45,7 @@ import java.util.Locale;
  * @创建时间 2020/11/17 20:48
  * @邮箱 ye_xi_feng@163.com
  */
-public abstract class BaseApplication<Flavor extends IFlavors> extends Application implements Thread.UncaughtExceptionHandler {
+public abstract class BaseApplication<Flavor extends IFlavors> extends Application {
     private PackageManager packageManager;
     private static BaseApplication instance;
     protected UserActivityLifecycleCallbacks mLifecycleCallbacks;
@@ -72,10 +72,6 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
     }
 
     public void onActivitysDestory(Activity activity) {
-    }
-
-    private void initThrowableHandler() {
-        Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
     protected void initUserActivityLifecycleCallbacks() {
@@ -117,12 +113,6 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         }
-    }
-
-    @Override
-    public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
-        Log.e("App", e.getMessage());
-
     }
 
     /**

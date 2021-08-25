@@ -80,8 +80,8 @@ public class AppLanguageUtils {
                     return locale;
                 }
             }
+            return locale;
         }
-        return Locale.ENGLISH;
     }
 
 
