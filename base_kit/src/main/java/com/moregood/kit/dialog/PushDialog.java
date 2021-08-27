@@ -43,9 +43,11 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     private View view;
     private String title="";
     private String content="";
+    private Context context;
     public PushDialog(Context context, String content, String title) {
         this.title=title;
         this.content=content;
+        this.context=context;
     }
 
     @Override
@@ -83,7 +85,9 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {
-                dismiss();
+                if(!((Activity)context).isFinishing()){
+                    dismiss();
+                }
                 t.cancel();
             }
         }, 5000);
