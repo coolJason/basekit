@@ -100,6 +100,8 @@ dependencies {
     //评价星级 https://github.com/williamyyu/SimpleRatingBar
     api 'com.github.ome450901:SimpleRatingBar:1.5.1'
     api 'com.github.tbruyelle:rxpermissions:0.12'
+    // 查看大图
+    api 'com.github.SherlockGougou:BigImageViewPager:androidx-6.1.3'
 }
 
 
