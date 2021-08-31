@@ -16,6 +16,9 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -52,7 +55,15 @@ public class AppUtils {
         }
         return "";
     }
-
+    //是否支持google服务
+    public static boolean isGooglePlayServiceAvailable (Context context) {
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
+        if (status == ConnectionResult.SUCCESS) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * 检查手机上是否安装了指定的软件
      */
