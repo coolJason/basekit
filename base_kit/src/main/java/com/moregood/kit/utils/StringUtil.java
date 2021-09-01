@@ -1,5 +1,8 @@
 package com.moregood.kit.utils;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.res.Resources;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -255,4 +258,12 @@ public class StringUtil {
         return c;
     }
 
+    public static void copyToClip(Context context, String content){
+        //获取剪贴板管理器：
+        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        // 创建普通字符型ClipData
+        ClipData mClipData = ClipData.newPlainText("Label", content);
+        // 将ClipData内容放到系统剪贴板里。
+        cm.setPrimaryClip(mClipData);
+    }
 }
