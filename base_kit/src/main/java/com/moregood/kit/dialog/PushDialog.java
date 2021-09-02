@@ -99,7 +99,9 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.iv_finish){
-            dismiss();
+            if(getActivity().isFinishing()) {
+                dismiss();
+            }
         }
     }
 }
