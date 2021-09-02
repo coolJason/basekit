@@ -85,7 +85,7 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {
-                if(!((Activity)context).isFinishing()){
+                if(((Activity)context).isFinishing()){
                     dismiss();
                 }
                 t.cancel();
