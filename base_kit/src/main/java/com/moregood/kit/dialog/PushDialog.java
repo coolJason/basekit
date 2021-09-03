@@ -85,7 +85,7 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {
-                if(((Activity)context).isFinishing()){
+                if(getDialog()!=null){
                     dismiss();
                 }
                 t.cancel();
@@ -99,9 +99,8 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.iv_finish){
-            if(getActivity().isFinishing()) {
                 dismiss();
-            }
         }
     }
+
 }
