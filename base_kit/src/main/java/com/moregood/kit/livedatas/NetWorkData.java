@@ -24,6 +24,7 @@ public class NetWorkData {
     }
 
     public boolean isConnect() {
-        return mNetWorkType != NETWORKTYPE_INVALID;
+//        return mNetWorkType != NETWORKTYPE_INVALID;
+        return true;
     }
 }
