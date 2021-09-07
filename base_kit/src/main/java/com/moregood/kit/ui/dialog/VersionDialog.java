@@ -52,7 +52,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
     private ProgressBar progress_bar;
     private String title;
 
-
+    private boolean isInstall=false;
     public VersionDialog(Context context,String apkUrl,String content,String versionName,String title,boolean isShow,boolean isBack) {
         super(context);
         this.context=context;
@@ -116,13 +116,33 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         if(v.getId()==R.id.tv_no_update||v.getId()==R.id.iv_finish){
             dismiss();
         }else if(v.getId()==R.id.tv_update){
-            progress_bar.setVisibility(View.VISIBLE);
-            tv_no_update.setVisibility(View.GONE);
-            tv_update.setVisibility(View.GONE);
-            updateApp(apkUrl);
+            updata();
         }
     }
+    public void updata(){
+        if (!isInstall){
+            progress_bar.setVisibility(View.VISIBLE);
+            tv_update.setVisibility(View.GONE);
+            updateApp(apkUrl);
+            tv_update.setEnabled(false);
+        }else {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                // 给目标应用一个临时授权
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri data = FileProvider.getUriForFile(context, context.getPackageName() + ".fileProvider" , new File(sdcardPath,fileName));
+                intent.setDataAndType(data, "application/vnd.android.package-archive");
 
+
+            } else {
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setDataAndType(Uri.fromFile(new File(sdcardPath, fileName)), "application/vnd.android.package-archive");
+            }
+            context.startActivity(intent);
+            dismiss();
+        }
+    }
     //下载更新app
     public void updateApp(String apkUrl) {
         //弄个Handler用于通知主线程
@@ -140,27 +160,22 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
                         progress_bar.setProgress(_pre);
                         break;
                     case 1:
-                        dismiss();
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            // 给目标应用一个临时授权
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            Uri data = FileProvider.getUriForFile(context,context.getPackageName() + ".fileProvider" , new File(sdcardPath,fileName));
-                            intent.setDataAndType(data, "application/vnd.android.package-archive");
+                        isInstall = true;
+                        tv_update.setText("下载完成,立即安装");
 
-                        } else {
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.setDataAndType(Uri.fromFile(new File(sdcardPath, fileName)), "application/vnd.android.package-archive");
-                        }
-                        context.startActivity(intent);
-
-
+                        tv_update.setEnabled(true);
+                        progress_bar.setVisibility(View.GONE);
+                        tv_update.setVisibility(View.VISIBLE);
                         break;
 
                     case 2:
                         //progressDialog.dismiss();
-                        Toast.makeText(context,"下载出错",Toast.LENGTH_LONG).show();
+                        isInstall = false;
+                        tv_update.setText("下载失败，重新下载");
+                        progress_bar.setProgress(0);
+                        progress_bar.setVisibility(View.GONE);
+                        tv_update.setVisibility(View.VISIBLE);
+                        tv_update.setEnabled(true);
                         break;
                 }
             }
