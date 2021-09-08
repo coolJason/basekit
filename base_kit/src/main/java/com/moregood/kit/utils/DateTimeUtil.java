@@ -1,5 +1,6 @@
 package com.moregood.kit.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -85,5 +86,20 @@ public class DateTimeUtil {
             }
         }
         return timeArys;
+    }
+    public static String timeDateStr(String time){
+        SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);
+        Date date = null;
+        try {
+            date = sdf.parse(time);
+            return date.getTime()+"";
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    //月,日小于10前面补0
+    public static  String zeroize(int obj) {
+        return  obj < 10 ? "0" + obj : obj+"";
     }
 }
