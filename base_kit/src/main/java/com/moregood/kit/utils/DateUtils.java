@@ -2,6 +2,7 @@ package com.moregood.kit.utils;
 
 import android.text.TextUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1264,5 +1265,28 @@ public final class DateUtils {
         }
         return result;
     }
+
+    /**
+     * hh:mm 转为时间戳
+     * @param ctime
+     * @return
+     */
+    public static long timeStampHM(String ctime) throws ParseException {
+        SimpleDateFormat simpleDateFormat =new SimpleDateFormat("HH:mm");
+        Date date= simpleDateFormat.parse(ctime);
+        long ts =date.getTime();
+        return ts;
+    }
+    /**
+     * YY-MM-DD HH:mm:ss 转为 hh:mm时间戳
+     * @param ctime YY-MM-DD HH:mm:ss
+     * @return
+     */
+//    public static long timeStamp(long ctime) throws ParseException {
+//        SimpleDateFormat simpleDateFormat =new SimpleDateFormat("HH:mm");
+////
+////        long ts =date.getTime();
+////        return ts;
+//    }
 
 }
