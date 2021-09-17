@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/dp_75"
         app:shapeAppearanceOverlay="@style/circleImageStyle"
-        android:src="@drawable/ic_merchant_push_icon"
+        tools:src="@drawable/ic_merchant_push_icon"
         app:strokeColor="@color/white"
         app:strokeWidth="@dimen/dp_4"></com.google.android.material.imageview.ShapeableImageView>
     <TextView

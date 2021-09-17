@@ -44,10 +44,12 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     private String title="";
     private String content="";
     private Context context;
-    public PushDialog(Context context, String content, String title) {
+    private int type=1;// 1接单 2 超时
+    public PushDialog(Context context, String content, String title,int type) {
         this.title=title;
         this.content=content;
         this.context=context;
+        this.type=type;
     }
 
     @Override
@@ -81,7 +83,11 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         iv_finish.setOnClickListener(this);
         tv_title.setText(title);
         tv_content.setText(content);
-        iv_image.setBackground(getResources().getDrawable(R.drawable.ic_merchant_push_icon));
+        if(type==1){
+            iv_image.setImageResource(R.drawable.ic_merchant_push_icon);
+        }else if(type==2){
+            iv_image.setImageResource(R.drawable.ic_error_push_icon);
+        }
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
             public void run() {
