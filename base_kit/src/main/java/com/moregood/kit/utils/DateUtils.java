@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 
 /**
@@ -105,7 +106,9 @@ public final class DateUtils {
     public static String formatTime(final long time, final String format) {
         if (format == null) return null;
         try {
-            return new SimpleDateFormat(format).format(time);
+           SimpleDateFormat simpleDateFormat =new SimpleDateFormat(format);
+           simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+            return simpleDateFormat.format(new Date(time));
         } catch (Exception e) {
             Logger.d(TAG, e, "formatTime");
         }
