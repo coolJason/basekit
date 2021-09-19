@@ -1,6 +1,9 @@
 package com.moregood.kit.utils;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
@@ -18,6 +21,9 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.security.MessageDigest;
 import java.util.UUID;
+
+import static android.content.Context.AUDIO_SERVICE;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
 /**
@@ -259,4 +265,15 @@ public class DeviceUtils {
 
     }
 
+    public static void setStreamVolumeMax(Context context){
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.isNotificationPolicyAccessGranted()) {
+            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            context.startActivity(intent);
+        }else{
+            AudioManager am = (AudioManager)context.getSystemService(AUDIO_SERVICE);
+            int music=am.getStreamMaxVolume(AudioManager.STREAM_RING );
+            am.setStreamVolume(AudioManager.STREAM_RING ,music,AudioManager.FLAG_PLAY_SOUND);
+        }
+    }
 }
