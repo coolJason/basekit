@@ -280,7 +280,7 @@ public class DeviceUtils {
             context.startActivity(intent);
         }else{
             AudioManager am = (AudioManager)context.getSystemService(AUDIO_SERVICE);
-            int music=am.getStreamMaxVolume(AudioManager.STREAM_ALARM );
+            int music=am.getStreamMaxVolume(AudioManager.STREAM_MUSIC );
             am.setStreamVolume(AudioManager.STREAM_ALARM ,music,AudioManager.FLAG_PLAY_SOUND);
         }
     }
