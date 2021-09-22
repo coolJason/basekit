@@ -1,12 +1,20 @@
 package com.moregood.kit.utils;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -272,8 +280,27 @@ public class DeviceUtils {
             context.startActivity(intent);
         }else{
             AudioManager am = (AudioManager)context.getSystemService(AUDIO_SERVICE);
-            int music=am.getStreamMaxVolume(AudioManager.STREAM_RING );
-            am.setStreamVolume(AudioManager.STREAM_RING ,music,AudioManager.FLAG_PLAY_SOUND);
+            int music=am.getStreamMaxVolume(AudioManager.STREAM_ALARM );
+            am.setStreamVolume(AudioManager.STREAM_ALARM ,music,AudioManager.FLAG_PLAY_SOUND);
+        }
+    }
+
+    public static void initMediaPlayer(Activity activity, MediaPlayer mediaPlayer) {
+        try {
+            //权限判断，如果没有权限就请求权限
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            } else {
+                AssetFileDescriptor assetFileDescriptor = activity.getAssets().openFd("createorder.mp3");
+                mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                mediaPlayer.setLooping(false);//设置为循环播放
+                mediaPlayer.prepare();//初始化播放器MediaPlayer
+                mediaPlayer.setVolume(1,1);
+                mediaPlayer.start();//开始播放
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
