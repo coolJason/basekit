@@ -285,19 +285,28 @@ public class DeviceUtils {
         }
     }
 
-    public static void initMediaPlayer(Activity activity, MediaPlayer mediaPlayer) {
+    public static void initMediaPlayer(Activity activity, MediaPlayer mediaPlayer, String fileName) {
         try {
+            if (mediaPlayer == null) {
+                return;
+            }
             //权限判断，如果没有权限就请求权限
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             } else {
-                AssetFileDescriptor assetFileDescriptor = activity.getAssets().openFd("createorder.mp3");
-                mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-                mediaPlayer.setLooping(false);//设置为循环播放
-                mediaPlayer.prepare();//初始化播放器MediaPlayer
-                mediaPlayer.setVolume(1,1);
-                mediaPlayer.start();//开始播放
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.reset();
+                }
+                AssetFileDescriptor assetFileDescriptor = activity.getAssets().openFd(fileName);
+                if (assetFileDescriptor != null) {
+                    mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                    mediaPlayer.setLooping(false);//设置为循环播放
+                    mediaPlayer.prepare();//初始化播放器MediaPlayer
+                    mediaPlayer.setVolume(1,1);
+                    mediaPlayer.start();//开始播放
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
