@@ -26,6 +26,5 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             tools:replace="android:theme" />
-        <activity android:name="com.hyphenate.easeui.ui.WebViewActivity"></activity>
     </application>
 </manifest>
