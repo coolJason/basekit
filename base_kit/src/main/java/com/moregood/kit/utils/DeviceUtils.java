@@ -285,14 +285,14 @@ public class DeviceUtils {
         }
     }
 
-    public static void initMediaPlayer(Activity activity, MediaPlayer mediaPlayer, String fileName) {
+    public static void initMediaPlayer(Context activity, MediaPlayer mediaPlayer, String fileName) {
         try {
             if (mediaPlayer == null) {
                 return;
             }
             //权限判断，如果没有权限就请求权限
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                ActivityCompat.requestPermissions((Activity) activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             } else {
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.stop();
