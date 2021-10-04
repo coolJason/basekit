@@ -1,6 +1,7 @@
 package com.moregood.kit.net;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 
 import com.google.gson.Gson;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -163,28 +165,32 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
     }
 
     protected RequestBody createRequestBody(Pair<String, Object>... params) {
-        StringBuilder sb = new StringBuilder("{");
+        HashMap hashMap=new HashMap();
+//        StringBuilder sb = new StringBuilder("{");
         for (Pair<String, Object> p : params) {
-            if (sb.length() > 1) {
-                sb.append(",");
-            }
-            sb.append("\"").append(p.first).append("\":");
-            if (p.second instanceof Integer
-                    || p.second instanceof Float
-                    || p.second instanceof Long
-                    || p.second instanceof Double
-                    || p.second instanceof Short
-                    || p.second instanceof Byte) {
-                sb.append(p.second);
-            } else if(p.second instanceof List){
-                sb.append(createArrayBody((List<Object>) p.second));
-            } else {
-                sb.append("\"").append(p.second).append("\"");
-            }
+            hashMap.put(p.first,p.second);
+//            if (sb.length() > 1) {
+//                sb.append(",");
+//            }
+//            sb.append("\"").append(p.first).append("\":");
+//            if (p.second instanceof Integer
+//                    || p.second instanceof Float
+//                    || p.second instanceof Long
+//                    || p.second instanceof Double
+//                    || p.second instanceof Short
+//                    || p.second instanceof Byte) {
+//                sb.append(p.second);
+//            } else if(p.second instanceof List){
+//                sb.append(createArrayBody((List<Object>) p.second));
+//            } else {
+//                sb.append("\"").append(p.second).append("\"");
+//            }
         }
-        sb.append("}");
+//        sb.append("}");
+        Gson gson=new Gson();
+        String str=gson.toJson(hashMap);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        return RequestBody.create(JSON, sb.toString());
+        return RequestBody.create(JSON, str.toString());
 
     }
 

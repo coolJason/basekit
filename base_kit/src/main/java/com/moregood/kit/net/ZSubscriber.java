@@ -1,11 +1,12 @@
 package com.moregood.kit.net;
 
-import android.util.Log;
-import android.widget.Toast;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.moregood.kit.R;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.utils.Logger;
+import com.moregood.kit.utils.ResourceUtil;
+import com.moregood.kit.utils.ToastUtil;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -54,6 +55,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                 }
             } else if (e instanceof ConnectException || e instanceof UnknownHostException) {
                 onConnectException();
+
             } else if (e instanceof SocketTimeoutException) {
                 onSocketTimeoutException();
             } else {
@@ -76,6 +78,14 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
      */
     protected void onConnectException() {
         Logger.e("onConnectException");
+        ToastUtil.showShortToast(ResourceUtil.getResString(R.string.no_network));
+    }
+
+    /**
+     * 连接错误，可能是连接了一个未连网的Wifi
+     */
+    protected void unknownHostException() {
+        Logger.e("unknownHostException");
     }
 
     /**
