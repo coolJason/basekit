@@ -26,175 +26,194 @@ public class ResourceUtil {
     private static final String RES_ANIM = "anim";
     private static final String RES_MENU = "menu";
     private static final String RES_RAW = "raw";
-    public static final  String ASSETS = "assets://";
-    public static final  String HTTP = "http://";
+    public static final String ASSETS = "assets://";
+    public static final String HTTP = "http://";
 
-    public static Bitmap createBitmap(String url){
-        if(url.contains("sdcard/")){
+    public static Bitmap createBitmap(String url) {
+        if (url.contains("sdcard/")) {
             return BitmapFactory.decodeFile(url);
-        }else{
+        } else {
             InputStream inputStream = getRawInputStream(url);
-            if(inputStream!=null){
+            if (inputStream != null) {
                 return BitmapFactory.decodeStream(inputStream);
             }
-            try{
+            try {
                 int resId = getMipmapId(url);
-                if(resId>0){
-                    return BitmapFactory.decodeResource(BaseApplication.getInstance().getResources(),resId);
+                if (resId > 0) {
+                    return BitmapFactory.decodeResource(BaseApplication.getInstance().getResources(), resId);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         }
         return null;
     }
 
-    public static InputStream getRawInputStream(String name){
+    public static InputStream getRawInputStream(String name) {
         int resId = ResourceUtil.getRawIdByName(name);
-        if(resId>0) {
+        if (resId > 0) {
             return BaseApplication.getInstance().getResources().openRawResource(resId);
         }
         return null;
     }
 
-    public static String getRawResPath(String name){
+    public static String getRawResPath(String name) {
         return "android.resource://" + BaseApplication.getInstance().getPackageName() + "/" + getRawIdByName(name);
     }
 
     public static int getRawIdByName(String name) {
-        return getResId(BaseApplication.getInstance(),name,RES_RAW);
+        return getResId(BaseApplication.getInstance(), name, RES_RAW);
     }
 
     public static int getMipmapId(String name) {
-        return getResId(BaseApplication.getInstance(),name,RES_MIPMAP);
+        return getResId(BaseApplication.getInstance(), name, RES_MIPMAP);
     }
 
 
-        /**
-         * 获取资源文件的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getId(Context context, String resName){
-            return getResId(context,resName,RES_ID);
-        }
+    /**
+     * 获取资源文件的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getId(Context context, String resName) {
+        return getResId(context, resName, RES_ID);
+    }
 
-        /**
-         * 获取资源文件string的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getStringId(Context context, String resName){
-            return getResId(context,resName,RES_STRING);
-        }
+    /**
+     * 获取资源文件string的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getStringId(Context context, String resName) {
+        return getResId(context, resName, RES_STRING);
+    }
 
-        /**
-         * 获取资源文件drable的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getDrableId(Context context, String resName){
-            return getResId(context,resName, RES_DRAWABLE);
-        }
+    /**
+     * 获取string
+     * @param resId
+     * @return
+     */
+    public static String getResString(int resId) {
+        return BaseApplication.getInstance().getString(resId);
+    }
 
-        /**
-         * 获取资源文件layout的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getLayoutId(Context context, String resName){
-            return getResId(context,resName,RES_LAYOUT);
-        }
+    /**
+     * 获取资源文件drable的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getDrableId(Context context, String resName) {
+        return getResId(context, resName, RES_DRAWABLE);
+    }
 
-        /**
-         * 获取资源文件style的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getStyleId(Context context, String resName){
-            return getResId(context,resName,RES_STYLE);
-        }
+    /**
+     * 获取资源文件layout的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getLayoutId(Context context, String resName) {
+        return getResId(context, resName, RES_LAYOUT);
+    }
 
-        /**
-         * 获取资源文件color的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getColorId(Context context, String resName){
-            return getResId(context,resName,RES_COLOR);
-        }
+    /**
+     * 获取资源文件style的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getStyleId(Context context, String resName) {
+        return getResId(context, resName, RES_STYLE);
+    }
 
-        /**
-         * 获取资源文件dimen的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getDimenId(Context context, String resName){
-            return getResId(context,resName,RES_DIMEN);
-        }
+    /**
+     * 获取资源文件color的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getColorId(Context context, String resName) {
+        return getResId(context, resName, RES_COLOR);
+    }
 
-        /**
-         * 获取资源文件ainm的id
-         * @param context
-         * @param resName
-         * @return
-         */
-        public static int getAnimId(Context context, String resName){
-            return getResId(context,resName,RES_ANIM);
-        }
+    /**
+     * 获取资源文件dimen的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getDimenId(Context context, String resName) {
+        return getResId(context, resName, RES_DIMEN);
+    }
+
+    /**
+     * 获取资源文件ainm的id
+     *
+     * @param context
+     * @param resName
+     * @return
+     */
+    public static int getAnimId(Context context, String resName) {
+        return getResId(context, resName, RES_ANIM);
+    }
 
 
-        /**
-         * 获取资源文件menu的id
-         */
-        public static int getMenuId(Context context, String resName){
-            return getResId(context,resName,RES_MENU);
-        }
+    /**
+     * 获取资源文件menu的id
+     */
+    public static int getMenuId(Context context, String resName) {
+        return getResId(context, resName, RES_MENU);
+    }
 
-        /**
-         * 获取资源文件ID
-         * @param context
-         * @param resName
-         * @param defType
-         * @return
-         */
-        public static int getResId(Context context, String resName, String defType){
-            return context.getResources().getIdentifier(resName, defType, context.getPackageName());
-        }
+    /**
+     * 获取资源文件ID
+     *
+     * @param context
+     * @param resName
+     * @param defType
+     * @return
+     */
+    public static int getResId(Context context, String resName, String defType) {
+        return context.getResources().getIdentifier(resName, defType, context.getPackageName());
+    }
 
-        public static Uri getRawUri(Context context, String resName, String ext){
-            return Uri.parse(String.format("android.resource://%s/raw/%s.%s",context.getPackageName(),resName,ext));
-        }
+    public static Uri getRawUri(Context context, String resName, String ext) {
+        return Uri.parse(String.format("android.resource://%s/raw/%s.%s", context.getPackageName(), resName, ext));
+    }
 
-        public static Uri getRawPngUri(Context context, String resName){
-            return Uri.parse(String.format("android.resource://%s/raw/%s.%s",context.getPackageName(),resName,"png"));
-        }
+    public static Uri getRawPngUri(Context context, String resName) {
+        return Uri.parse(String.format("android.resource://%s/raw/%s.%s", context.getPackageName(), resName, "png"));
+    }
 
-        public static Uri getRawJpgUri(Context context, String resName){
-            return Uri.parse(String.format("android.resource://%s/raw/%s.%s",context.getPackageName(),resName,"jpg"));
-        }
-        public static Uri getRawImageUri(Context context, String resName){
-            Uri uri = null;
+    public static Uri getRawJpgUri(Context context, String resName) {
+        return Uri.parse(String.format("android.resource://%s/raw/%s.%s", context.getPackageName(), resName, "jpg"));
+    }
+
+    public static Uri getRawImageUri(Context context, String resName) {
+        Uri uri = null;
+        try {
+            uri = getRawJpgUri(context, resName);
+        } catch (Exception e) {
             try {
-                uri = getRawJpgUri(context,resName);
-            }catch (Exception e){
-                try {
-                    uri = getRawPngUri(context, resName);
-                }catch (Exception ee){
+                uri = getRawPngUri(context, resName);
+            } catch (Exception ee) {
 
-                }
             }
-            return uri;
         }
+        return uri;
+    }
 
     public static String getRawUriString(String resName) {
-        return String.format("android.resource://%s/raw/%s.%s",BaseApplication.getInstance(),resName,"jpg");
+        return String.format("android.resource://%s/raw/%s.%s", BaseApplication.getInstance(), resName, "jpg");
     }
 
     /**
