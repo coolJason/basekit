@@ -100,7 +100,12 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         return builder.create();
     }
 
-
+    @Override
+    public void dismiss() {
+//        super.dismiss();
+        //修复错误Can not perform this action after onSaveInstanceState
+        dismissAllowingStateLoss();
+    }
 
     @Override
     public void onClick(View view) {
