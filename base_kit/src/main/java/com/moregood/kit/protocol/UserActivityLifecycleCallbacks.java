@@ -33,6 +33,7 @@ public class UserActivityLifecycleCallbacks implements Application.ActivityLifec
 
     @Override
     public void onActivityStarted(Activity activity) {
+        BaseApplication.getInstance().isBackground = false;
         Logger.d("ActivityLifecycle > onActivityStarted " + activity.getLocalClassName());
     }
 
@@ -58,6 +59,7 @@ public class UserActivityLifecycleCallbacks implements Application.ActivityLifec
         Logger.d("ActivityLifecycle > onActivityStopped " + activity.getLocalClassName());
         resumeActivity.remove(activity);
         if (resumeActivity.isEmpty()) {
+            BaseApplication.getInstance().isBackground = true;
             Logger.d("ActivityLifecycle > 在后台了");
         }
     }

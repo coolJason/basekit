@@ -78,7 +78,10 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
      */
     protected void onConnectException() {
         Logger.e("onConnectException");
-        ToastUtil.showShortToast(ResourceUtil.getResString(R.string.no_network));
+        if(!BaseApplication.getInstance().isBackground){
+            ToastUtil.showShortToast(ResourceUtil.getResString(R.string.no_network));
+        }
+
     }
 
     /**

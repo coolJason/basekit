@@ -12,16 +12,12 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.multidex.MultiDex;
 
 import com.moregood.kit.R;
-import com.moregood.kit.bean.Account;
 import com.moregood.kit.bean.AccountConfig;
 import com.moregood.kit.bean.item.UpdateInfo;
 import com.moregood.kit.language.AppLanguageUtils;
@@ -52,6 +48,7 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
     private Handler sHandler = new Handler(Looper.getMainLooper());
     protected UpdateInfo updateInfo;
     private Flavor mFlavors;
+    public boolean isBackground;
 
 
     @Override
@@ -239,4 +236,6 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
     }
 
     public abstract void onTokenInvalid();
+    
+    
 }
