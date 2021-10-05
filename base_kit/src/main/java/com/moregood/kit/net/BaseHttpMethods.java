@@ -150,16 +150,8 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
     }
 
     protected RequestBody createListRequestBody(List list) {
-        StringBuilder sb = new StringBuilder("[");
-        if(list!=null&&list.size()>0){
-            for(Object o:list){
-                if(sb.length()>1){
-                    sb.append(",");
-                }
-                sb.append(o.toString());
-            }
-        }
-        sb.append("]");
+        Gson gson=new Gson();
+        String sb=gson.toJson(list);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         return RequestBody.create(JSON, sb.toString());
     }
