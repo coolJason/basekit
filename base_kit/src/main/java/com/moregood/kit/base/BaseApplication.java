@@ -16,6 +16,7 @@ import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
+import androidx.multidex.MultiDex;
 
 import com.moregood.kit.R;
 import com.moregood.kit.bean.AccountConfig;
@@ -24,6 +25,7 @@ import com.moregood.kit.language.AppLanguageUtils;
 import com.moregood.kit.language.LangInfo;
 import com.moregood.kit.platform.IFlavors;
 import com.moregood.kit.protocol.UserActivityLifecycleCallbacks;
+import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
 import com.tencent.mmkv.MMKV;
@@ -92,7 +94,9 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-//        MultiDex.install(this);
+        if ("google".equals(AppUtils.getChannelName(this))) {
+            MultiDex.install(this);
+        }
     }
 
     public PackageManager getPm() {
