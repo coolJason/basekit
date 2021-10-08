@@ -104,4 +104,10 @@
     <string name="user_service_agreement">用户服务协议</string>
     <string name="user_privacy_agreement">用户隐私协议</string>
     <string name="no_network">当前无网络</string>
+    <string name="message_permission_rationale">授予下列权限以继续程序:\n\n%1$s</string>
+    <string name="lib_language_tips">提示</string>
+    <string name="lib_language_app_requires_permission">App需要以下权限</string>
+    <string name="lib_language_settings">设置</string>
+    <string name="lib_language_cancel">取消</string>
+    <string name="confirm">确认</string>
 </resources>
