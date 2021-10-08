@@ -31,6 +31,19 @@ public class Logger {
     }
 
     /**
+     *
+     * @param msg
+     */
+    public static void e(String msg) {
+        if (!debugMode || msg == null) return;
+        try {
+            Log.e(TAG, msg);
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * print out debug message
      *
      * @param format message format

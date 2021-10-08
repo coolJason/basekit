@@ -51,6 +51,7 @@ public class DateTimeUtil {
 
     /**
      * 将一段时间转换为具体时长，例：1小时10分钟5秒
+     *
      * @param durationMillis
      * @return
      */
@@ -65,6 +66,27 @@ public class DateTimeUtil {
             }
         }
         return stringBuffer.toString();
+    }
+
+    public static String getTimeDuration1(long duration) {
+        String time = "";
+        long minute = duration / 60000;
+        long seconds = duration % 60000;
+        long second = Math.round((float) seconds / 1000);
+        if (minute < 10) {
+            time += "0";
+        }
+        time += minute + ":";
+        if (second < 10) {
+            time += "0";
+        }
+        time += second;
+        return time;
+    }
+
+    public static long getTimeDuration2(long duration) {
+        long minute = duration / 60000;
+        return minute;
     }
 
     /**
@@ -87,19 +109,21 @@ public class DateTimeUtil {
         }
         return timeArys;
     }
-    public static String timeDateStr(String time){
+
+    public static String timeDateStr(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);
         Date date = null;
         try {
             date = sdf.parse(time);
-            return date.getTime()+"";
+            return date.getTime() + "";
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return "";
     }
+
     //月,日小于10前面补0
-    public static  String zeroize(int obj) {
-        return  obj < 10 ? "0" + obj : obj+"";
+    public static String zeroize(int obj) {
+        return obj < 10 ? "0" + obj : obj + "";
     }
 }

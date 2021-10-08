@@ -101,6 +101,15 @@ public class ResourceUtil {
     }
 
     /**
+     * 获取格式化string
+     * @param resId
+     * @return
+     */
+    public static String getResFormatString(int resId,Object... formatArgs) {
+        return BaseApplication.getInstance().getString(resId,formatArgs);
+    }
+
+    /**
      * 获取资源文件drable的id
      *
      * @param context
