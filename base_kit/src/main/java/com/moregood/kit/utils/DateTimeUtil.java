@@ -85,7 +85,7 @@ public class DateTimeUtil {
     }
 
     public static long getTimeDuration2(long duration) {
-        long minute = duration / 60000;
+        long minute = Math.abs(duration / 60000);
         return minute;
     }
 
