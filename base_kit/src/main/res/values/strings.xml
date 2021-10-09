@@ -110,4 +110,9 @@
     <string name="lib_language_settings">设置</string>
     <string name="lib_language_cancel">取消</string>
     <string name="confirm">确认</string>
+    <string name="support_scope_tips">目前仅支持dubai、sharjah、ajman、umm al quwain、ras al khaimah、fujairah 区域配送，小拜会努力扩大范围的~</string>
+    <string name="refund">申请退款</string>
+    <string name="contact_merchant">联系商家</string>
+
+
 </resources>
