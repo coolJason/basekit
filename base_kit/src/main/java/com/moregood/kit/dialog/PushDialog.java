@@ -44,7 +44,7 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     private String title="";
     private String content="";
     private Context context;
-    private int type=1;// 1接单 2 超时
+    private int type=1;// 1接单 2 超时 (用户端中使用 8商家已接单 9商家已出餐10骑手已取餐)
     public PushDialog(Context context, String content, String title,int type) {
         this.title=title;
         this.content=content;
@@ -87,6 +87,12 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
             iv_image.setImageResource(R.drawable.ic_merchant_push_icon);
         }else if(type==2){
             iv_image.setImageResource(R.drawable.ic_error_push_icon);
+        }else if(type==8){
+            iv_image.setImageResource(R.drawable.ic_receiving_order);
+        }else if(type==9){
+            iv_image.setImageResource(R.drawable.ic_eat_out);
+        }else if(type==10){
+            iv_image.setImageResource(R.drawable.ic_take_meal);
         }
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
