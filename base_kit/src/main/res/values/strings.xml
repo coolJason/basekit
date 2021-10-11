@@ -114,6 +114,10 @@
     <string name="refund">申请退款</string>
     <string name="contact_merchant">联系商家</string>
     <string name="contact_rider">联系骑手</string>
+    <string name="copy_success">复制成功</string>
+    <string name="ge">个</string>
+    <string name="save_success">保存成功</string>
+    <string name="save_fail">保存失败</string>
 
 
 
