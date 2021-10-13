@@ -45,7 +45,12 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     private String content="";
     private Context context;
     private int type=1;// 1接单 2 超时 (用户端中使用 8商家已接单 9商家已出餐10骑手已取餐)
-    public PushDialog(Context context, String content, String title,int type) {
+
+    public PushDialog() {
+        super();
+    }
+
+    public PushDialog(Context context, String content, String title, int type) {
         this.title=title;
         this.content=content;
         this.context=context;
