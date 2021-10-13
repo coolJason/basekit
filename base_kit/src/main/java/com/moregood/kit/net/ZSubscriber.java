@@ -4,9 +4,11 @@ package com.moregood.kit.net;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.moregood.kit.R;
 import com.moregood.kit.base.BaseApplication;
+import com.moregood.kit.dialog.FrozenDialog;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ResourceUtil;
 import com.moregood.kit.utils.ToastUtil;
+import com.moregood.kit.utils.WebConstant;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -41,6 +43,24 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                     case 80115:// 顶号操作
                         onTokenInvalid();
                         LiveEventBus.get("STORT_LOCATION").post("");
+                        break;
+                    case 80120:// 账号冻结(骑手)
+                        FrozenDialog frozenDialog=new FrozenDialog(BaseApplication.getInstance().getLifecycleCallbacks().current());
+                        frozenDialog.setMyOnClick(new FrozenDialog.MyOnClick() {
+                            @Override
+                            public void onclick() {
+                                LiveEventBus.get("FROZEN").post("");
+                            }
+                        });
+                        break;
+                    case 80121:// 账号冻结(商家)
+                        FrozenDialog frozenDialog2=new FrozenDialog(BaseApplication.getInstance().getLifecycleCallbacks().current());
+                        frozenDialog2.setMyOnClick(new FrozenDialog.MyOnClick() {
+                            @Override
+                            public void onclick() {
+                                LiveEventBus.get("FROZEN").post("");
+                            }
+                        });
                         break;
                     default:
                         handlerApiError(apiException.getErrorCode(), apiException.getMessage());
@@ -78,7 +98,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
      */
     protected void onConnectException() {
         Logger.e("onConnectException");
-        if(!BaseApplication.getInstance().isBackground){
+        if (!BaseApplication.getInstance().isBackground) {
             ToastUtil.showShortToast(ResourceUtil.getResString(R.string.no_network));
         }
 
