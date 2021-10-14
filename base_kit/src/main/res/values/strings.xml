@@ -119,6 +119,7 @@
     <string name="save_success">保存成功</string>
     <string name="save_fail">保存失败</string>
     <string name="contact_customer">联系客服</string>
+    <string name="frozen_tip">很抱歉，您的账号已被冻结,\n请联系客服解冻。</string>
 
 
 
