@@ -89,6 +89,12 @@ public class DateTimeUtil {
         return minute;
     }
 
+    public static long getTimeDuration3(long duration) {
+        long seconds = duration % 60000;
+        long second = Math.round((float) seconds / 1000);
+        return second;
+    }
+
     /**
      * 转换时间长度为数组
      *
