@@ -1,12 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        google()
-        jcenter()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven {url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+        maven { url MAVEN_REPO_RELEASE_URL }
+        jcenter()
+        mavenCentral()
+        google()
+
     }
     dependencies {
         classpath "com.android.tools.build:gradle:3.5.4"
@@ -29,16 +37,19 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
-        maven { url "https://maven.google.com" }
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven {url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url "https://jitpack.io" }
-        google()
-        jcenter()
+        maven { url "https://maven.google.com" }
         maven { url MAVEN_REPO_RELEASE_URL }
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        jcenter()
+        mavenCentral()
+        google()
     }
 }
 
