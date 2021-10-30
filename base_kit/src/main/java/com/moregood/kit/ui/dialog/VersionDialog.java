@@ -161,7 +161,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
                         break;
                     case 1:
                         isInstall = true;
-                        tv_update.setText("下载完成,立即安装");
+                        tv_update.setText(getContext().getString(R.string.download_complete_install_now));
 
                         tv_update.setEnabled(true);
                         progress_bar.setVisibility(View.GONE);
@@ -171,7 +171,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
                     case 2:
                         //progressDialog.dismiss();
                         isInstall = false;
-                        tv_update.setText("下载失败，重新下载");
+                        tv_update.setText(getContext().getString(R.string.download_failed_install_now));
                         progress_bar.setProgress(0);
                         progress_bar.setVisibility(View.GONE);
                         tv_update.setVisibility(View.VISIBLE);
