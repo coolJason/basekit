@@ -1,7 +1,6 @@
 package com.moregood.kit.net;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.Pair;
 
 import com.google.gson.Gson;
@@ -84,11 +83,11 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
             }
 
         });
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-//            String url;
-//
-//            @Override
-//            public void log(String message) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            String url;
+
+            @Override
+            public void log(String message) {
 //                if (message != null) {
 //                    if (message.contains("-->") && !message.contains("--> END")) {
 //                        url = message;
@@ -97,11 +96,11 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 //
 //                    }
 //                }
-//                Logger.e("请求原始结果： %s", message);
-//            }
-//        });
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        client.addInterceptor(loggingInterceptor);
+                Logger.e("请求原始结果： %s", message);
+            }
+        });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client.addInterceptor(loggingInterceptor);
         OkHttpClient httpClient = client.build();
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
