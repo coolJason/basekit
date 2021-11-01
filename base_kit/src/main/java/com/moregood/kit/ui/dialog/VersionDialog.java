@@ -38,10 +38,10 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
     private String content;//升级内容
     private String apkUrl;//apk下载地址
     private String versionName;
-    private String sdcardPath ;
+    private String sdcardPath;
     private String fileName;
-    private boolean isShow=false;//是否显示取消按钮
-    private boolean isBack=true;//系统返回键返回是否关闭弹窗
+    private boolean isShow = false;//是否显示取消按钮
+    private boolean isBack = true;//系统返回键返回是否关闭弹窗
     private View view;
     private ImageView iv_finish;
     private TextView tv_no_update;
@@ -52,57 +52,58 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
     private ProgressBar progress_bar;
     private String title;
 
-    private boolean isInstall=false;
-    public VersionDialog(Context context,String apkUrl,String content,String versionName,String title,boolean isShow,boolean isBack) {
+    private boolean isInstall = false;
+
+    public VersionDialog(Context context, String apkUrl, String content, String versionName, String title, boolean isShow, boolean isBack) {
         super(context);
-        this.context=context;
+        this.context = context;
         this.content = content;
         this.apkUrl = apkUrl;
-        this.isShow=isShow;
-        this.versionName=versionName;
-        sdcardPath=context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/";
-        fileName= context.getPackageName()+".apk";
-        this.isBack=isBack;
-        this.title=title;
-        initview();
+        this.isShow = isShow;
+        this.versionName = versionName;
+        sdcardPath = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/";
+        fileName = context.getPackageName() + ".apk";
+        this.isBack = isBack;
+        this.title = title;
+        initView();
     }
 
     public VersionDialog(Context context) {
         super(context);
-        this.context=context;
-            sdcardPath=context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/";
-        fileName= context.getPackageName()+".apk";
-            initview();
+        this.context = context;
+        sdcardPath = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/";
+        fileName = context.getPackageName() + ".apk";
+        initView();
     }
 
-    public void initview(){
-        view=LayoutInflater.from(context).inflate(R.layout.version_update_dialogfragment, null);
-       setContentView(view);
+    public void initView() {
+        view = LayoutInflater.from(context).inflate(R.layout.version_update_dialogfragment, null);
+        setContentView(view);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //一定要在setContentView之后调用，否则无效
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        iv_finish=view.findViewById(R.id.iv_finish);
-        tv_no_update=view.findViewById(R.id.tv_no_update);
-        tv_content=view.findViewById(R.id.tv_content);
-        tv_update=view.findViewById(R.id.tv_update);
-        tv_version_name=view.findViewById(R.id.tv_version_name);
-        progress_bar=view.findViewById(R.id.progress_bar);
-        tv_title=view.findViewById(R.id.tv_title);
+        iv_finish = view.findViewById(R.id.iv_finish);
+        tv_no_update = view.findViewById(R.id.tv_no_update);
+        tv_content = view.findViewById(R.id.tv_content);
+        tv_update = view.findViewById(R.id.tv_update);
+        tv_version_name = view.findViewById(R.id.tv_version_name);
+        progress_bar = view.findViewById(R.id.progress_bar);
+        tv_title = view.findViewById(R.id.tv_title);
         tv_title.setText(title);
         tv_content.setText(content.replace("\\n", "\n"));
         tv_version_name.setText(versionName);
         iv_finish.setOnClickListener(this);
         tv_no_update.setOnClickListener(this);
         tv_update.setOnClickListener(this);
-        if(isBack){
+        if (isBack) {
             setCancelable(true);
-        }else {
+        } else {
             setCancelable(false);
         }
-        if(isShow){
+        if (isShow) {
             iv_finish.setVisibility(View.VISIBLE);
             tv_no_update.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             iv_finish.setVisibility(View.GONE);
             tv_no_update.setVisibility(View.GONE);
         }
@@ -110,28 +111,28 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.tv_no_update||v.getId()==R.id.iv_finish){
+        if (v.getId() == R.id.tv_no_update || v.getId() == R.id.iv_finish) {
             dismiss();
-        }else if(v.getId()==R.id.tv_update){
+        } else if (v.getId() == R.id.tv_update) {
             updata();
         }
     }
-    public void updata(){
-        if (!isInstall){
+
+    public void updata() {
+        if (!isInstall) {
             progress_bar.setVisibility(View.VISIBLE);
             tv_update.setVisibility(View.GONE);
             updateApp(apkUrl);
             tv_update.setEnabled(false);
-        }else {
+        } else {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 // 给目标应用一个临时授权
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                Uri data = FileProvider.getUriForFile(context, context.getPackageName() + ".fileProvider" , new File(sdcardPath,fileName));
+                Uri data = FileProvider.getUriForFile(context, context.getPackageName() + ".fileProvider", new File(sdcardPath, fileName));
                 intent.setDataAndType(data, "application/vnd.android.package-archive");
 
 
@@ -143,15 +144,13 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
             dismiss();
         }
     }
+
     //下载更新app
     public void updateApp(String apkUrl) {
         //弄个Handler用于通知主线程
-        final Handler handler = new Handler()
-        {
-            public void handleMessage(Message message)
-            {
-                switch (message.what)
-                {
+        final Handler handler = new Handler() {
+            public void handleMessage(Message message) {
+                switch (message.what) {
                     case 0:
                         int downloadSize = message.arg1;
                         int fileSize = message.arg2;
@@ -182,19 +181,18 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         };
         //开始下载apk
         FileDownloader fileDownloader = new FileDownloader();
-        fileDownloader.setOnDownloadProcessListener(new FileDownloader.OnDownloadProcessListener()
-        {
+        fileDownloader.setOnDownloadProcessListener(new FileDownloader.OnDownloadProcessListener() {
             int FileSize;
+
             //将要开始下载时
             @Override
-            public void initDownload(int fileSize)
-            {
+            public void initDownload(int fileSize) {
                 FileSize = fileSize;
             }
+
             //下载中
             @Override
-            public void onDownloadProcess(int downloadSize)
-            {
+            public void onDownloadProcess(int downloadSize) {
                 Message message = handler.obtainMessage();
                 message.what = 0;
                 message.arg1 = downloadSize;
@@ -204,8 +202,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
 
             //下载完成
             @Override
-            public void onDownloadDone(int code)
-            {
+            public void onDownloadDone(int code) {
                 Message message = handler.obtainMessage();
                 message.what = code;
                 handler.sendMessage(message);
