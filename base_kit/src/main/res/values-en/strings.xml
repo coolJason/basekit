@@ -124,5 +124,4 @@
     <string name="download_failed_install_now">Failed, download again</string>
     <string name="upgrade_now">Upgrade now</string>
     <string name="upgrade_later">Upgrade later</string>
-
 </resources>
