@@ -55,6 +55,20 @@ public class AppUtils {
         }
         return "";
     }
+    /**
+     * 获取渠道名
+     * @return 如果没有获取成功，那么返回值为空
+     */
+    public static String getChannelName(Context mContext,String name) {
+        try {
+            PackageManager pm = mContext.getPackageManager();
+            ApplicationInfo appInfo = pm.getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA);
+            return appInfo.metaData.getString("EASE_CUSTOMER_KEY");
+        } catch (PackageManager.NameNotFoundException ignored) {
+            Log.i(TAG, "getChannelName: ==========================="+ignored);
+        }
+        return "";
+    }
     //是否支持google服务
     public static boolean isGooglePlayServiceAvailable (Context context) {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
@@ -440,5 +454,12 @@ public class AppUtils {
         }
         return null;
     }
-
+    public static boolean isApkInDebug(Context context) {
+        try {
+            ApplicationInfo info = context.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
