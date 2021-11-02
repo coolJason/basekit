@@ -2,7 +2,7 @@
 <resources>
     <string name="title_choose_image">打开相册</string>
     <string name="app_language_pref_key" translatable="false">app_language_pref_key</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">取消</string>
     <string name="close">Close</string>
     <string name="none_vip">VIP not opened</string>
 
