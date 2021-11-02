@@ -72,11 +72,11 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
                     Logger.d("未 add header");
                 }
                 builder.addHeader("Content-Type", "application/json")
-                        .addHeader("Connection", "keep-alive")
+//                        .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "application/json")
-                        .addHeader("Access-Control-Allow-Origin", "*")
-                        .addHeader("Access-Control-Allow-Headers", "X-Requested-With")
-                        .addHeader("Vary", "Accept-Encoding")
+//                        .addHeader("Access-Control-Allow-Origin", "*")
+//                        .addHeader("Access-Control-Allow-Headers", "X-Requested-With")
+//                        .addHeader("Vary", "Accept-Encoding")
                         .method(original.method(), original.body());
                 Request request = builder.build();
                 return chain.proceed(request);
@@ -96,7 +96,8 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 //
 //                    }
 //                }
-                Logger.e("请求原始结果： %s", message);
+//                Logger.e("请求原始结果： %s", message);
+                Logger.e(message);
             }
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
