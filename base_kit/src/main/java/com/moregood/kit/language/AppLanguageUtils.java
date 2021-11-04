@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.LocaleList;
 import android.text.TextUtils;
@@ -23,11 +24,12 @@ public class AppLanguageUtils {
 
     private static HashMap<String, LangInfo> mAllLanguages = new HashMap<String, LangInfo>();
 
-    public static void init(String[] languageTitle,String[] languageValue,Locale[] locales){
-        for(int i=0;i<languageTitle.length;i++){
+    public static void init(String[] languageTitle, String[] languageValue, TypedArray ar, Locale[] locales) {
+        for (int i = 0; i < languageTitle.length; i++) {
             String title = languageTitle[i];
             String value = languageValue[i];
-            mAllLanguages.put(languageValue[i],new LangInfo(title,value,locales[i]));
+            int icon = ar.getResourceId(i, 0);
+            mAllLanguages.put(languageValue[i], new LangInfo(title, value, icon, locales[i]));
         }
     }
 
@@ -109,10 +111,10 @@ public class AppLanguageUtils {
         return mAllLanguages.values();
     }
 
-    public static LangInfo getCurrentLanInfo(String lang){
-        if(mAllLanguages.containsKey(lang)){
+    public static LangInfo getCurrentLanInfo(String lang) {
+        if (mAllLanguages.containsKey(lang)) {
             return mAllLanguages.get(lang);
         }
-        return new LangInfo("English","en",Locale.ENGLISH);
+        return new LangInfo("English", "en", Locale.ENGLISH);
     }
 }
