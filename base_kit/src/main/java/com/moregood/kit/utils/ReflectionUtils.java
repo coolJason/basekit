@@ -872,10 +872,19 @@ public class ReflectionUtils {
      * @return
      */
     public static <T> Class<T> getDefinedTClass(Object target, int index) {
-        {
-            Class<T> tClass = (Class<T>) ((ParameterizedType) target.getClass().getGenericSuperclass()).getActualTypeArguments()[index];
-            return tClass;
+        Class<T> tClass = null;
+        Type type = target.getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType) {
+            // 强制转化“参数化类型”
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            // 参数化类型中可能有多个泛型参数
+            Type[] types = parameterizedType.getActualTypeArguments();
+            // 获取数据的第一个元素(User.class)
+            tClass = (Class<T>) types[index];
         }
+
+//            Class<T> tClass = (Class<T>) ((ParameterizedType) target.getClass().getGenericSuperclass()).getActualTypeArguments()[index];
+        return tClass;
     }
 
     public static <T> T getDefinedTInstance(Object target, int index) {

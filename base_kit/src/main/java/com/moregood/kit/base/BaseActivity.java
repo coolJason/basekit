@@ -66,8 +66,10 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         try {
             Class vmClass = ReflectionUtils.getDefinedTClass(this, 0);
-            mViewModel = (VM) new ViewModelProvider(this).get(vmClass);
-            Logger.e("Reflection VM=" + mViewModel);
+            if (vmClass != null) {
+                mViewModel = (VM) new ViewModelProvider(this).get(vmClass);
+                Logger.e("Reflection VM=" + mViewModel);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

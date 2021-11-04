@@ -46,7 +46,10 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
         mUnbinder = initBinder(mView);
         try {
             Class vmClass = ReflectionUtils.getDefinedTClass(this, 0);
-            mViewModel = (VM) new ViewModelProvider(this).get(vmClass);
+            if (vmClass != null) {
+                mViewModel = (VM) new ViewModelProvider(this).get(vmClass);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
