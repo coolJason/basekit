@@ -74,5 +74,15 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <!--圆角WebView-->
+    <declare-styleable name="ProgressCornersWebView">
+        <attr name="leftTopCorner" format="boolean"></attr>
+        <attr name="rightTopCorner" format="boolean"></attr>
+        <attr name="leftBottomCorner" format="boolean"></attr>
+        <attr name="rightBottomCorner" format="boolean"></attr>
+        <!--圆角半径-->
+        <attr name="cornerRadius" format="dimension"></attr>
+    </declare-styleable>
+
 
 </resources>
