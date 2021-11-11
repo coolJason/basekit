@@ -87,15 +87,15 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 //            String url;
 //            @Override
 //            public void log(String message) {
-//                if (message != null) {
-//                    if (message.contains("-->") && !message.contains("--> END")) {
-//                        url = message;
-//                    } else if (message.contains("{\"data\":")) {
-//                        LogUtils.logNetResponse(url, message);
-//
-//                    }
-//                }
-//                Logger.e("请求原始结果： %s", message);
+////                if (message != null) {
+////                    if (message.contains("-->") && !message.contains("--> END")) {
+////                        url = message;
+////                    } else if (message.contains("{\"data\":")) {
+////                        LogUtils.logNetResponse(url, message);
+////
+////                    }
+////                }
+////                Logger.e("请求原始结果： %s", message);
 //                Logger.e(message);
 //            }
 //        });
