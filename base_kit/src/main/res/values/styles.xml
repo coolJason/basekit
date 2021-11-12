@@ -84,9 +84,4 @@
         <attr name="cornerRadius" format="dimension"></attr>
     </declare-styleable>
 
-    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
-    </style>
-
-
 </resources>
