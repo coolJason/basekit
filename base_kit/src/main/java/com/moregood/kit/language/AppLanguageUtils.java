@@ -7,8 +7,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.LocaleList;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+
+import com.moregood.kit.R;
+import com.moregood.kit.base.BaseApplication;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -116,5 +120,11 @@ public class AppLanguageUtils {
             return mAllLanguages.get(lang);
         }
         return new LangInfo("English", "en", Locale.ENGLISH);
+    }
+
+    public static String getCurrentLanguage(){
+        String key = BaseApplication.getInstance().getString(R.string.app_language_pref_key);
+        String language = PreferenceManager.getDefaultSharedPreferences(BaseApplication.getInstance()).getString(key, "en");
+        return language;
     }
 }
