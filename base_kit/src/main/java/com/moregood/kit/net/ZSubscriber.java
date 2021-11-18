@@ -70,7 +70,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                 HttpException httpException = (HttpException) e;
                 switch (httpException.code()) {
                     case 401:
-                        onTokenInvalid();
+//                        onTokenInvalid();
                         break;
                 }
             } else if (e instanceof ConnectException || e instanceof UnknownHostException) {
