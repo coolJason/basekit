@@ -124,4 +124,6 @@
     <string name="download_failed_install_now">Failed, download again</string>
     <string name="upgrade_now">Upgrade now</string>
     <string name="upgrade_later">Upgrade later</string>
+    <string name="login_chat_server">登录聊天服务器..</string>
+    <string name="enter_the_chat_room">进入聊天页面..</string>
 </resources>

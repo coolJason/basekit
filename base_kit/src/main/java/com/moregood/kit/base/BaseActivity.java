@@ -43,6 +43,15 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     protected Unbinder mUnbinder;
     List<ActivityLifecycleCallbacks> lifecycleCallbacks = new ArrayList<>();
     private PermissionChecker permissionChecker;
+    private boolean dark=false;
+
+    public boolean isDark() {
+        return dark;
+    }
+
+    public void setDark(boolean dark) {
+        this.dark = dark;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,7 +120,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     }
 
     public boolean isStatusDark() {
-        return false;
+        return dark;
     }
 
 

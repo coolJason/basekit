@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 public abstract class ToolBarActivity<VM extends BaseViewModel> extends BaseActivity<VM> {
     protected Toolbar toolbar;
     protected TextView tv_title;
+    protected ImageView iv_back;
     protected View rootView;
 
     private ObjectAnimator animator;
@@ -59,9 +61,10 @@ public abstract class ToolBarActivity<VM extends BaseViewModel> extends BaseActi
     public void initView() {
         toolbar = findViewById(R.id.toolbar);
         tv_title = findViewById(R.id.tv_title);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
-        toolbar.setNavigationOnClickListener(view -> finish());
+        iv_back = findViewById(R.id.iv_back);
         setSupportActionBar(toolbar);
+        iv_back.setOnClickListener(view -> finish());
+        intiStatusBar();
         FrameLayout viewStub = findViewById(R.id.viewStub);
         rootView = LayoutInflater.from(this).inflate(getLayoutResID(), viewStub, false);
         viewStub.addView(rootView);
@@ -75,7 +78,15 @@ public abstract class ToolBarActivity<VM extends BaseViewModel> extends BaseActi
     public Toolbar getToolbar() {
         return toolbar;
     }
-
+    public void intiStatusBar(){
+        if(isDark()){
+            iv_back.setImageResource(R.drawable.ic_back_black);
+            tv_title.setTextColor(getResources().getColor(R.color.black));
+        }else {
+            iv_back.setImageResource(R.drawable.ic_back_white_1);
+            tv_title.setTextColor(getResources().getColor(R.color.white));
+        }
+    }
     protected void setTransition() {
         transitions = bindTransitions();
         if (transitions != null)
