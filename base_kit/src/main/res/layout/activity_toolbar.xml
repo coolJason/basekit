@@ -12,7 +12,16 @@
         android:layout_height="wrap_content"
         android:theme="@style/ToolbarStyle"
         app:titleTextColor="@android:color/white"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimary">
+        <TextView
+            android:layout_marginRight="@dimen/dp_60"
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_35"
+            android:gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/viewStub"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
 import androidx.appcompat.widget.Toolbar;
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
  */
 public abstract class ToolBarActivity<VM extends BaseViewModel> extends BaseActivity<VM> {
     protected Toolbar toolbar;
+    protected TextView tv_title;
     protected View rootView;
 
     private ObjectAnimator animator;
@@ -56,6 +58,7 @@ public abstract class ToolBarActivity<VM extends BaseViewModel> extends BaseActi
     @Override
     public void initView() {
         toolbar = findViewById(R.id.toolbar);
+        tv_title = findViewById(R.id.tv_title);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
         toolbar.setNavigationOnClickListener(view -> finish());
         setSupportActionBar(toolbar);
