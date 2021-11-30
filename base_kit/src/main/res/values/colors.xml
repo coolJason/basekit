@@ -47,7 +47,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="green">#22BB9B</color>
+    <color name="green_1">#DAF7F1</color>
     <color name="black_3">#333333</color>
+    <color name="blue">#ff04aef0</color>
 
     <color name="color_stroke">#e8e8e8</color>
     <color name="line">#44000000</color>
