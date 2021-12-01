@@ -6,13 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.webkit.WebView;
 
 import com.moregood.kit.R;
 
 /**
  * 圆角webview
  */
-public class CornersWebView extends WebKit {
+public class CornersWebView extends WebView {
     private int vWidth;
     private int vHeight;
     private int scrollX, scrollY = 0;
