@@ -9,7 +9,6 @@ public class Header {
     private String phoneNumber;
     private String userName;
     private String storeId;
-    private String abc;
 
     public String getExpireTime() {
         return expireTime;
@@ -73,13 +72,5 @@ public class Header {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
-    }
-
-    public String getAbc() {
-        return abc;
-    }
-
-    public void setAbc(String abc) {
-        this.abc = abc;
     }
 }
