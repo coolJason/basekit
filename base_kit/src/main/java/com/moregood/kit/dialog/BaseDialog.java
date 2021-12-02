@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.moregood.kit.utils.Logger;
-
 import butterknife.ButterKnife;
 
 /**
