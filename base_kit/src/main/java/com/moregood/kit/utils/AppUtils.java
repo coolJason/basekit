@@ -17,6 +17,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import androidx.core.content.FileProvider;
@@ -71,7 +72,7 @@ public class AppUtils {
     }
     //是否支持google服务
     public static boolean isGooglePlayServiceAvailable (Context context) {
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
+        int status = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
         if (status == ConnectionResult.SUCCESS) {
             return true;
         } else {
