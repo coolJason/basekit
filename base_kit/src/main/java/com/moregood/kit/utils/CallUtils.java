@@ -17,13 +17,13 @@ public class CallUtils {
 
     public static String phoneNumParse(String tel){
         if (tel.startsWith("971")) {
-            return tel;
+            return "+"+tel;
         } else if (tel.startsWith("86")) {
-            return tel;
+            return "+"+tel;
         } else if (tel.startsWith("50") || tel.startsWith("52") || tel.startsWith("54") || tel.startsWith("55") || tel.startsWith("56") || tel.startsWith("58")){
-            return "971" + tel;
+            return "+971" + tel;
         } else if (tel.length() == 11) {
-            return "86" + tel;
+            return "+86" + tel;
         } else {
             return tel;
         }
