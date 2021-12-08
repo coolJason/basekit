@@ -64,7 +64,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
                 if (header != null && header.size() > 0) {
                     for (String key : header.keySet()) {
                         String value = header.get(key);
-                        Logger.d("add header key=%s,value=%s", key, value);
+//                        Logger.d("add header key=%s,value=%s", key, value);
                         if (value != null)
                             builder.addHeader(key, value);
                     }
