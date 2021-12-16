@@ -43,7 +43,16 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     protected Unbinder mUnbinder;
     List<ActivityLifecycleCallbacks> lifecycleCallbacks = new ArrayList<>();
     private PermissionChecker permissionChecker;
-    private boolean dark=false;
+    private boolean dark = false;
+    private boolean isSystemForTheme = false;//置顶到任务栏
+
+    public boolean isSystemForTheme() {
+        return isSystemForTheme;
+    }
+
+    public void setSystemForTheme(boolean systemForTheme) {
+        isSystemForTheme = systemForTheme;
+    }
 
     public boolean isDark() {
         return dark;
@@ -61,7 +70,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
             AppLanguageUtils.changeAppLanguage(this, BaseApplication.getInstance().getAppLanguage(this));
         }
         setContentView(getLayoutResID());
-        updateFitSystemForTheme();
+
         if (getSupportActionBar() != null) {
             //左侧按钮：可见
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,6 +97,16 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         initView();
         initData();
+        if (isSystemForTheme) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            //注意要清除 FLAG_TRANSLUCENT_STATUS flag
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);// 图标显示深色
+        } else {
+            updateFitSystemForTheme();
+        }
     }
 
     public void updateFitSystemForTheme() {
@@ -153,13 +172,14 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
                 callbacks.onActivitySaveInstanceState(outState);
             }
     }
+
     /**
      * 设置是否是沉浸式，并可设置状态栏颜色
      *
      * @param fitSystemForTheme
-     * @param color           颜色值
+     * @param color             颜色值
      */
-    public void setFitSystemForTheme(boolean fitSystemForTheme,String color) {
+    public void setFitSystemForTheme(boolean fitSystemForTheme, String color) {
         setFitSystem(fitSystemForTheme);
         //初始设置
 //        StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.white));
@@ -174,6 +194,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
 //            setDarkStatusIcon(isStatusDark());
         }
     }
+
     /**
      * 设置是否是沉浸式，并可设置状态栏颜色
      *
