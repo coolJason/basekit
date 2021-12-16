@@ -64,6 +64,16 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (isSystemForTheme) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            //注意要清除 FLAG_TRANSLUCENT_STATUS flag
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);// 图标显示深色
+        } else {
+            updateFitSystemForTheme();
+        }
         super.onCreate(savedInstanceState);
 //        Crashlytics.log(Log.DEBUG, getClass().getName(), "Crash");
         if (!BaseApplication.getInstance().isFollowSystemLanguage()) {
@@ -97,16 +107,6 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         initView();
         initData();
-        if (isSystemForTheme) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            //注意要清除 FLAG_TRANSLUCENT_STATUS flag
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);// 图标显示深色
-        } else {
-            updateFitSystemForTheme();
-        }
     }
 
     public void updateFitSystemForTheme() {
