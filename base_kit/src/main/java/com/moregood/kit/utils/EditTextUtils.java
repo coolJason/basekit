@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -17,12 +18,10 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.moregood.kit.R;
-
 
 public class EditTextUtils {
 
-    public static void changePwdDrawableRight(EditText editText, Drawable eyeOpen , Drawable eyeClose, Drawable left, Drawable top, Drawable bottom) {
+    public static void changePwdDrawableRight(EditText editText, Drawable eyeOpen, Drawable eyeClose, Drawable left, Drawable top, Drawable bottom) {
         //标识密码是否能被看见
         final boolean[] canBeSeen = {false};
         editText.setOnTouchListener((v, event) -> {
@@ -36,16 +35,13 @@ public class EditTextUtils {
                 return false;
             if (event.getX() > editText.getWidth()
                     - editText.getPaddingRight()
-                    - drawable.getIntrinsicWidth())
-            {
+                    - drawable.getIntrinsicWidth()) {
 
-                if (canBeSeen[0])
-                {
+                if (canBeSeen[0]) {
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     editText.setCompoundDrawablesWithIntrinsicBounds(left, top, eyeOpen, bottom);
                     canBeSeen[0] = false;
-                } else
-                {
+                } else {
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
 
                     editText.setCompoundDrawablesWithIntrinsicBounds(left, top, eyeClose, bottom);
@@ -90,6 +86,7 @@ public class EditTextUtils {
 
     /**
      * 单行，根据关键字确定省略号的不同位置
+     *
      * @param textView
      * @param str
      * @param keyword
@@ -97,21 +94,21 @@ public class EditTextUtils {
      * @return
      */
     public static String ellipsizeString(TextView textView, String str, String keyword, int width) {
-        if(TextUtils.isEmpty(keyword)) {
+        if (TextUtils.isEmpty(keyword)) {
             return str;
         }
         Paint paint = textView.getPaint();
-        if(paint.measureText(str) < width) {
+        if (paint.measureText(str) < width) {
             return str;
         }
         int count = paint.breakText(str, 0, str.length(), true, width, null);
         int index = str.indexOf(keyword);
         //如果关键字在第一行,末尾显示省略号
-        if(index + keyword.length() < count) {
+        if (index + keyword.length() < count) {
             return str;
         }
         //如果关键字在最后，则起始位置显示省略号
-        if(str.length() - index <= count - 3) {
+        if (str.length() - index <= count - 3) {
             String end = str.substring(str.length() - count);
             end = "..." + end.substring(3);
             return end;
@@ -125,7 +122,7 @@ public class EditTextUtils {
     }
 
     public static SpannableStringBuilder highLightKeyword(Context context, String str, String keyword) {
-        if(TextUtils.isEmpty(str) || TextUtils.isEmpty(keyword) || !str.contains(keyword)) {
+        if (TextUtils.isEmpty(str) || TextUtils.isEmpty(keyword) || !str.contains(keyword)) {
             return null;
         }
         SpannableStringBuilder builder = new SpannableStringBuilder(str);
@@ -133,8 +130,16 @@ public class EditTextUtils {
         return builder;
     }
 
+    public static SpannableString setSomeColor(String content, int start, int end, int color) {
+        SpannableString spanString = new SpannableString(content);
+        ForegroundColorSpan span = new ForegroundColorSpan(color);
+        spanString.setSpan(span, start, end, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        return spanString;
+    }
+
     /**
      * 设置最多显示行数及保留末尾的文本类型
+     *
      * @param textView
      * @param str
      * @param num
@@ -146,19 +151,19 @@ public class EditTextUtils {
         textView.setMaxLines(num);
         textView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
         TextPaint paint = textView.getPaint();
-        if(TextUtils.isEmpty(str) || width <= 0 || paint.measureText(str) < width) {
+        if (TextUtils.isEmpty(str) || width <= 0 || paint.measureText(str) < width) {
             return str;
         }
         //检查是否需要进行省略
         int startIndex = 0;
         int maxNum = 0;
-        for(int i = 0; i < num; i++) {
-            if(startIndex < str.length()) {
+        for (int i = 0; i < num; i++) {
+            if (startIndex < str.length()) {
                 maxNum += paint.breakText(str, startIndex, str.length(), true, width, null);
                 startIndex = maxNum - 1;
             }
         }
-        if(str.length() < maxNum) {
+        if (str.length() < maxNum) {
             return str;
         }
         //获取第num行占据的字符数目
@@ -170,11 +175,11 @@ public class EditTextUtils {
             return str;
         }
         //如果不满num行
-        if(str.length() < maxCount) {
+        if (str.length() < maxCount) {
             return str;
         }
         //如果文件
-        if(str.contains(".")) {
+        if (str.contains(".")) {
             int lastIndex = str.lastIndexOf(".");
             String suffix = "..." + str.substring(lastIndex - 5);
             float requestWidth = paint.measureText(suffix);
@@ -183,13 +188,14 @@ public class EditTextUtils {
             int takeUpCount = paint.breakText(reverse, 0, reverse.length(), true, requestWidth, null);
             takeUpCount = getTakeUpCount(paint, reverse, takeUpCount, requestWidth);
             str = str.substring(0, maxCount - takeUpCount) + suffix;
-            Log.i("EaseEditTextUtils", "last str = "+str);
+            Log.i("EaseEditTextUtils", "last str = " + str);
         }
         return str;
     }
 
     /**
      * 检查保证可以展示文件类型
+     *
      * @param paint
      * @param reverse
      * @param takeUpCount
@@ -198,7 +204,7 @@ public class EditTextUtils {
      */
     private static int getTakeUpCount(Paint paint, String reverse, int takeUpCount, float requestWidth) {
         float measureWidth = paint.measureText(reverse.substring(0, takeUpCount));
-        if(measureWidth <= requestWidth) {
+        if (measureWidth <= requestWidth) {
             return getTakeUpCount(paint, reverse, takeUpCount + 1, requestWidth);
         }
         return takeUpCount + 1;
