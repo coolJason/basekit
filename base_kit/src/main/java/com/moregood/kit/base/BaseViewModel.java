@@ -5,14 +5,8 @@ import android.text.TextUtils;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.jeremyliao.liveeventbus.LiveEventBus;
-import com.jeremyliao.liveeventbus.core.Observable;
-import com.moregood.kit.utils.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.http.PUT;
 
 /**
  * Author: Devin.Ding
@@ -22,6 +16,8 @@ import retrofit2.http.PUT;
 public class BaseViewModel extends ViewModel {
 
     Map<String, MutableLiveData> mMutableMap;
+    public int pageNum = 1;
+    public int pageSize = 15;
 
     public BaseViewModel() {
         mMutableMap = new HashMap<>();

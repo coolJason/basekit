@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 
+import androidx.annotation.DimenRes;
+
 import com.moregood.kit.base.BaseApplication;
 
 import java.io.InputStream;
@@ -239,5 +241,13 @@ public class ResourceUtil {
             resIds[i] = ar.getResourceId(i, 0);
         ar.recycle();
         return resIds;
+    }
+
+    public static float getDimension(Context context, @DimenRes int resourceId) {
+        return context.getResources().getDimension(resourceId);
+    }
+
+    public static int getDimensionPixelSize(Context context, @DimenRes int resourceId) {
+        return context.getResources().getDimensionPixelSize(resourceId);
     }
 }

@@ -95,4 +95,9 @@
     <color name="m202F2F39">#332F2F39</color>
     <color name="m2F2F39">#2f2f39</color>
 
+    <color name="defaultTagsTextColor">#FFFFFF</color>
+    <dimen name="defaultTagsTextSize">16sp</dimen>
+    <dimen name="defaultTagsCloseImagePadding">10dp</dimen>
+    <dimen name="defaultTagsPadding">0dp</dimen>
+
 </resources>
