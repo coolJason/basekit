@@ -100,4 +100,9 @@
     <dimen name="defaultTagsCloseImagePadding">10dp</dimen>
     <dimen name="defaultTagsPadding">0dp</dimen>
 
+    <!--新版颜色值-->
+    <color name="main">#FFCF00</color>
+    <color name="black_1">#111111</color>
+
+
 </resources>
