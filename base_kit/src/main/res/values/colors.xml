@@ -99,5 +99,14 @@
     <dimen name="defaultTagsTextSize">16sp</dimen>
     <dimen name="defaultTagsCloseImagePadding">10dp</dimen>
     <dimen name="defaultTagsPadding">0dp</dimen>
+    <!--新版颜色-->
+    <color name="color_FFCF00">#FFCF00</color>
+    <color name="color_FFF9E4">#FFF9E4</color>
+    <color name="black_111111">#111111</color>
+
+    <!--新版颜色值-->
+    <color name="main">#FFCF00</color>
+    <color name="black_1">#111111</color>
+
 
 </resources>
