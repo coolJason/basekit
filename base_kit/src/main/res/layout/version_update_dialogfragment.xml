@@ -84,7 +84,7 @@
                     android:id="@+id/tv_update"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_solid_22bb9b_r45"
+                    android:background="@drawable/bg_solid_ffcf00_r36"
                     android:gravity="center"
                     android:paddingTop="@dimen/dp_20"
                     android:paddingBottom="@dimen/dp_20"
