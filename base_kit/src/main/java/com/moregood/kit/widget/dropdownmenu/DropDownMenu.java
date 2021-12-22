@@ -57,6 +57,11 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
     protected List<Integer> mDetailHeights;
 
     /**
+     * 缓存每个页面的每个Item高度
+     */
+    protected List<Integer> mDetailItemHeights;
+
+    /**
      * 当前选中的位置
      */
     protected int mCurrentPosition = -1;
@@ -123,7 +128,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
 
         mContext = context;
         mDetailHeights = new ArrayList<>();
-
+        mDetailItemHeights = new ArrayList<>();
     }
 
     @Override
@@ -194,11 +199,14 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
 
         mDetailHeights.clear();
         int count = mDetailContainer.getChildCount();
-        int maxHeight = (int) ((getMeasuredHeight() - mMenuContainer.getMeasuredHeight()) * mDetailHeightMaxRatio);
+        int mDetailHeight = getMeasuredHeight();
+        int maxHeight = (int) ((mDetailHeight - mMenuContainer.getMeasuredHeight()) * mDetailHeightMaxRatio);
         for (int i = 0; i < count; i++) {
             // 获取每个详情页面的高度
             View view = mDetailContainer.getChildAt(i);
-            mDetailHeights.add(view.getMeasuredHeight() > maxHeight ? maxHeight : view.getMeasuredHeight());
+            int mViewHeight = view.getMeasuredHeight();
+            mDetailHeights.add(Math.min(mViewHeight, maxHeight));
+            mDetailItemHeights.add(mDetailHeights.get(i) / mAdapter.getItemCount(i));
             if (mIsInitAdapter) {
                 view.setTranslationY(-mDetailHeights.get(i));
                 view.setVisibility(GONE);
@@ -294,7 +302,7 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
      *
      * @param position
      */
-    protected void updateDetail(final int position) {
+    public void updateDetail(final int position) {
         if (mIsAnimatorExecute || mCurrentPosition == -1) {
             return;
         }
@@ -356,6 +364,9 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
         if (mIsAnimatorExecute || mCurrentPosition == -1) {
             return;
         }
+        if (mMenuStatusListener != null) {
+            mMenuStatusListener.onMenuClose();
+        }
         // 显示当前的DetailView
         final View detailView = mDetailContainer.getChildAt(mCurrentPosition);
         final float itemHeight = mDetailHeights.get(mCurrentPosition);
@@ -407,60 +418,67 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
      * @param position
      */
     public void openDetail(final View menuView, final int position) {
-        if (isOpen()) {
-            closeDetail();
-            return;
-        }
-        if (mIsAnimatorExecute) {
-            return;
-        }
-        // 显示遮罩层
-        mDetailWrapper.setVisibility(VISIBLE);
-        // 获取当前需要显示的 DetailView
-        final View detailView = mDetailContainer.getChildAt(position);
-        // 显示当前需要显示的的 DetailView
-        detailView.setVisibility(VISIBLE);
-        // 获取该页面的高度
-        final float itemHeight = mDetailHeights.get(position);
+        try {
+            if (isOpen()) {
+                closeDetail();
+                return;
+            }
+            if (mIsAnimatorExecute) {
+                return;
+            }
+            if (mMenuStatusListener != null) {
+                mMenuStatusListener.onMenuOpen();
+            }
+            // 显示遮罩层
+            mDetailWrapper.setVisibility(VISIBLE);
+            // 获取当前需要显示的 DetailView
+            final View detailView = mDetailContainer.getChildAt(position);
+            // 显示当前需要显示的的 DetailView
+            detailView.setVisibility(VISIBLE);
+            // 获取该页面的高度
+            final float itemHeight = mDetailHeights.get(position);
 
-        // 配置打开的属性动画
-        ValueAnimator animator = ValueAnimator.ofFloat(-itemHeight, 0);
-        animator.setDuration(mAnimatorDuration);
-        if (mOpenInterpolator != null) {
-            animator.setInterpolator(mOpenInterpolator);
-        }
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float tempValue = (float) animation.getAnimatedValue();
-                // 动态更新内容容器的高度
-                updateDetailContainerHeight((int) (itemHeight + tempValue));
-                // 设置位移动画
-                ViewCompat.setTranslationY(detailView, tempValue);
+            // 配置打开的属性动画
+            ValueAnimator animator = ValueAnimator.ofFloat(-itemHeight, 0);
+            animator.setDuration(mAnimatorDuration);
+            if (mOpenInterpolator != null) {
+                animator.setInterpolator(mOpenInterpolator);
+            }
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float tempValue = (float) animation.getAnimatedValue();
+                    // 动态更新内容容器的高度
+                    updateDetailContainerHeight((int) (itemHeight + tempValue));
+                    // 设置位移动画
+                    ViewCompat.setTranslationY(detailView, tempValue);
 
-                // 设置遮罩层的透明度
-                float alpha = 1 - Math.abs(tempValue / itemHeight);
-                if (alpha > 1) {
-                    return;
+                    // 设置遮罩层的透明度
+                    float alpha = 1 - Math.abs(tempValue / itemHeight);
+                    if (alpha > 1) {
+                        return;
+                    }
+                    ViewCompat.setAlpha(mMaskView, alpha);
                 }
-                ViewCompat.setAlpha(mMaskView, alpha);
-            }
-        });
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mIsAnimatorExecute = false;
-            }
+            });
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mIsAnimatorExecute = false;
+                }
 
-            @Override
-            public void onAnimationStart(Animator animation) {
-                mCurrentPosition = position;
-                mIsAnimatorExecute = true;
-                // 回调Adapter对应的方法
-                mAdapter.onMenuOpen(menuView);
-            }
-        });
-        animator.start();
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    mCurrentPosition = position;
+                    mIsAnimatorExecute = true;
+                    // 回调Adapter对应的方法
+                    mAdapter.onMenuOpen(menuView);
+                }
+            });
+            animator.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -475,7 +493,13 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
     }
 
     private void reset() {
+        List<Integer> mTempHeight = new ArrayList<>();
+        for (int i = 0; i < mDetailHeights.size(); i++) {
+            int newHeight = mDetailItemHeights.get(i) * mAdapter.getItemCount(i);
+            mTempHeight.add(newHeight);
+        }
         mDetailHeights.clear();
+        mDetailHeights.addAll(mTempHeight);
         mDetailContainer.removeAllViews();
         mMenuContainer.removeAllViews();
     }
@@ -593,5 +617,18 @@ public class DropDownMenu extends LinearLayout implements View.OnClickListener {
 
     // endregion -------------------------
 
+    public interface MenuStatusListener {
+        void onMenuOpen();
+        void onMenuClose();
+    }
 
+    private MenuStatusListener mMenuStatusListener;
+
+    public MenuStatusListener getMenuStatusListener() {
+        return mMenuStatusListener;
+    }
+
+    public void setMenuStatusListener(MenuStatusListener mMenuStatusListener) {
+        this.mMenuStatusListener = mMenuStatusListener;
+    }
 }

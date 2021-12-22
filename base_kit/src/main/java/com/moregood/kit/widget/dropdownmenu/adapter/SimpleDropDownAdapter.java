@@ -28,6 +28,11 @@ public abstract class SimpleDropDownAdapter<T> extends BaseDropDownAdapter {
     }
 
     @Override
+    public int getItemCount(int position) {
+        return 0;
+    }
+
+    @Override
     public T getItem(int position) {
         return mDatas.get(position);
     }
