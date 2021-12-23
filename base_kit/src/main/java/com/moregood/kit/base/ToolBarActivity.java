@@ -48,7 +48,7 @@ public abstract class ToolBarActivity<VM extends BaseViewModel> extends BaseActi
 
     @Override
     public void setTitle(int titleId) {
-        getSupportActionBar().setTitle(titleId);
+        tv_title.setText(titleId);
     }
 
     @Override

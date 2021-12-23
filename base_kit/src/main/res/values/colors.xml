@@ -107,6 +107,8 @@
     <!--新版颜色值-->
     <color name="main">#FFCF00</color>
     <color name="black_1">#111111</color>
+    <color name="gray_f6f6f8">#F6F6F8</color>
+    <color name="red_fa4c41">#FA4C41</color>
 
 
 </resources>

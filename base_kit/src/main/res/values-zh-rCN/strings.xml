@@ -122,8 +122,8 @@
     <string name="frozen_tip">很抱歉，您的账号已被冻结,\n请联系客服解冻。</string>
     <string name="download_complete_install_now">下载完成,立即安装</string>
     <string name="download_failed_install_now">下载失败，重新下载</string>
-    <string name="upgrade_now">立即升级</string>
-    <string name="upgrade_later">暂不升级</string>
+    <string name="upgrade_now">立即更新</string>
+    <string name="upgrade_later">暂不更新</string>
     <string name="login_chat_server">登录聊天服务器..</string>
     <string name="enter_the_chat_room">进入聊天页面..</string>
 </resources>
