@@ -24,8 +24,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_300"
-                android:scaleType="centerCrop"
-                android:background="@drawable/ic_version_bg" />
+                android:background="@drawable/ic_version_bg_yellow"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/iv_finish"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_38"
                 android:layout_marginTop="@dimen/dp_58"
-                android:textColor="@color/white"
+                android:textColor="@color/black_111111"
                 android:textSize="@dimen/dp_40"
                 android:textStyle="bold"
                 tools:text="发现新版本" />
@@ -55,7 +55,7 @@
                 android:layout_below="@+id/tv_title"
                 android:layout_marginLeft="@dimen/dp_44"
                 android:layout_marginTop="@dimen/dp_5"
-                android:textColor="@color/white"
+                android:textColor="@color/black_111111"
                 android:textSize="@dimen/sp_28"
                 tools:text="v2.0.31" />
         </RelativeLayout>
@@ -75,37 +75,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nestedscrollview"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:layout_marginRight="@dimen/dp_30"
                 android:layout_marginBottom="@dimen/dp_45"
-                android:orientation="vertical">
-
+                android:gravity="center"
+                android:orientation="horizontal">
                 <TextView
-                    android:id="@+id/tv_update"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_solid_ffcf00_r36"
-                    android:gravity="center"
-                    android:paddingTop="@dimen/dp_20"
-                    android:paddingBottom="@dimen/dp_20"
-                    android:text="@string/upgrade_now"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_30" />
-
-                <TextView
+                    android:layout_weight="1"
                     android:id="@+id/tv_no_update"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_update"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/bg_stoke_cccccc_r45"
                     android:gravity="center"
-                    android:paddingTop="@dimen/dp_20"
-                    android:paddingBottom="@dimen/dp_20"
                     android:text="@string/upgrade_later"
                     android:textColor="@color/gray6"
                     android:textSize="@dimen/sp_30"
-                    android:visibility="gone" />
+                    />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray_f6f6f8"
+                    />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/upgrade_now"
+                    android:textColor="@color/red_fa4c41"
+                    android:textSize="@dimen/sp_30" />
+
+
 
                 <com.moregood.kit.widget.MyProgress
                     android:id="@+id/progress_bar"
@@ -120,10 +119,10 @@
                 android:id="@+id/nestedscrollview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_38"
-                android:layout_marginTop="@dimen/dp_27"
                 android:layout_marginRight="@dimen/dp_43"
-                android:layout_marginBottom="@dimen/dp_30">
+                android:layout_marginTop="@dimen/dp_27">
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -134,10 +133,7 @@
                     android:minHeight="@dimen/dp_200"
                     android:textColor="@color/black_3"
                     android:textSize="@dimen/sp_28"
-                    tools:text="修复了一些BUG\n
-优化了启动速度\n
-优化了一部分UI界面\n
-新增了吃饭不要钱还有奖品拿的功能" />
+                    tools:text="修复了一些BUG\n优化了启动速度\n优化了一部分UI界面\n新增了吃饭不要钱还有奖品拿的功能" />
             </androidx.core.widget.NestedScrollView>
 
         </RelativeLayout>

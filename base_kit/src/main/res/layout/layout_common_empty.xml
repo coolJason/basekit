@@ -16,7 +16,7 @@
         android:id="@+id/emptyImageView"
         android:layout_width="@dimen/dp_222"
         android:layout_height="@dimen/dp_222"
-        app:srcCompat="@drawable/ic_common_empty_icon" />
+        app:srcCompat="@drawable/ic_no_favorite_yellow" />
 
     <TextView
         android:id="@+id/emptyContentTv"

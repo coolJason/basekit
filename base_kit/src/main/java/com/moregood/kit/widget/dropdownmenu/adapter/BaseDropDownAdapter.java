@@ -44,6 +44,12 @@ public abstract class BaseDropDownAdapter {
     public abstract int getCount();
 
     /**
+     * 获取每页Item数量
+     *
+     * @return
+     */
+    public abstract int getItemCount(int position);
+    /**
      * 获取对应位置的数据
      *
      * @param position

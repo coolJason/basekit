@@ -101,7 +101,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
             setCancelable(false);
         }
         if (isShow) {
-            iv_finish.setVisibility(View.VISIBLE);
+            iv_finish.setVisibility(View.GONE);
             tv_no_update.setVisibility(View.VISIBLE);
         } else {
             iv_finish.setVisibility(View.GONE);
