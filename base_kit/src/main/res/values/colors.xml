@@ -103,6 +103,12 @@
     <color name="color_FFCF00">#FFCF00</color>
     <color name="color_FFF9E4">#FFF9E4</color>
     <color name="black_111111">#111111</color>
+    <color name="brown_FF856404">#FF856404</color>
+    <color name="yellow_FFF3CD">#FFF3CD</color>
+    <color name="yellow_FFFF8100">#FFFF8100</color>
+    <color name="green_35C2AB">#35C2AB</color>
+    <color name="gray_DFDFDF">#DFDFDF</color>
+    <color name="gray_background">#F6F6F8</color>
 
     <!--新版颜色值-->
     <color name="main">#FFCF00</color>

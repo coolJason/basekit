@@ -36,6 +36,7 @@ public final class DateUtils {
     public static final String yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss";
     public static final String yyyy_MM_ddHHmm = "yyyy-MM-dd HH:mm";
     public static final String yyyyMMddHHmmss_2 = "yyyy年M月d日 HH:mm:ss";
+    public static final String yyyyMMddHHmmss_3 = "yyyy年M月d日 HH:mm";
     public static final String MMdd = "MM-dd";
     public static final String MMddHHmm = "MM-dd HH:mm";
     public static final String MMdd2 = "MM月dd日";
