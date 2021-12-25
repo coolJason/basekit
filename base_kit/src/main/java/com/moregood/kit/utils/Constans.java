@@ -19,4 +19,8 @@ public interface Constans {
     String IS_NEED = "isNeed";
     String COMMENT_RIDER = "commentRider";
     String COMMENT_RIDER_SUCCESS = "commentRiderSuccess";
+    int GOOD_COMMENT = 1;
+    int BAD_COMMENT = 2;
+    int ANONYMOUS = 1;//表示匿名
+    int NO_ANONYMOUS = 0;//表示不匿名
 }
