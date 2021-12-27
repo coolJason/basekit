@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,10 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.moregood.kit.R;
-import com.moregood.kit.dialog.MgDialog;
 import com.moregood.kit.language.AppLanguageUtils;
 import com.moregood.kit.permission.PermissionChecker;
-import com.moregood.kit.utils.AppUtil;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
 
