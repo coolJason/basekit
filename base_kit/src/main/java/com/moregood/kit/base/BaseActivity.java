@@ -1,5 +1,7 @@
 package com.moregood.kit.base;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
@@ -65,12 +67,19 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (isSystemForTheme) {
+            //设置全屏
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            // 显示状态栏
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             //注意要清除 FLAG_TRANSLUCENT_STATUS flag
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);// 图标显示深色
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR// 图标显示深色
+            |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);//导航栏透明化
         } else {
             updateFitSystemForTheme();
         }
@@ -347,6 +356,28 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
 
     public VM getViewModel() {
         return mViewModel;
+    }
+    /**
+     * 设置Activity的statusBar隐藏
+     * @param activity
+     */
+    public static void statusBarHide(Activity activity){
+        // 代表 5.0 及以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View decorView = activity.getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            decorView.setSystemUiVisibility(option);
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            ActionBar actionBar = activity.getActionBar();
+            actionBar.hide();
+            return;
+        }
+
+        // versionCode > 4.4  and versionCode < 5.0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
     }
 
     /**
