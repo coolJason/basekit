@@ -95,8 +95,8 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 //
 //                    }
 //                }
-                Logger.longLog("请求原始结果： %s", message);
-                Logger.e(message);
+//                Logger.longLog("请求原始结果： %s", message);
+//                Logger.e(message);
             }
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
