@@ -76,7 +76,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
             getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR// 图标显示深色
-            |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);//导航栏透明化
+            );
         } else {
             updateFitSystemForTheme();
         }
