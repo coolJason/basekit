@@ -104,7 +104,8 @@ dependencies {
     api 'com.github.SherlockGougou:BigImageViewPager:androidx-6.1.3'
     //流式布局recyclerView
     api 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
-
+    //气泡弹窗
+    api 'com.github.xujiaji:happy-bubble:1.2.5'
 }
 
 
