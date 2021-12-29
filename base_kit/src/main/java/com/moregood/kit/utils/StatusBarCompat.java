@@ -186,8 +186,8 @@ public class StatusBarCompat {
     }
 
 
-    public static int getNavigationBarHeight(Activity activity) {
-        Resources resources = activity.getResources();
+    public static int getNavigationBarHeight(Context context) {
+        Resources resources = context.getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height","dimen", "android");
         int height = resources.getDimensionPixelSize(resourceId);
         return height;
