@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.moregood.kit.utils.ReflectionUtils;
 
 import butterknife.ButterKnife;
@@ -39,7 +40,7 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (getStatusColor() != 0) setFitSystemForTheme(true, getStatusColor());
+//        if (getStatusColor() != 0) setFitSystemForTheme(true, getStatusColor());
         int layoutResId = getLayoutResID();
         mView = layoutResId <= 0 ? getView() : inflater.inflate(getLayoutResID(), container, false);
         if (mView == null) mView = new FrameLayout(container.getContext());
@@ -94,21 +95,21 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
      * @param fitSystemForTheme
      * @param colorId           颜色资源路径
      */
-    public void setFitSystemForTheme(boolean fitSystemForTheme, @ColorRes int colorId) {
-        mCurrentStatusColor = colorId;
-        setFitSystem(fitSystemForTheme);
-        //初始设置
-//        StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.white));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getActivity().getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(colorId));
-            if (isStatusDark())
-                getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);// 图标显示深色
-            else
-                getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-        }
-    }
+//    public void setFitSystemForTheme(boolean fitSystemForTheme, @ColorRes int colorId) {
+//        mCurrentStatusColor = colorId;
+//        setFitSystem(fitSystemForTheme);
+//        //初始设置
+////        StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.white));
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = getActivity().getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(getResources().getColor(colorId));
+//            if (isStatusDark())
+//                getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);// 图标显示深色
+//            else
+//                getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+//        }
+//    }
 
     /**
      * 设置是否是沉浸式
@@ -149,10 +150,11 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
 
     @CallSuper
     public void onFragmentSelected() {
-        if (getView() != null && isInit)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                if (getActivity().getWindow().getStatusBarColor() != mCurrentStatusColor && mCurrentStatusColor != 0)
-                    setFitSystemForTheme(true, mCurrentStatusColor);
+        ImmersionBar.with(this).init();
+//        if (getView() != null && isInit)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//                if (getActivity().getWindow().getStatusBarColor() != mCurrentStatusColor && mCurrentStatusColor != 0)
+//                    setFitSystemForTheme(true, mCurrentStatusColor);
     }
 
     @CallSuper

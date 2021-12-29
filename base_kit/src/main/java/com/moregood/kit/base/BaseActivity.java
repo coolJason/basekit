@@ -65,7 +65,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (isSystemForTheme) {
-            ImmersionBar.with(this).init();
+            ImmersionBar.with(this).autoDarkModeEnable(false).barAlpha(0.3f).init();
 //            //设置全屏
 //            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //            // 显示状态栏
