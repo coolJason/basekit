@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.moregood.kit.R;
 import com.moregood.kit.language.AppLanguageUtils;
 import com.moregood.kit.permission.PermissionChecker;
@@ -64,19 +65,20 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (isSystemForTheme) {
-            //设置全屏
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            // 显示状态栏
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            //注意要清除 FLAG_TRANSLUCENT_STATUS flag
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR// 图标显示深色
-            );
+            ImmersionBar.with(this).init();
+//            //设置全屏
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//            // 显示状态栏
+//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//
+//
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            //注意要清除 FLAG_TRANSLUCENT_STATUS flag
+//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR// 图标显示深色
+//            );
         } else {
             updateFitSystemForTheme();
         }
