@@ -41,7 +41,9 @@ import java.util.List;
  */
 public class AppUtils {
 
-
+    public static boolean isMall(Context context){
+        return context.getPackageName().equals("com.bintiger.mall.android");
+    }
     final static String TAG = "AppUtils";
     /**
      * 获取渠道名
