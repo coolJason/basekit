@@ -23,6 +23,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.moregood.kit.R;
 import com.moregood.kit.language.AppLanguageUtils;
 import com.moregood.kit.permission.PermissionChecker;
+import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
 
@@ -65,23 +66,27 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (isSystemForTheme) {
-            ImmersionBar.with(this).autoDarkModeEnable(false)
-                    .statusBarDarkFont(true)
-                    .autoStatusBarDarkModeEnable(true,0.2f)
-                    .init();
-//            //设置全屏
-//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//            // 显示状态栏
-//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//
-//
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            //注意要清除 FLAG_TRANSLUCENT_STATUS flag
-//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR// 图标显示深色
-//            );
+            if (AppUtils.isMall(this)) {
+                //https://github.com/gyf-dev/ImmersionBar   属性参考链接
+                ImmersionBar.with(this).autoDarkModeEnable(false)
+                        .statusBarDarkFont(true)
+                        .autoStatusBarDarkModeEnable(true, 0.2f)
+                        .init();
+            } else {
+                //设置全屏
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                // 显示状态栏
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                //注意要清除 FLAG_TRANSLUCENT_STATUS flag
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR// 图标显示深色
+                );
+            }
         } else {
             updateFitSystemForTheme();
         }
@@ -359,11 +364,13 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     public VM getViewModel() {
         return mViewModel;
     }
+
     /**
      * 设置Activity的statusBar隐藏
+     *
      * @param activity
      */
-    public static void statusBarHide(Activity activity){
+    public static void statusBarHide(Activity activity) {
         // 代表 5.0 及以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View decorView = activity.getWindow().getDecorView();
