@@ -8,7 +8,6 @@ import com.moregood.kit.dialog.FrozenDialog;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ResourceUtil;
 import com.moregood.kit.utils.ToastUtil;
-import com.moregood.kit.utils.WebConstant;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
