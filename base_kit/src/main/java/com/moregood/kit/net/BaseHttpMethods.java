@@ -85,6 +85,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         });
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             String url;
+
             @Override
             public void log(String message) {
 //                if (message != null) {
@@ -96,7 +97,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 //                    }
 //                }
 //                Logger.longLog("请求原始结果： %s", message);
-//                Logger.e(message);
+                Logger.longLog(Logger.TAG, message);
             }
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -136,9 +137,9 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 
     protected String createListRequestBodyForString(List list) {
         StringBuilder sb = new StringBuilder("[");
-        if(list!=null&&list.size()>0){
-            for(Object o:list){
-                if(sb.length()>1){
+        if (list != null && list.size() > 0) {
+            for (Object o : list) {
+                if (sb.length() > 1) {
                     sb.append(",");
                 }
                 sb.append(o.toString());
@@ -149,17 +150,17 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
     }
 
     protected RequestBody createListRequestBody(List list) {
-        Gson gson=new Gson();
-        String sb=gson.toJson(list);
+        Gson gson = new Gson();
+        String sb = gson.toJson(list);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         return RequestBody.create(JSON, sb.toString());
     }
 
     protected RequestBody createRequestBody(Pair<String, Object>... params) {
-        HashMap hashMap=new HashMap();
+        HashMap hashMap = new HashMap();
 //        StringBuilder sb = new StringBuilder("{");
         for (Pair<String, Object> p : params) {
-            hashMap.put(p.first,p.second);
+            hashMap.put(p.first, p.second);
 //            if (sb.length() > 1) {
 //                sb.append(",");
 //            }
@@ -178,14 +179,14 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 //            }
         }
 //        sb.append("}");
-        Gson gson=new Gson();
-        String str=gson.toJson(hashMap);
+        Gson gson = new Gson();
+        String str = gson.toJson(hashMap);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         return RequestBody.create(JSON, str.toString());
 
     }
 
-    protected String createArrayBody(List<Object> mList){
+    protected String createArrayBody(List<Object> mList) {
         StringBuilder sb1 = new StringBuilder("[");
         if (mList == null || mList.size() == 0) {
             sb1.append("]");
