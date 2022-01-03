@@ -222,7 +222,7 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
 
     public String getAppLanguage(Context context) {
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.app_language_pref_key), Locale.ENGLISH.getLanguage());
+                .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
         Logger.e("appLang = " + appLang);
         return appLang;
     }
