@@ -4,12 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.CallSuper;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moregood.kit.bean.item.BindViewItemData;
-import com.moregood.kit.utils.Logger;
 
 import butterknife.ButterKnife;
 

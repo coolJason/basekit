@@ -23,4 +23,8 @@ public interface Constans {
     int BAD_COMMENT = 2;
     int ANONYMOUS = 1;//表示匿名
     int NO_ANONYMOUS = 0;//表示不匿名
+    int TYPE_SHOP = 1;//店铺
+    int TYPE_ADVERT = 2;//广告
+    int VIEW_HOLDER_TYPE_SHOP = 0;//店铺
+    int VIEW_HOLDER_TYPE_ADVERT = 1;//广告
 }
