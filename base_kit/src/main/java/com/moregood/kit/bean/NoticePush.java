@@ -19,6 +19,53 @@ public class NoticePush {
     private String noticeStyleContent2;
     private String title;
     private String pushContent;
+    private long noticePushId;
+    private long id;//弹窗id
+    private int secondsContent1;//左边按钮计时是时间
+
+    private int secondsContent2;//右边边按钮计时是时间
+
+    private int remindType;//0：弱提示 1：强提示
+
+    public long getNoticePushId() {
+        return noticePushId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNoticePushId(long noticePushId) {
+        this.noticePushId = noticePushId;
+    }
+
+    public int getSecondsContent1() {
+        return secondsContent1;
+    }
+
+    public void setSecondsContent1(int secondsContent1) {
+        this.secondsContent1 = secondsContent1;
+    }
+
+    public int getSecondsContent2() {
+        return secondsContent2;
+    }
+
+    public void setSecondsContent2(int secondsContent2) {
+        this.secondsContent2 = secondsContent2;
+    }
+
+    public int getRemindType() {
+        return remindType;
+    }
+
+    public void setRemindType(int remindType) {
+        this.remindType = remindType;
+    }
 
     public int getNoticeStyle() {
         return noticeStyle;

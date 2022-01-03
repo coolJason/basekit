@@ -127,4 +127,5 @@
     <string name="login_chat_server">登录聊天服务器..</string>
     <string name="enter_the_chat_room">进入聊天页面..</string>
     <string name="sure">确定</string>
+    <string name="invite_a_prize">邀请有奖</string>
 </resources>
