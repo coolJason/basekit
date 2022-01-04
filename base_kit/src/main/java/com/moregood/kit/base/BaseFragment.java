@@ -153,7 +153,7 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
 
     @CallSuper
     public void onFragmentSelected() {
-        if (AppUtils.isMall(getActivity())) {
+        if (getContext() != null && AppUtils.isMall(getContext())) {
             ImmersionBar.with(this).init();
         } else {
             if (getView() != null && isInit)
