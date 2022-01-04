@@ -111,6 +111,10 @@ dependencies {
     api 'com.gyf.immersionbar:immersionbar:3.0.0'
 // fragment快速实现（可选）
     api 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+
+    //微信集成
+    api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
+    api 'junit:junit:4.12'
 }
 
 
