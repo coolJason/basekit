@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.TransitionOptions;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.moregood.kit.R;
 
@@ -39,6 +40,18 @@ public class GlideManager {
             else
                 Glide.with(imageView.getContext()).load(url).apply(mOptions)
                         .transition(transitionOptions).into(imageView);
+        }
+    }
+    //图片下载并缓存在磁盘
+    public static void displayImageCache(ImageView imageView, Object url,RequestOptions requestOptions) {
+        if (imageView == null) return;
+        if (!((Activity) imageView.getContext()).isDestroyed()) {
+            if(requestOptions!=null){
+                Glide.with(imageView.getContext()).load(url).apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+            }else {
+                Glide.with(imageView.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+            }
+
         }
     }
 
