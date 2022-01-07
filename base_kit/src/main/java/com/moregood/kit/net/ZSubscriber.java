@@ -1,6 +1,9 @@
 package com.moregood.kit.net;
 
 
+import android.app.ActivityManager;
+import android.widget.Toast;
+
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.moregood.kit.R;
 import com.moregood.kit.base.BaseApplication;
@@ -127,7 +130,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
         if (errorCode == HttpResult.HTTP_RESULT_CODE_ALREADY_SUBSCRIPT) {
 
         }
-//        Toast.makeText(ActivityManager.getManager().getCurrentActivity(),error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(BaseApplication.getInstance().getLifecycleCallbacks().current(), error, Toast.LENGTH_SHORT).show();
         Logger.e(error);
     }
 

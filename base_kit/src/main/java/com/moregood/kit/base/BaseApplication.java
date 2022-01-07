@@ -25,6 +25,7 @@ import com.moregood.kit.language.AppLanguageUtils;
 import com.moregood.kit.language.LangInfo;
 import com.moregood.kit.platform.IFlavors;
 import com.moregood.kit.protocol.UserActivityLifecycleCallbacks;
+import com.moregood.kit.service.DnsCheckService;
 import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
@@ -65,12 +66,24 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
             String rootDir = MMKV.initialize(this);
             Logger.e("mmkv root: " + rootDir);
         }
+        //运行DNS检测服务
+        try {
+            Intent intent = new Intent(this, DnsCheckService.class);
+            startService(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onActivitysCreated(Activity activity) {
     }
 
     public void onActivitysDestory(Activity activity) {
+        if (getLifecycleCallbacks().getActivityList() == null || getLifecycleCallbacks().getActivityList().size() == 0) {
+            //停止dns检测服务
+            Intent intent = new Intent(this, DnsCheckService.class);
+            stopService(intent);
+        }
     }
 
 

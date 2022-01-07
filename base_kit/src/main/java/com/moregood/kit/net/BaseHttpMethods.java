@@ -3,6 +3,8 @@ package com.moregood.kit.net;
 import android.content.Context;
 import android.util.Pair;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.bean.VipInfo;
@@ -10,6 +12,8 @@ import com.moregood.kit.bean.item.UpdateInfo;
 import com.moregood.kit.utils.AppUtil;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -24,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -118,7 +123,22 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .baseUrl(BaseApplication.getInstance().getFlavors().getBaseUrl())
-                .client(httpClient)
+                .callFactory(new CallFactoryProxy(httpClient) {
+                    @NotNull
+                    @Override
+                    protected HttpUrl getNewUrl(String newHost, Request request) {
+                        if (newHost.contains("https://")) {
+                            newHost = newHost.replace("https://", "");
+                        }
+                        if (newHost.contains("http://")) {
+                            newHost = newHost.replace("http://", "");
+                        }
+                        String oldHost = request.url().host();
+                        String oldUrl = request.url().toString();
+                        String newUrl = oldUrl.replace(oldHost, newHost);
+                        return HttpUrl.get(newUrl);
+                    }
+                })
                 .build();
 
         mService = retrofit.create(ReflectionUtils.getDefinedTClass(this, 0));

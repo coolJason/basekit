@@ -75,7 +75,7 @@ public class RowView extends MGHLinearLayout {
         int rowEndTitleIcon = tya.getResourceId(R.styleable.RowView_rowEndTitleIcon, 0);
         int rowStartValueIcon = tya.getResourceId(R.styleable.RowView_rowStartValueIcon, 0);
         int rowEndValueIcon = tya.getResourceId(R.styleable.RowView_rowEndValueIcon, 0);
-        int rowTitleColor = tya.getColor(R.styleable.RowView_rowTitleColor, Color.BLACK);
+        int rowTitleColor = tya.getColor(R.styleable.RowView_rowTitleColor, Color.parseColor("#666666"));
         int rowValueColor = tya.getColor(R.styleable.RowView_rowValueColor, Color.BLACK);
         int rowIconColor = tya.getColor(R.styleable.RowView_rowIconColor, Color.WHITE);
         tya.recycle();
