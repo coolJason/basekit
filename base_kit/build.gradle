@@ -115,6 +115,8 @@ dependencies {
     //微信集成
     api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
     api 'junit:junit:4.12'
+    //角标
+    api "me.leolin:ShortcutBadger:1.1.22@aar"
 }
 
 

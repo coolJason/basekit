@@ -27,4 +27,9 @@ public interface Constans {
     int TYPE_ADVERT = 2;//广告
     int VIEW_HOLDER_TYPE_SHOP = 0;//店铺
     int VIEW_HOLDER_TYPE_ADVERT = 1;//广告
+    String MSG_SOURCE = "msgSource";
+    int MSG_SOURCE_MALL = 1;
+    int MSG_SOURCE_MERCHANT = 2;
+    int MSG_SOURCE_RIDER = 3;
+    int MSG_SOURCE_KEFU = 4;
 }
