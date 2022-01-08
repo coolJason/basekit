@@ -1,5 +1,7 @@
 package com.moregood.kit.bean;
 
+import java.math.BigDecimal;
+
 /**
  * @类名 NoticePush
  * @描述 通知弹窗
@@ -26,6 +28,30 @@ public class NoticePush {
     private int secondsContent2;//右边边按钮计时是时间
 
     private int remindType;//0：弱提示 1：强提示
+    /**
+     * 弹窗类型 0 正常弹窗 1新人专项弹窗
+     */
+    private int noticeType;
+    /**
+     * 优惠卷面额
+     */
+    private BigDecimal amount;
+
+    public int getNoticeType() {
+        return noticeType;
+    }
+
+    public void setNoticeType(int noticeType) {
+        this.noticeType = noticeType;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
     public long getNoticePushId() {
         return noticePushId;

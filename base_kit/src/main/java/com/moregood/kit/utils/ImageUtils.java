@@ -13,7 +13,9 @@
  */
 package com.moregood.kit.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -28,13 +30,23 @@ import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.WebView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.moregood.kit.R;
+import com.moregood.kit.base.BaseActivity;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.widget.NestedScrollView;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -745,5 +757,72 @@ public class ImageUtils {
 		}
 		return maxSize;
 	}
-
+	//分享保存图片
+	public static Bitmap saveSharePic(Context context, RelativeLayout relativelayout) {
+		if (relativelayout == null) {
+			return null;
+		}
+		try {
+			int h = 0;
+			// 获取ScrollView实际高度
+			for (int i = 0; i < relativelayout.getChildCount(); i++) {
+				h += relativelayout.getChildAt(i).getHeight();
+				relativelayout.getChildAt(i).setBackgroundResource(R.color.white);
+			}
+			// 创建对应大小的bitmap
+			Bitmap bitmap = Bitmap.createBitmap(relativelayout.getWidth(), h, Bitmap.Config.ARGB_8888);
+			final Canvas canvas = new Canvas(bitmap);
+			relativelayout.draw(canvas);
+			// 保存图片
+//                savePicture(DoctorMainActivity.this, bitmap);
+			 saveImg(context,bitmap, context.getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "", System.currentTimeMillis() + ".jpg");
+			return bitmap;
+		} catch (Exception oom) {
+			((Activity)context).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(context, R.string.save_fail, Toast.LENGTH_SHORT).show();
+				}
+			});
+			return null;
+		}
+	}
+	/**
+	 * 保存图片到SD卡
+	 *
+	 * @param bm         图片bitmap对象
+	 * @param floderPath 下载文件保存目录
+	 * @param fileName   文件名称(不带后缀)
+	 */
+	public static void saveImg(Context context,Bitmap bm, String floderPath, String fileName) throws IOException {
+		try{
+			File folder = new File(floderPath);
+			if (!folder.exists()) {
+				folder.mkdirs();
+			}
+			String savePath = folder.getPath() + File.separator + fileName + ".jpg";
+			File file = new File(savePath);
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+			bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+			((Activity)context).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(context, R.string.save_success, Toast.LENGTH_SHORT).show();
+				}
+			});
+			Log.i("ProfileDetailsActivity", savePath + " 保存成功");
+			bos.flush();
+			bos.close();
+			//通知相册刷新
+			MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), fileName, null);
+			context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + fileName)));
+		}catch (Exception e){
+			((Activity)context).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(context, R.string.save_fail, Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
+	}
 }

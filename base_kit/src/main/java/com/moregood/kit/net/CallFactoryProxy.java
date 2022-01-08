@@ -19,7 +19,11 @@ public abstract class CallFactoryProxy implements Call.Factory {
 
     @Override
     public Call newCall(Request request) {
+
         if (!TextUtils.isEmpty(NEW_HOST)) {
+            if(request.url().toString().contains("https://a1.easemob.com")||request.url().toString().contains("https://a1-sgp.easemob.com")){
+                return delegate.newCall(request);
+            }
             HttpUrl newHttpUrl = getNewUrl(NEW_HOST, request);
             if (newHttpUrl != null) {
                 Request newRequest = request.newBuilder().url(newHttpUrl).build();
