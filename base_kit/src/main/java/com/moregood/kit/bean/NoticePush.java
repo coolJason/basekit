@@ -32,10 +32,23 @@ public class NoticePush {
      * 弹窗类型 0 正常弹窗 1新人专项弹窗
      */
     private int noticeType;
+
+    /**
+     * 优惠券弹窗展示 0不展示 1展示
+     */
+    private int discountType;
     /**
      * 优惠卷面额
      */
     private BigDecimal amount;
+
+    public int getDiscountType() {
+        return discountType;
+    }
+
+    public void setDiscountType(int discountType) {
+        this.discountType = discountType;
+    }
 
     public int getNoticeType() {
         return noticeType;
