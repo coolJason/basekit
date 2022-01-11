@@ -109,6 +109,7 @@
     <color name="green_35C2AB">#35C2AB</color>
     <color name="gray_DFDFDF">#DFDFDF</color>
     <color name="gray_background">#F6F6F8</color>
+    <color name="red_FFFF5C5B">#FFFF5C5B</color>
 
     <!--新版颜色值-->
     <color name="main">#FFCF00</color>
