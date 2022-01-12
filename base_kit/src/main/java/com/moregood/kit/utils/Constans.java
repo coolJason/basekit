@@ -32,4 +32,5 @@ public interface Constans {
     int MSG_SOURCE_MERCHANT = 2;
     int MSG_SOURCE_RIDER = 3;
     int MSG_SOURCE_KEFU = 4;
+    String IS_FIRST = "isFirst";
 }
