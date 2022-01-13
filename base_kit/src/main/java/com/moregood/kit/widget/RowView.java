@@ -115,4 +115,8 @@ public class RowView extends MGHLinearLayout {
     public void setTitle(String value) {
         titleView.setText(value);
     }
+
+    public void setValueColor(int color) {
+        valueView.setTextColor(color);
+    }
 }
