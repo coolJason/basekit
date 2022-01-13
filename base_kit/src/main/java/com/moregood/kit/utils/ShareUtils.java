@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class ShareUtils {
-    private static final String APP_ID = "wx465d12366410b4ba";
+    private static final String APP_ID = "wx03b8698ae4bf2ff0";
 
     // IWXAPI 是第三方app和微信通信的openApi接口
     private static IWXAPI api;
