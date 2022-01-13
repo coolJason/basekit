@@ -101,7 +101,7 @@ public class DnsCheckService extends Service {
 
             @Override
             public void onError(Throwable e) {
-                super.onError(e);
+//                super.onError(e);
                 if (dnsList.size() > 0) {
                     dnsList.remove(0);
                     check();

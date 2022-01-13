@@ -8,6 +8,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.moregood.kit.R;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.dialog.FrozenDialog;
+import com.moregood.kit.utils.BaseKitToastUtils;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ResourceUtil;
 import com.moregood.kit.utils.ToastUtil;
@@ -101,7 +102,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
     protected void onConnectException() {
         Logger.e("onConnectException");
         if (!BaseApplication.getInstance().isBackground) {
-            ToastUtil.showShortToast(ResourceUtil.getResString(R.string.no_network));
+            BaseKitToastUtils.showFailToast(ResourceUtil.getResString(R.string.no_network));
         }
 
     }
@@ -130,12 +131,12 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
         if (errorCode == HttpResult.HTTP_RESULT_CODE_ALREADY_SUBSCRIPT) {
 
         }
-        Toast.makeText(BaseApplication.getInstance().getLifecycleCallbacks().current(), error, Toast.LENGTH_SHORT).show();
+        BaseKitToastUtils.showFailToast(error);
         Logger.e(error);
     }
 
     private void handlerThrowable(Throwable e) {
-//        Toast.makeText(ActivityManager.getManager().getCurrentActivity(),e.getMessage(), Toast.LENGTH_SHORT).show();
+        BaseKitToastUtils.showFailToast(e.getMessage());
         Logger.e(e.getMessage());
     }
 
