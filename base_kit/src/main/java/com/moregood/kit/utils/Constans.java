@@ -33,4 +33,9 @@ public interface Constans {
     int MSG_SOURCE_RIDER = 3;
     int MSG_SOURCE_KEFU = 4;
     String IS_FIRST = "isFirst";
+    String COUPON_PUSH_TYPE = "couponPushType";
+    String COUPON_ID = "couponId";
+    String COUPON = "coupon";
+    String STATE = "state";
+
 }
