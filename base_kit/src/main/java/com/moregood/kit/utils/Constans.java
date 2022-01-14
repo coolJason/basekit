@@ -37,5 +37,6 @@ public interface Constans {
     String COUPON_ID = "couponId";
     String COUPON = "coupon";
     String STATE = "state";
+    String IS_NEED_SHOW = "isNeedShow";
 
 }
