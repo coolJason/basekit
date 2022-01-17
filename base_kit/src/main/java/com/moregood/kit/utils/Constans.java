@@ -38,5 +38,6 @@ public interface Constans {
     String COUPON = "coupon";
     String STATE = "state";
     String IS_NEED_SHOW = "isNeedShow";
+    String START_TIME = "startTime";
 
 }
