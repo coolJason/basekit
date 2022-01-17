@@ -49,9 +49,9 @@ public class DnsCheckService extends Service {
             return;
         }
         dnsList.clear();
+        dnsList.add("https://mk.baituoapp.com");
+        dnsList.add("https://st.baituoapp.com");
         dnsList.add(BaseApplication.getInstance().getFlavors().getBaseUrl());
-        dnsList.add("https://st.baituomall.com");
-        dnsList.add("https://rl.baituomall.com");
         check();
     }
 
@@ -115,7 +115,7 @@ public class DnsCheckService extends Service {
         if (disposable != null) {
             disposable.dispose();
         }
-        disposable = Observable.timer(5 * 60, TimeUnit.SECONDS)
+        disposable = Observable.timer(15, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
