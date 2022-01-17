@@ -48,7 +48,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                         LiveEventBus.get("STORT_LOCATION").post("");
                         break;
                     case 80120:// 账号冻结(骑手)
-                        FrozenDialog frozenDialog=new FrozenDialog(BaseApplication.getInstance().getLifecycleCallbacks().current());
+                        FrozenDialog frozenDialog = new FrozenDialog(BaseApplication.getInstance().getLifecycleCallbacks().current());
                         frozenDialog.setMyOnClick(new FrozenDialog.MyOnClick() {
                             @Override
                             public void onclick() {
@@ -57,7 +57,7 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
                         });
                         break;
                     case 80121:// 账号冻结(商家)
-                        FrozenDialog frozenDialog2=new FrozenDialog(BaseApplication.getInstance().getLifecycleCallbacks().current());
+                        FrozenDialog frozenDialog2 = new FrozenDialog(BaseApplication.getInstance().getLifecycleCallbacks().current());
                         frozenDialog2.setMyOnClick(new FrozenDialog.MyOnClick() {
                             @Override
                             public void onclick() {
@@ -82,7 +82,9 @@ public abstract class ZSubscriber<T> implements Consumer<T> {
             } else if (e instanceof SocketTimeoutException) {
                 onSocketTimeoutException();
             } else {
-                handlerThrowable(e);
+                if (!e.toString().contains("The mapper function returned a null value")) {
+                    handlerThrowable(e);
+                }
             }
         } catch (Exception ee) {
             ee.printStackTrace();
