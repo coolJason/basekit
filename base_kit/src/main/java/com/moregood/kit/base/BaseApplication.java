@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.LifecycleOwner;
@@ -68,6 +69,9 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
         }
         //运行DNS检测服务
         try {
+            if (TextUtils.isEmpty(AppUtils.getChannelName(this)) || AppUtils.getChannelName(this).equals("dev")) {
+                return;
+            }
             Intent intent = new Intent(this, DnsCheckService.class);
             startService(intent);
         } catch (Exception e) {
