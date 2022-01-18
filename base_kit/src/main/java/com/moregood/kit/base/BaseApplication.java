@@ -69,7 +69,8 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
         }
         //运行DNS检测服务
         try {
-            if (TextUtils.isEmpty(AppUtils.getChannelName(this)) || AppUtils.getChannelName(this).equals("dev")) {
+            String channelName = AppUtils.getChannelName(this);
+            if (!TextUtils.isEmpty(channelName) && channelName.equals("develop")) {
                 return;
             }
             Intent intent = new Intent(this, DnsCheckService.class);

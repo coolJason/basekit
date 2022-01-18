@@ -9,6 +9,7 @@ import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.net.CallFactoryProxy;
 import com.moregood.kit.net.ErrorHandler;
 import com.moregood.kit.net.ZSubscriber;
+import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.Logger;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,6 +25,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DnsCheckService extends Service {
     private Disposable disposable;
+    private Disposable checkDisposable;
     private static final List<String> dnsList = new ArrayList<>();
 
     @Override
@@ -49,9 +51,15 @@ public class DnsCheckService extends Service {
             return;
         }
         dnsList.clear();
-        dnsList.add("https://mk.baituoapp.com");
-        dnsList.add("https://st.baituoapp.com");
         dnsList.add(BaseApplication.getInstance().getFlavors().getBaseUrl());
+        if (!TextUtils.isEmpty(AppUtils.getChannelName(this))
+                && (AppUtils.getChannelName(this).equals("online") || AppUtils.getChannelName(this).equals("google"))) {
+            dnsList.add("https://mk.baituomall.com");
+            dnsList.add("https://st.baituomall.com");
+        } else {
+            dnsList.add("https://mk.baituoapp.com");
+            dnsList.add("https://st.baituoapp.com");
+        }
         check();
     }
 
@@ -61,7 +69,7 @@ public class DnsCheckService extends Service {
         }
         Observable<String> listObservable = Observable.fromIterable(dnsList);
         Observable<Long> timerObservable = Observable.interval(1000, TimeUnit.MILLISECONDS);
-        Observable.zip(listObservable, timerObservable, (BiFunction<String, Long, String>) (dns, aLong) -> {
+        checkDisposable = Observable.zip(listObservable, timerObservable, (BiFunction<String, Long, String>) (dns, aLong) -> {
             try {
                 URL url = new URL(dns);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -90,6 +98,9 @@ public class DnsCheckService extends Service {
                 if (!TextUtils.isEmpty(dns)) {
 //                    Logger.e(DnsCheckService.class.getName() + "%s", "可用");
                     CallFactoryProxy.NEW_HOST = dns;
+                    if (checkDisposable != null) {
+                        checkDisposable.dispose();
+                    }
                 } else {
 //                    Logger.e(DnsCheckService.class.getName() + "%s", "不可用");
                 }
