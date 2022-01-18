@@ -814,8 +814,18 @@ public class ImageUtils {
 			bos.flush();
 			bos.close();
 			//通知相册刷新
-			MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), fileName, null);
+			// 其次把文件插入到系统图库
+			try {
+				MediaStore.Images.Media.insertImage(context.getContentResolver(),
+						file.getAbsolutePath(), fileName, null);
+			} catch (FileNotFoundException e) {
+				Log.i("TAG", "saveImg: ===============eeeeeeeeee===="+e);
+				e.printStackTrace();
+			}
+			// 最后通知图库更新
 			context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + fileName)));
+//			MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), fileName, null);
+//			context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + fileName)));
 		}catch (Exception e){
 			((Activity)context).runOnUiThread(new Runnable() {
 				@Override
