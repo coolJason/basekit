@@ -81,16 +81,16 @@ public class DnsCheckService extends Service {
                     conn.connect();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return null;
+                    return "";
                 }
                 int code = conn.getResponseCode();
                 if ((code >= 100) && (code < 400)) {
                     return dns;
                 }
-                return null;
+                return "";
             } catch (Throwable e) {
                 e.printStackTrace();
-                return null;
+                return "";
             }
         }).subscribe(new Consumer<String>() {
             @Override
