@@ -117,6 +117,8 @@ dependencies {
     api 'junit:junit:4.12'
     //角标
     api "me.leolin:ShortcutBadger:1.1.22@aar"
+    //获取设备唯一标识
+    api 'com.github.gzu-liyujiang:Android_CN_OAID:4.2.3'
 }
 
 
