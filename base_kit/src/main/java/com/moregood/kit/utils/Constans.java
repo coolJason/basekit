@@ -39,6 +39,5 @@ public interface Constans {
     String STATE = "state";
     String IS_NEED_SHOW = "isNeedShow";
     String START_TIME = "startTime";
-    String DISMISS = "dismiss";
 
 }
