@@ -40,5 +40,6 @@ public interface Constans {
     String IS_NEED_SHOW = "isNeedShow";
     String START_TIME = "startTime";
     String WAIT_COMMENT_ORDER_TIP = "waitCommentOrderTip";
+    String RICH_TEXT = "richText";
 
 }
