@@ -126,7 +126,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     }
 
     public void updateFitSystemForTheme() {
-        setFitSystemForTheme(true, getStatusColor() != 0 ? getStatusColor() : R.color.colorPrimary);
+        setFitSystemForTheme(true, getStatusColor() != 0 ? getStatusColor() : R.color.white);
 
     }
 
