@@ -45,13 +45,13 @@ public class GlideManager {
     //图片下载并缓存在磁盘
     public static void displayImageCache(ImageView imageView, Object url,RequestOptions requestOptions) {
         if (imageView == null) return;
-        if (!((Activity) imageView.getContext()).isDestroyed()) {
-            if(requestOptions!=null){
-                Glide.with(imageView.getContext()).load(url).apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
-            }else {
-                Glide.with(imageView.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
-            }
-
+        if (imageView.getContext() instanceof Activity && ((Activity) imageView.getContext()).isDestroyed()) {
+            return;
+        }
+        if (requestOptions != null) {
+            Glide.with(imageView.getContext()).load(url).apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+        } else {
+            Glide.with(imageView.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
         }
     }
 
