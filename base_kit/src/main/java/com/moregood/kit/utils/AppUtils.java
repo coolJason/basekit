@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,6 +34,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
+import static android.app.Notification.EXTRA_CHANNEL_ID;
+import static android.provider.Settings.EXTRA_APP_PACKAGE;
+
 
 /**
  * Author: Devin.Ding
@@ -41,12 +45,15 @@ import java.util.List;
  */
 public class AppUtils {
 
-    public static boolean isMall(Context context){
+    public static boolean isMall(Context context) {
         return context.getPackageName().equals("com.bintiger.mall.android");
     }
+
     final static String TAG = "AppUtils";
+
     /**
      * 获取渠道名
+     *
      * @return 如果没有获取成功，那么返回值为空
      */
     public static String getChannelName(Context mContext) {
@@ -58,22 +65,25 @@ public class AppUtils {
         }
         return "";
     }
+
     /**
      * 获取渠道名
+     *
      * @return 如果没有获取成功，那么返回值为空
      */
-    public static String getChannelName(Context mContext,String name) {
+    public static String getChannelName(Context mContext, String name) {
         try {
             PackageManager pm = mContext.getPackageManager();
             ApplicationInfo appInfo = pm.getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA);
             return appInfo.metaData.getString("EASE_CUSTOMER_KEY");
         } catch (PackageManager.NameNotFoundException ignored) {
-            Log.i(TAG, "getChannelName: ==========================="+ignored);
+            Log.i(TAG, "getChannelName: ===========================" + ignored);
         }
         return "";
     }
+
     //是否支持google服务
-    public static boolean isGooglePlayServiceAvailable (Context context) {
+    public static boolean isGooglePlayServiceAvailable(Context context) {
         int status = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
         if (status == ConnectionResult.SUCCESS) {
             return true;
@@ -81,6 +91,7 @@ public class AppUtils {
             return false;
         }
     }
+
     /**
      * 检查手机上是否安装了指定的软件
      */
@@ -438,8 +449,10 @@ public class AppUtils {
             Log.d("startToGooglePlay", "GoogleMarket Intent not found");
         }
     }
+
     /**
      * 获取进程名
+     *
      * @param cxt
      * @param pid
      * @return
@@ -457,12 +470,41 @@ public class AppUtils {
         }
         return null;
     }
+
     public static boolean isApkInDebug(Context context) {
         try {
             ApplicationInfo info = context.getApplicationInfo();
             return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static void gotoNotificationSetting(Context context) {
+        if (context == null) {
+            return;
+        }
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            //这种方案适用于 API 26, 即8.0（含8.0）以上可以用
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                intent.putExtra(EXTRA_APP_PACKAGE, context.getPackageName());
+                intent.putExtra(EXTRA_CHANNEL_ID, context.getApplicationInfo().uid);
+            } else {
+                //这种方案适用于 API21——25，即 5.0——7.1 之间的版本可以使用
+                intent.putExtra("app_package", context.getPackageName());
+                intent.putExtra("app_uid", context.getApplicationInfo().uid);
+            }
+            ((Activity) context).startActivityForResult(intent, 1005);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 出现异常则跳转到应用设置界面
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+            intent.setData(uri);
+            context.startActivity(intent);
         }
     }
 }
