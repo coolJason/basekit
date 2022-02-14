@@ -75,7 +75,7 @@ public class AppUtils {
         try {
             PackageManager pm = mContext.getPackageManager();
             ApplicationInfo appInfo = pm.getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA);
-            return appInfo.metaData.getString("EASE_CUSTOMER_KEY");
+            return appInfo.metaData.getString(name);
         } catch (PackageManager.NameNotFoundException ignored) {
             Log.i(TAG, "getChannelName: ===========================" + ignored);
         }
