@@ -2,15 +2,12 @@ package com.moregood.kit.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.os.Handler;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.CallSuper;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
-
-import com.moregood.kit.utils.Logger;
 
 
 /**
@@ -76,7 +73,6 @@ public abstract class BaseSplashFragment extends BaseFragment {
     };
 
     private void end() {
-        Logger.d("onAnimationEnd");
         FragmentActivity activity = getActivity();
         if (activity == null) return;
         if (activity.isDestroyed()) return;
