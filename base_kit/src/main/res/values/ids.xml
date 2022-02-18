@@ -28,4 +28,11 @@
 <!--    <item name="key_966" type="string" />-->
 <!--    <item name="key_66" type="string" />-->
     <item name="accelarate_detail_high_end" type="color" />
+
+    <item name="decode" type="id"/>
+    <item name="decode_failed" type="id"/>
+    <item name="decode_succeeded" type="id"/>
+    <item name="quit" type="id"/>
+    <item name="restart_preview" type="id"/>
+    <item name="return_scan_result" type="id"/>
 </resources>
