@@ -23,6 +23,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.moregood.kit.R;
 import com.moregood.kit.language.AppLanguageUtils;
 import com.moregood.kit.permission.PermissionChecker;
+import com.moregood.kit.utils.ActivityCollector;
 import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
@@ -65,6 +66,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ActivityCollector.addActivity(this, getClass());
         if (isSystemForTheme) {
             if (AppUtils.isMall(this)) {
                 //https://github.com/gyf-dev/ImmersionBar   属性参考链接
@@ -320,6 +322,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
 
     @Override
     protected void onDestroy() {
+        ActivityCollector.removeActivity(this);
         if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
