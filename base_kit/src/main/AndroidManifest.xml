@@ -34,8 +34,5 @@
             android:name="com.moregood.kit.service.DnsCheckService"
             android:enabled="true"
             android:exported="false" />
-        <activity
-            android:name="com.moregood.kit.qrcode.CaptureActivity"
-            android:screenOrientation="portrait" />
     </application>
 </manifest>
