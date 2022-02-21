@@ -127,7 +127,7 @@ dependencies {
     //富文本
     api 'com.zzhoujay.richtext:richtext:3.0.7'
     api 'com.zzhoujay:html:1.0.1'
-
+    api 'com.github.ithedan:TextViewDrawable:v1.0'
 }
 
 
