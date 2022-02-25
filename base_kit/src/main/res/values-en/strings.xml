@@ -124,8 +124,9 @@
     <string name="download_failed_install_now">Failed, download again</string>
     <string name="upgrade_now">Upgrade now</string>
     <string name="upgrade_later">Upgrade later</string>
-    <string name="login_chat_server">登录聊天服务器..</string>
-    <string name="enter_the_chat_room">进入聊天页面..</string>
-    <string name="sure">确定</string>
-    <string name="invite_a_prize">邀请有奖</string>
+    <string name="login_chat_server">Login to chat server..</string>
+    <string name="enter_the_chat_room">Enter the chat page..</string>
+    <string name="sure">ok</string>
+    <string name="invite_a_prize">Invitation Award</string>
+    <string name="install_wx">Please download and install WeChat</string>
 </resources>

@@ -128,4 +128,5 @@
     <string name="enter_the_chat_room">进入聊天页面..</string>
     <string name="sure">确定</string>
     <string name="invite_a_prize">邀请有奖</string>
+    <string name="install_wx">请下载安装微信</string>
 </resources>
