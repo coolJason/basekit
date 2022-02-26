@@ -1,6 +1,13 @@
 package com.moregood.kit.utils;
 
 public interface Constans {
+    String IV_SHORTCUT_WIDTH_120 = "?x-oss-process=image/resize,h_120,w_120";
+    String IV_SHORTCUT_WIDTH_200 = "?x-oss-process=image/resize,h_200,w_200";
+    String IV_SHORTCUT_WIDTH_300 = "?x-oss-process=image/resize,h_300,w_300";
+    String IV_SHORTCUT_WIDTH_500 = "?x-oss-process=image/resize,h_300,w_500";
+    String IV_SHORTCUT_WIDTH_1000 = "?x-oss-process=image/resize,h_800,w_1000";
+
+    String USER_TYPE = "userType";
     String STORE_ID = "storeId";
     String PRODUCT_ID = "productId";
     String ORDER_ID = "orderId";
