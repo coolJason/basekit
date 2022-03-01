@@ -1282,6 +1282,17 @@ public final class DateUtils {
         long ts =date.getTime();
         return ts;
     }
+
+    public static String getStartTimestamp(String startTime) {
+        String start = startTime + " 00:00:00";
+        return start;
+    }
+
+    public static String getEndTimestamp(String endTime) {
+        String end = endTime + " 23:59:59";
+        return end;
+    }
+
     /**
      * YY-MM-DD HH:mm:ss 转为 hh:mm时间戳
      * @param ctime YY-MM-DD HH:mm:ss
