@@ -50,6 +50,7 @@ public interface Constans {
     String RICH_TEXT = "richText";
     String COMBINDED_ORDER_TIP = "combindedOrderTip";
     int USER_TYPE_TAKEAWAY = 1;
-    int USER_TYPE_GROUP_BUG= 2;
+    int USER_TYPE_GROUP_BUG = 2;
+    String DEL_ADDRESS = "delAddress";
 
 }
