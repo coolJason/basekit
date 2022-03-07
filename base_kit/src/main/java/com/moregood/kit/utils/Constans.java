@@ -51,6 +51,8 @@ public interface Constans {
     String COMBINDED_ORDER_TIP = "combindedOrderTip";
     int USER_TYPE_TAKEAWAY = 1;
     int USER_TYPE_GROUP_BUG = 2;
+    String LBS = "lbs";
     String DEL_ADDRESS = "delAddress";
+    String IS_ALL_GESTURES_ENABLED = "isAllGesturesEnabled";
 
 }
