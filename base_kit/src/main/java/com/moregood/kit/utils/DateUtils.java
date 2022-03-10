@@ -32,6 +32,7 @@ public final class DateUtils {
     public static final String yyyyMMdd2 = "yyyyMMdd";
     public static final String yyyyMMdd3 = "yyyy年MM月dd日";
     public static final String yyyyMMdd4 = "yyyy.MM.dd";
+    public static final String yyyyMMdd5 = "yyyy-MM";
     public static final String yyyyMMddHHmm = "yyyy/MM/dd hh:mm";
     public static final String yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss";
     public static final String yyyy_MM_ddHHmm = "yyyy-MM-dd HH:mm";
@@ -1281,6 +1282,17 @@ public final class DateUtils {
         long ts =date.getTime();
         return ts;
     }
+
+    public static String getStartTimestamp(String startTime) {
+        String start = startTime + " 00:00:00";
+        return start;
+    }
+
+    public static String getEndTimestamp(String endTime) {
+        String end = endTime + " 23:59:59";
+        return end;
+    }
+
     /**
      * YY-MM-DD HH:mm:ss 转为 hh:mm时间戳
      * @param ctime YY-MM-DD HH:mm:ss
