@@ -128,6 +128,9 @@ dependencies {
     api 'com.zzhoujay.richtext:richtext:3.0.7'
     api 'com.zzhoujay:html:1.0.1'
     api 'com.github.ithedan:TextViewDrawable:v1.0'
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    api 'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
+    api 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
 }
 
 
