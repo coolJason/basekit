@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintlayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -56,6 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintLeft_toRightOf="@+id/iv_image"
         app:layout_constraintRight_toRightOf="parent"
+        android:paddingBottom="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_30"
         android:layout_marginTop="@dimen/dp_14"
         android:layout_marginLeft="@dimen/dp_28"
