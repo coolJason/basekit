@@ -225,6 +225,17 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         return sb1.toString();
     }
 
+    /**
+     * 创建请求请求数据-适用于提交单个对象数据的情况
+     * @param objects
+     * @return
+     */
+    protected RequestBody createObjectRequestBody(Object objects) {
+        Gson gson = new Gson();
+        String sb = gson.toJson(objects);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        return RequestBody.create(JSON, sb.toString());
+    }
 
     public <T> boolean request(ZSubscriber<T> subscriber, Object... params) {
         Method[] methods = IHttpService.class.getDeclaredMethods();
