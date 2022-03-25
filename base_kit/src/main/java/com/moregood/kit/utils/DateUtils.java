@@ -1071,6 +1071,42 @@ public final class DateUtils {
      * @param nowTime   当前时间
      * @param startTime 开始时间
      * @param endTime   结束时间
+     * @param format    时间格式
+     * @return
+     */
+    public static boolean isInTimeNotContain(final String nowTime, final String startTime, final String endTime, final String format) {
+        if (nowTime == null || startTime == null || endTime == null || format == null) return false;
+        try {
+            // 格式化日期
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            // 当前时间转换
+            long now = sdf.parse(nowTime).getTime();
+            // 开始时间转换
+            long start = sdf.parse(startTime).getTime();
+            // 结束时间转换
+            long end = sdf.parse(endTime).getTime();
+            // 判断结束时间是否小于开始时间
+            if (end < start) { // 结束属于第二天区域
+                if (now > start || now < end) {
+                    return true;
+                }
+            } else {
+                if (now > start && now < end) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            Logger.d(TAG, e, "isInTime");
+        }
+        return false;
+    }
+
+    /**
+     * 判断时间是否在 [startTime, endTime] 区间，注意时间格式要一致
+     *
+     * @param nowTime   当前时间
+     * @param startTime 开始时间
+     * @param endTime   结束时间
      * @return
      */
     public static boolean isInTime(final long nowTime, final long startTime, final long endTime) {
