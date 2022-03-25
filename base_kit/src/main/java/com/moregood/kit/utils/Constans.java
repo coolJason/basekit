@@ -25,7 +25,8 @@ public interface Constans {
     String NOTICE_LIST = "noticeList";
     String IS_NEED = "isNeed";
     String COMMENT_RIDER = "commentRider";
-    String COMMENT_RIDER_SUCCESS = "commentRiderSuccess";
+    String COMMENT_RIDER_SUCCESS = "commentRiderSuccess";//评价骑手成功
+    String COMMENT_ORDER_SUCCESS = "commentOrderSuccess";//评价订单成功
     int GOOD_COMMENT = 1;
     int BAD_COMMENT = 2;
     int ANONYMOUS = 1;//表示匿名
