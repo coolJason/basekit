@@ -1,5 +1,6 @@
 package com.moregood.kit.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * At Date 2021/8/19
  * Describe:
  */
-public class AreaCodeData {
+public class AreaCodeData implements Serializable {
     private String code;
 
     private List<String> codeSubAreaListVOList;
