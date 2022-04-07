@@ -3,8 +3,6 @@ package com.moregood.kit.net;
 import android.content.Context;
 import android.util.Pair;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.Gson;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.bean.VipInfo;
@@ -121,6 +119,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 
         retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())
+                .addConverterFactory(new EmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .baseUrl(BaseApplication.getInstance().getFlavors().getBaseUrl())
