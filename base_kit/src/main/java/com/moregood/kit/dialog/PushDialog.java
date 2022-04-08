@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.moregood.kit.R;
 
 import java.util.Timer;
@@ -25,6 +26,7 @@ import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 import butterknife.BindView;
 
@@ -44,7 +46,17 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     private String title="";
     private String content="";
     private Context context;
+    private ConstraintLayout constraintlayout;
     private int type=1;// 1接单 2 超时 (用户端中使用 8商家已接单 9商家已出餐10骑手已取餐)
+    private MerchantCommentOnclick merchantCommentOnclick;
+
+    public MerchantCommentOnclick getMerchantCommentOnclick() {
+        return merchantCommentOnclick;
+    }
+
+    public void setMerchantCommentOnclick(MerchantCommentOnclick merchantCommentOnclick) {
+        this.merchantCommentOnclick = merchantCommentOnclick;
+    }
 
     public PushDialog() {
         super();
@@ -85,7 +97,9 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
         iv_image=view.findViewById(R.id.iv_image);
         tv_title=view.findViewById(R.id.tv_title);
         tv_content=view.findViewById(R.id.tv_content);
+        constraintlayout=view.findViewById(R.id.constraintlayout);
         iv_finish.setOnClickListener(this);
+        constraintlayout.setOnClickListener(this);
         tv_title.setText(title);
         tv_content.setText(content);
         if(type==1){
@@ -98,6 +112,8 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
             iv_image.setImageResource(R.drawable.ic_eat_out);
         }else if(type==10){
             iv_image.setImageResource(R.drawable.ic_take_meal);
+        }else if(type==11){//商家回复
+            iv_image.setImageResource(R.drawable.ic_merchant_msg);
         }
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -122,7 +138,14 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId()==R.id.iv_finish){
                 dismiss();
+        }else if(view.getId()==R.id.constraintlayout){
+            if(merchantCommentOnclick!=null) {
+                merchantCommentOnclick.onclick();
+                dismiss();
+            }
         }
     }
-
+    public interface MerchantCommentOnclick{
+        void onclick();
+    }
 }

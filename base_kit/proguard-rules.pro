@@ -31,3 +31,7 @@
 -keep class com.ta.utdid2.device.**{*;}
 #防止inline
 -dontoptimize
+#oppo推送
+-keep public class * extends android.app.Service
+-keep class com.heytap.mcssdk.** {*;}
+-keep class com.heytap.msp.push.** { *;}
