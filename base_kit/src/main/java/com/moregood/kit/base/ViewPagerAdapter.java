@@ -43,6 +43,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public long getItemId(int position) {
+        return mFragments.get(position).hashCode();
+    }
+
+    @Override
     public int getCount() {
         return mFragments.size();
     }
