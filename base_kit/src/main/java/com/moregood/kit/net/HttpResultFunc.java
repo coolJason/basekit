@@ -57,11 +57,13 @@ public class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
                 List list = (List) data;
                 if (list.size() > 0) {
                     for (Object obj : list) {
+                        ReflectionUtils.setField(obj.getClass(), "total", obj, tHttpResult.getTotal());
                         ReflectionUtils.setField(obj.getClass(), "serverTimestamp", obj, tHttpResult.getTimestamp());
                     }
                 }
             } else {
                 if (data != null) {
+                    ReflectionUtils.setField(data.getClass(), "total", data, tHttpResult.getTotal());
                     ReflectionUtils.setField(data.getClass(), "serverTimestamp", data, tHttpResult.getTimestamp());
                 }
             }

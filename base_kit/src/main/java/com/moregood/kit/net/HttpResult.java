@@ -36,17 +36,15 @@ public class HttpResult<T> {
      */
     public static final int HTTP_RESULT_CODE_TOKEN_INVALID = 20102;
     private int code;
+    private int total;
     private long timestamp;
     private String message;
 
     private T data;
 
-
     public T getData() {
         return data;
     }
-
-
 
     public void setData(T data) {
         this.data = data;
@@ -76,12 +74,22 @@ public class HttpResult<T> {
         this.code = code;
     }
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                "\"errorCode\":\"" + code + "\"" +
-                ", \"errorMsg\":\"" + message + "\"" +
-                ", \"data\":" + data +
+        return "HttpResult{" +
+                "code=" + code +
+                ", total=" + total +
+                ", timestamp=" + timestamp +
+                ", message='" + message + '\'' +
+                ", data=" + data +
                 '}';
     }
 }
