@@ -35,6 +35,11 @@ public class HttpResult<T> {
      * 令牌无效或非法，需要重新调用REGISTER接口请求Token
      */
     public static final int HTTP_RESULT_CODE_TOKEN_INVALID = 20102;
+
+    /**
+     * 空body错误码
+     */
+    public static final int HTTP_RESULT_CODE_NULL_BODY = -1;
     private int code;
     private long timestamp;
     private String message;
