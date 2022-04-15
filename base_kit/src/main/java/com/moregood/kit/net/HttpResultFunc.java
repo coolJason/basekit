@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.utils.Logger;
 import com.moregood.kit.utils.ReflectionUtils;
+import com.moregood.kit.utils.ToastUtil;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.functions.Function;
+
+import static com.moregood.kit.net.HttpResult.HTTP_RESULT_CODE_NULL_BODY;
 
 /**
  * description :
@@ -32,7 +35,9 @@ public class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
         Gson gson = new Gson();
         invokeServerTimestampValue(tHttpResult);
         String json = gson.toJson(tHttpResult);
-
+        if (tHttpResult == null) {
+            throw new ApiException(HTTP_RESULT_CODE_NULL_BODY, url + ":body is null");
+        }
         Logger.longLog(String.format("%s 请求结果：", url), json);
         if (!tHttpResult.isSuccess()) {
             throw new ApiException(tHttpResult.getErrorCode(), tHttpResult.getErrorMsg());
