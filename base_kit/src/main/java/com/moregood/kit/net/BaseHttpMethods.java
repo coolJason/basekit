@@ -1,9 +1,13 @@
 package com.moregood.kit.net;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
+import android.os.Debug;
 import android.util.Pair;
 
 import com.google.gson.Gson;
+import com.moregood.kit.BuildConfig;
 import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.bean.VipInfo;
 import com.moregood.kit.bean.item.UpdateInfo;
@@ -119,8 +123,8 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.addInterceptor(loggingInterceptor);
 
+        if(BuildConfig.DEBUG)
         client = addX509(client);
-
 
         OkHttpClient httpClient = client.build();
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
@@ -158,15 +162,17 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         mService = retrofit.create(ReflectionUtils.getDefinedTClass(this, 0));
     }
 
-    //捕获接口数据配置
+    //忽略过期安全证书
     private  OkHttpClient.Builder addX509( OkHttpClient.Builder client){
 
         final X509TrustManager trustManager = new X509TrustManager() {
+            @SuppressLint("TrustAllX509TrustManager")
             @Override
             public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 
             }
 
+            @SuppressLint("TrustAllX509TrustManager")
             @Override
             public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 
@@ -191,6 +197,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         }
         client.sslSocketFactory(sslContext.getSocketFactory(),trustManager);
         client.hostnameVerifier(new HostnameVerifier() {
+            @SuppressLint("BadHostnameVerifier")
             @Override
             public boolean verify(String s, SSLSession sslSession) {
                 return true;
