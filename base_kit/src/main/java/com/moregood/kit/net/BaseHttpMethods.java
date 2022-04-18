@@ -16,12 +16,24 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -106,6 +118,10 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.addInterceptor(loggingInterceptor);
+
+        client = addX509(client);
+
+
         OkHttpClient httpClient = client.build();
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
@@ -115,8 +131,6 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
         httpClientBuilder.protocols(Collections.singletonList(Protocol.HTTP_1_1));
         httpClientBuilder.pingInterval(15, TimeUnit.SECONDS);// 默认是0
         httpClientBuilder.retryOnConnectionFailure(false);  //默认是true
-//        httpClientBuilder.connectionPool(new ConnectionPool(32, 20, TimeUnit.MILLISECONDS));
-
         retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder.build())
                 .addConverterFactory(new EmptyConverterFactory())
@@ -142,6 +156,47 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
                 .build();
 
         mService = retrofit.create(ReflectionUtils.getDefinedTClass(this, 0));
+    }
+
+    //捕获接口数据配置
+    private  OkHttpClient.Builder addX509( OkHttpClient.Builder client){
+
+        final X509TrustManager trustManager = new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContext.getInstance("TLS");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            sslContext.init(null, new X509TrustManager[]{trustManager}, new SecureRandom());
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+        client.sslSocketFactory(sslContext.getSocketFactory(),trustManager);
+        client.hostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String s, SSLSession sslSession) {
+                return true;
+            }
+        });
+        return client;
     }
 
 
@@ -226,6 +281,7 @@ public abstract class BaseHttpMethods<HS extends IHttpService> {
 
     /**
      * 创建请求请求数据-适用于提交单个对象数据的情况
+     *
      * @param objects
      * @return
      */
