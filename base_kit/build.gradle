@@ -8,13 +8,15 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1042
-        versionName "1.4.2"
+        versionCode 1046
+        versionName "1.4.6"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-
+    dataBinding{
+        enabled = true
+    }
     buildTypes {
         release {
             minifyEnabled false
