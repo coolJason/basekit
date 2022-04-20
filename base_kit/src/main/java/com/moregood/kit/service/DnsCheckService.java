@@ -138,7 +138,7 @@ public class DnsCheckService extends Service {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         throwable.printStackTrace();
-                        executeDnsCheckScheduler();
+                        timer();
                     }
                 });
     }
