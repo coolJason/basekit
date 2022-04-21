@@ -114,6 +114,12 @@ public class PushDialog extends DialogFragment implements View.OnClickListener {
             iv_image.setImageResource(R.drawable.ic_take_meal);
         }else if(type==11){//商家回复
             iv_image.setImageResource(R.drawable.ic_merchant_msg);
+        }else if(type==13){//商家取消订单
+            iv_image.setImageResource(R.drawable.ic_order_cancle);
+        }else if(type==14){//平台取消订单
+            iv_image.setImageResource(R.drawable.ic_order_cancle);
+        }else if(type==15){//平台消息
+            iv_image.setImageResource(R.drawable.ic_platform_msg);
         }
         final Timer t = new Timer();
         t.schedule(new TimerTask() {
