@@ -17,7 +17,7 @@ public class BaseViewModel extends ViewModel {
 
     Map<String, MutableLiveData> mMutableMap;
     public int pageNum = 1;
-    public int pageSize = 15;
+    public int pageSize = 5;
 
     public BaseViewModel() {
         mMutableMap = new HashMap<>();
