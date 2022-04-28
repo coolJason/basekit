@@ -15,6 +15,10 @@ public class AreaCodeData implements Serializable {
 
     private boolean isCheck;
 
+    private String easyName;
+
+    private String name;
+
     public boolean isCheck() {
         return isCheck;
     }
@@ -37,5 +41,21 @@ public class AreaCodeData implements Serializable {
 
     public void setCodeSubAreaList(List<String> codeSubAreaList) {
         this.codeSubAreaListVOList = codeSubAreaList;
+    }
+
+    public String getEasyName() {
+        return easyName;
+    }
+
+    public void setEasyName(String easyName) {
+        this.easyName = easyName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
