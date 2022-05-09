@@ -25,7 +25,7 @@ import java.util.TimerTask;
 
 
 /**
- * description :
+ * description : 用户端主页面-自己系统的消息推送
  * author : yexifeng
  * email : ye_xi_feng@163.com
  * date : 2019/6/19 17:37
@@ -40,7 +40,7 @@ public class PushHomeDialog extends DialogFragment implements View.OnClickListen
     private String content="";
     private Context context;
     private ConstraintLayout constraintlayout;
-    private int type=1;// 1接单 2 超时 (用户端中使用 8商家已接单 9商家已出餐10骑手已取餐)
+    private int type=1;// 消息类型
     private MerchantCommentOnclick merchantCommentOnclick;
 
     public MerchantCommentOnclick getMerchantCommentOnclick() {
