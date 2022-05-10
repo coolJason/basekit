@@ -33,17 +33,17 @@ public class BadgeUtils {
     private static int notificationId = 0;
 
     public static void setCount(final int count, final Context context) {
-        if (count >= 0 && context != null) {
+        if (count > 0 && context != null) {
             Log.d("BRAND", Build.BRAND);
             switch (Build.BRAND.toLowerCase()) {
                 case "huawei":
                 case "honor":
                     setHuaweiBadge(count, context);
                     break;
-//                case "redmi":
-//                case "xiaomi":
-//                    setNotificationBadge(count, context);
-//                    break;
+                case "redmi":
+                case "xiaomi":
+                    setNotificationBadge(count, context);
+                    break;
 //                case "samsung":
 //                    setSamsungBadge(count, context);
 //                    break;
@@ -116,7 +116,8 @@ public class BadgeUtils {
         if (Build.BRAND.equalsIgnoreCase("xiaomi") || Build.BRAND.equalsIgnoreCase("redmi")) {
             setXiaomiBadge(count, notification);
         }
-        notificationManager.notify(notificationId++, notification);
+        notificationManager.cancel(0525);
+        notificationManager.notify(0525, notification);
         return true;
     }
 
