@@ -30,10 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BadgeUtils {
-    private static int notificationId = 0;
+    private static final int NOTIFY_ID_MALL = 1525;//用户端通知栏id
+    private static final int NOTIFY_ID_MERCHANT = 1526;//商家端通知栏id
+    private static final int NOTIFY_ID_RIDER = 1527;//骑手端通知栏id
 
     public static void setCount(final int count, final Context context) {
-        if (count > 0 && context != null) {
+        if (count >= 0 && context != null) {
             Log.d("BRAND", Build.BRAND);
             switch (Build.BRAND.toLowerCase()) {
                 case "huawei":
@@ -102,22 +104,23 @@ public class BadgeUtils {
         Intent intent = new Intent(context, ToolBarActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         Notification notification = new NotificationCompat.Builder(context, "badge")
-                .setContentTitle("应用角标")
-                .setContentText("您有" + count + "条未读消息")
+                .setContentTitle(context.getResources().getString(R.string.come_come))
+//                .setContentText("您有" + count + "条未读消息")
+                .setContentText(context.getResources().getString(R.string.view_unread_messages))
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap
                         .ic_launcher))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setChannelId("badge")
-                .setNumber(count)
+                .setNumber(count == 0 ? 0 : count - 1)
                 .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).build();
         // 小米
         if (Build.BRAND.equalsIgnoreCase("xiaomi") || Build.BRAND.equalsIgnoreCase("redmi")) {
-            setXiaomiBadge(count, notification);
+            setXiaomiBadge(count == 0 ? 0 : count - 1, notification);
         }
-        notificationManager.cancel(0525);
-        notificationManager.notify(0525, notification);
+        notificationManager.cancel(getNotifyId(context));
+        notificationManager.notify(getNotifyId(context), notification);
         return true;
     }
 
@@ -314,4 +317,26 @@ public class BadgeUtils {
             super(cr);
         }
     }
+
+    /**
+     * 根据包名获取获取通知id
+     *
+     * @return
+     */
+    public static int getNotifyId(Context context) {
+        int notifyId = NOTIFY_ID_MALL;
+        switch (context.getPackageName()) {
+            case "com.bintiger.mall":
+                notifyId = NOTIFY_ID_MALL;
+                break;
+            case "com.bintiger.merchant.android":
+                notifyId = NOTIFY_ID_MERCHANT;
+                break;
+            case "com.bintiger.rider.android":
+                notifyId = NOTIFY_ID_RIDER;
+                break;
+        }
+        return notifyId;
+    }
+
 }

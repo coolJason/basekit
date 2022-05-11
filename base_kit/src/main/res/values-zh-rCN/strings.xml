@@ -129,4 +129,6 @@
     <string name="sure">确定</string>
     <string name="invite_a_prize">邀请有奖</string>
     <string name="install_wx">请下载安装微信</string>
+    <string name="come_come">拜托拜托</string>
+    <string name="view_unread_messages">查看未读消息</string>
 </resources>

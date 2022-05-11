@@ -129,4 +129,6 @@
     <string name="sure">ok</string>
     <string name="invite_a_prize">Invitation Award</string>
     <string name="install_wx">Please download and install WeChat</string>
+    <string name="come_come">拜托拜托</string>
+    <string name="view_unread_messages">查看未读消息</string>
 </resources>
