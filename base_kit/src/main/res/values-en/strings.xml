@@ -131,4 +131,5 @@
     <string name="install_wx">Please download and install WeChat</string>
     <string name="come_come">COME COME</string>
     <string name="view_unread_messages">View unread messages</string>
+    <string name="google_play_update_tip">The current version is not the latest version. Please update it in Google play store</string>
 </resources>
