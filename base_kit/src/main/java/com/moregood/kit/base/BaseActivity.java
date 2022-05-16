@@ -65,6 +65,10 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         this.dark = dark;
     }
 
+    public void setmViewModel(VM mViewModel) {
+        this.mViewModel = mViewModel;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ActivityCollector.addActivity(this, getClass());
