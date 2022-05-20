@@ -128,6 +128,30 @@ public final class ValiToPhoneUtils {
         return false;
     }
 
+    /**
+     * 验证手机号码的格式是否是迪拜或者国内的
+     *
+     * @param phone
+     * @return
+     */
+    public static boolean isPhoneNumCnOrUae(final String phone) {
+        if (!isEmpty(phone)) {
+            if (match(PHONE_CALL_PATTERN_CN, phone)) {
+                return true;
+            }
+            if (match(PHONE_CALL_PATTERN_CN_SIMPLE, phone)) {
+                return true;
+            }
+            if (match(PHONE_CALL_PATTERN_UAE, phone)) {
+                return true;
+            }
+            if (match(PHONE_CALL_PATTERN_UAE_SIMPLE, phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // ==============
     // = 手机号判断 =
     // ==============
@@ -156,6 +180,16 @@ public final class ValiToPhoneUtils {
 
     // 座机电话格式验证
     public static final String PHONE_CALL_PATTERN = "^(?:\\(\\d{3,4}\\)|\\d{3,4}-)?\\d{7,8}(?:-\\d{1,4})?$";
+
+    // 国内号码带国际区号
+    public static final String PHONE_CALL_PATTERN_CN = "^861[3|4|5|6|7|8|9]\\d{9}$";
+    // 国内号码不带国际区号
+    public static final String PHONE_CALL_PATTERN_CN_SIMPLE = "^1[3|4|5|6|7|8|9]\\d{9}$";
+    // 阿联酋号码带国际区号
+    public static final String PHONE_CALL_PATTERN_UAE = "^9715[0|2|4|5|6|8]\\d{7}$";
+    // 阿联酋号码不带国际区号
+    public static final String PHONE_CALL_PATTERN_UAE_SIMPLE = "^5[0|2|4|5|6|8]\\d{7}$";
+
 
     static {
 
