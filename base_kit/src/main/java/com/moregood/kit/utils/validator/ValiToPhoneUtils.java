@@ -139,10 +139,16 @@ public final class ValiToPhoneUtils {
             if (match(PHONE_CALL_PATTERN_CN, phone)) {
                 return true;
             }
+            if (match(PHONE_CALL_PATTERN_CN_PLUS, phone)) {
+                return true;
+            }
             if (match(PHONE_CALL_PATTERN_CN_SIMPLE, phone)) {
                 return true;
             }
             if (match(PHONE_CALL_PATTERN_UAE, phone)) {
+                return true;
+            }
+            if (match(PHONE_CALL_PATTERN_UAE_PLUS, phone)) {
                 return true;
             }
             if (match(PHONE_CALL_PATTERN_UAE_SIMPLE, phone)) {
@@ -183,10 +189,13 @@ public final class ValiToPhoneUtils {
 
     // 国内号码带国际区号
     public static final String PHONE_CALL_PATTERN_CN = "^861[3|4|5|6|7|8|9]\\d{9}$";
+    // 国内号码带国际区号
+    public static final String PHONE_CALL_PATTERN_CN_PLUS = "^\\+861[3|4|5|6|7|8|9]\\d{9}$";
     // 国内号码不带国际区号
     public static final String PHONE_CALL_PATTERN_CN_SIMPLE = "^1[3|4|5|6|7|8|9]\\d{9}$";
     // 阿联酋号码带国际区号
     public static final String PHONE_CALL_PATTERN_UAE = "^9715[0|2|4|5|6|8]\\d{7}$";
+    public static final String PHONE_CALL_PATTERN_UAE_PLUS = "^\\+9715[0|2|4|5|6|8]\\d{7}$";
     // 阿联酋号码不带国际区号
     public static final String PHONE_CALL_PATTERN_UAE_SIMPLE = "^5[0|2|4|5|6|8]\\d{7}$";
 
