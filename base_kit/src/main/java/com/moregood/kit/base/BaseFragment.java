@@ -37,6 +37,15 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
     protected Unbinder mUnbinder;
     protected VM mViewModel;
     protected int mCurrentStatusColor;
+    private boolean isImmersionBar=true;
+
+    public boolean isImmersionBar() {
+        return isImmersionBar;
+    }
+
+    public void setImmersionBar(boolean immersionBar) {
+        isImmersionBar = immersionBar;
+    }
 
     @Nullable
     @Override
@@ -154,7 +163,9 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
     @CallSuper
     public void onFragmentSelected() {
         if (getContext() != null && AppUtils.isMall(getContext())) {
-            ImmersionBar.with(this).init();
+            if(isImmersionBar){
+                ImmersionBar.with(this).init();
+            }
         } else {
             if (getView() != null && isInit)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
