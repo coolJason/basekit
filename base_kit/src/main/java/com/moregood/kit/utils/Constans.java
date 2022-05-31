@@ -55,5 +55,6 @@ public interface Constans {
     String LBS = "lbs";
     String DEL_ADDRESS = "delAddress";
     String IS_ALL_GESTURES_ENABLED = "isAllGesturesEnabled";
+    String TYPE = "type";
 
 }
