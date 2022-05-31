@@ -154,6 +154,9 @@ public final class ValiToPhoneUtils {
             if (match(PHONE_CALL_PATTERN_UAE_SIMPLE, phone)) {
                 return true;
             }
+            if (match(PHONE_CALL_PATTERN_UAE_SIMPLE_ZERO, phone)) {
+                return true;
+            }
         }
         return false;
     }
@@ -198,7 +201,8 @@ public final class ValiToPhoneUtils {
     public static final String PHONE_CALL_PATTERN_UAE_PLUS = "^\\+9715[0|2|4|5|6|8]\\d{7}$";
     // 阿联酋号码不带国际区号
     public static final String PHONE_CALL_PATTERN_UAE_SIMPLE = "^5[0|2|4|5|6|8]\\d{7}$";
-
+    // 阿联酋号码不带国际区号，0开头
+    public static final String PHONE_CALL_PATTERN_UAE_SIMPLE_ZERO = "^05[0|2|4|5|6|8]\\d{7}$";
 
     static {
 
