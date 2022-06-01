@@ -12,22 +12,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.moregood.kit.R;
+import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.base.ToolBarActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BadgeUtils {
     private static final int NOTIFY_ID_MALL = 1525;//用户端通知栏id
@@ -44,7 +49,41 @@ public class BadgeUtils {
                     break;
                 case "redmi":
                 case "xiaomi":
-                    setNotificationBadge(count, context);
+                    setNotificationBadge(count, context, "");
+                    break;
+//                case "samsung":
+//                    setSamsungBadge(count, context);
+//                    break;
+//                case "oppo":
+////                    setOPPOBadge(count, context) || setOPPOBadge2(count, context);
+//                    break;
+//                case "vivo":
+//                    setVivoBadge(count, context);
+//                    break;
+//                case "lenovo":
+//                    setZukBadge(count, context);
+//                    break;
+//                case "htc":
+//                    setHTCBadge(count, context);
+//                    break;
+//                case "sony":
+//                    setSonyBadge(count, context);
+//                    break;
+            }
+        }
+    }
+
+    public static void setCount(final int count, final Context context, String msg) {
+        if (count >= 0 && context != null) {
+            Log.d("BRAND", Build.BRAND);
+            switch (Build.BRAND.toLowerCase()) {
+                case "huawei":
+                case "honor":
+                    setHuaweiBadge(count, context);
+                    break;
+                case "redmi":
+                case "xiaomi":
+                    setNotificationBadge(count, context, msg);
                     break;
 //                case "samsung":
 //                    setSamsungBadge(count, context);
@@ -86,7 +125,7 @@ public class BadgeUtils {
         }
     }
 
-    public static boolean setNotificationBadge(int count, Context context) {
+    public static boolean setNotificationBadge(int count, Context context, String msg) {
         Logger.e("====777=");
         NotificationManager notificationManager = (NotificationManager) context.getSystemService
                 (Context.NOTIFICATION_SERVICE);
@@ -103,25 +142,51 @@ public class BadgeUtils {
         }
         Intent intent = new Intent(context, ToolBarActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        boolean isZh = BaseApplication.getInstance().getAppLanguage(context).equals("zh");
+        String contentTitle = "";
+        if (isZh) {
+            contentTitle = context.getString(R.string.come_come);
+        } else {
+            contentTitle = getUsString(R.string.come_come, context);
+        }
         Notification notification = new NotificationCompat.Builder(context, "badge")
-                .setContentTitle(context.getResources().getString(R.string.come_come))
+                .setContentTitle(contentTitle)
 //                .setContentText("您有" + count + "条未读消息")
-                .setContentText(context.getResources().getString(R.string.view_unread_messages))
+                .setContentText(TextUtils.isEmpty(msg) ? context.getResources().getString(R.string.view_unread_messages) : msg)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap
                         .ic_launcher))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setChannelId("badge")
-                .setNumber(count == 0 ? 0 : count - 1)
+                .setNumber(count)
                 .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL).build();
-        // 小米
-        if (Build.BRAND.equalsIgnoreCase("xiaomi") || Build.BRAND.equalsIgnoreCase("redmi")) {
-            setXiaomiBadge(count == 0 ? 0 : count - 1, notification);
-        }
+
+        setXiaomiBadge(count, notification);
         notificationManager.cancel(getNotifyId(context));
-        notificationManager.notify(getNotifyId(context), notification);
+        if (count > 0) {
+            notificationManager.notify(getNotifyId(context), notification);
+        }
         return true;
+    }
+
+    public static String getUsString(int id, Context appContext) {
+        String name;
+        //获取当前环境的Resources
+        Resources resources = appContext.getResources();
+        //获得res资源对象
+        Configuration config = resources.getConfiguration();
+        Locale oldLocale = config.locale;
+        //获得设置对象
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        //  获得屏幕参数：主要是分辨率，像素等。
+        config.locale = Locale.ENGLISH;
+        // 英文
+        resources.updateConfiguration(config, dm);
+        name = resources.getString(id);
+        config.locale = oldLocale;
+        resources.updateConfiguration(config, dm);
+        return name;
     }
 
     private static void setXiaomiBadge(int count, Notification notification) {
@@ -133,7 +198,7 @@ public class BadgeUtils {
             method.invoke(extraNotification, count);
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.e("====999=="+e.getMessage());
+            Logger.e("====999==" + e.getMessage());
         }
     }
 
