@@ -301,7 +301,7 @@ public class DeviceUtils {
                 AssetFileDescriptor assetFileDescriptor = activity.getAssets().openFd(fileName);
                 if (assetFileDescriptor != null) {
                     mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     mediaPlayer.setLooping(false);//设置为循环播放
                     mediaPlayer.prepare();//初始化播放器MediaPlayer
                     mediaPlayer.setVolume(1,1);
