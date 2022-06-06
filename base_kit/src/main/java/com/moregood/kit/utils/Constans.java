@@ -19,6 +19,7 @@ public interface Constans {
     String FOLLOW_COMMENT_SUCCESS = "followCommentSuccess";
     int MAX_100 = 100;
     int MAX_140 = 140;
+    int MAX_200 = 200;
     int MAX_UPLOAD_IMG = 6;
     int MIN_DATUM = 1200;
     int QUALITY_90 = 90;
