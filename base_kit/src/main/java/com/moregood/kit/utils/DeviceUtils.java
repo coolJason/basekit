@@ -11,6 +11,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 
 import androidx.core.app.ActivityCompat;
@@ -273,15 +274,15 @@ public class DeviceUtils {
 
     }
 
-    public static void setStreamVolumeMax(Context context){
+    public static void setStreamVolumeMax(Context context) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.isNotificationPolicyAccessGranted()) {
             Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
             context.startActivity(intent);
-        }else{
-            AudioManager am = (AudioManager)context.getSystemService(AUDIO_SERVICE);
-            int music=am.getStreamMaxVolume(AudioManager.STREAM_MUSIC );
-            am.setStreamVolume(AudioManager.STREAM_ALARM ,music,AudioManager.FLAG_PLAY_SOUND);
+        } else {
+            AudioManager am = (AudioManager) context.getSystemService(AUDIO_SERVICE);
+            int music = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            am.setStreamVolume(AudioManager.STREAM_ALARM, music, AudioManager.FLAG_PLAY_SOUND);
         }
     }
 
@@ -294,19 +295,27 @@ public class DeviceUtils {
 //            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 //                ActivityCompat.requestPermissions((Activity) activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 //            } else {
-                if (!mediaPlayer.isPlaying()) {
-                    mediaPlayer.stop();
-                    mediaPlayer.reset();
+            if (!mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+            }
+            AssetFileDescriptor assetFileDescriptor = activity.getAssets().openFd(fileName);
+            if (assetFileDescriptor != null) {
+                mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(), assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.setLooping(false);//设置为循环播放
+                mediaPlayer.prepare();//初始化播放器MediaPlayer
+                mediaPlayer.setVolume(1, 1);
+                mediaPlayer.start();//开始播放
+                try {
+                    if (activity.getPackageName().equals("com.bintiger.rider.android")) {
+                        Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(mediaPlayer.getDuration());
+                    }
+                } catch (Exception e) {
+
                 }
-                AssetFileDescriptor assetFileDescriptor = activity.getAssets().openFd(fileName);
-                if (assetFileDescriptor != null) {
-                    mediaPlayer.setDataSource(assetFileDescriptor.getFileDescriptor(),assetFileDescriptor.getStartOffset(), assetFileDescriptor.getLength());
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mediaPlayer.setLooping(false);//设置为循环播放
-                    mediaPlayer.prepare();//初始化播放器MediaPlayer
-                    mediaPlayer.setVolume(1,1);
-                    mediaPlayer.start();//开始播放
-                }
+            }
 //            }
         } catch (Exception e) {
             e.printStackTrace();
