@@ -57,5 +57,6 @@ public interface Constans {
     String DEL_ADDRESS = "delAddress";
     String IS_ALL_GESTURES_ENABLED = "isAllGesturesEnabled";
     String TYPE = "type";
+    String ORDER_REFRESH = "order_refresh";
 
 }
