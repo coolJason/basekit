@@ -234,11 +234,14 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
     }
 
     protected void onLanguageChange() {
-        if (!isFollowSystemLanguage())
+//        if (!isFollowSystemLanguage())
             AppLanguageUtils.changeAppLanguage(this, getAppLanguage(this));
     }
 
     public String getAppLanguage(Context context) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            return "en";
+        }
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
         Logger.e("appLang = " + appLang);
