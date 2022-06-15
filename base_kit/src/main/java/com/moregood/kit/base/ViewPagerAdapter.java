@@ -1,9 +1,13 @@
 package com.moregood.kit.base;
 
 
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        return super.instantiateItem(container, position);
+    }
+
     /**
      * @param fragment      添加Fragment
      * @param fragmentTitle Fragment的标题，即TabLayout中对应Tab的标题
@@ -31,6 +41,16 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         mFragmentsTitles.add(fragmentTitle);
     }
 
+
+
+
+    public void removeFragment() {
+        mFragmentsTitles.remove(1);
+        mFragmentsTitles.remove(2);
+
+        mFragments.remove(1);
+        mFragments.remove(2);
+    }
     public void removeAllFragment() {
         mFragments.clear();
         mFragmentsTitles.clear();
@@ -51,7 +71,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mFragments.size();
     }
-
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
     @Override
     public CharSequence getPageTitle(int position) {
         //得到对应position的Fragment的title
