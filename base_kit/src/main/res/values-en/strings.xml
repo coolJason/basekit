@@ -99,10 +99,10 @@
         <!--<item>vi</item>-->
     </string-array>
 
-    <string name="no_comment">No comments</string>
-    <string name="user_agreement">The service agreement</string>
-    <string name="user_service_agreement">User Service Agreement</string>
-    <string name="user_privacy_agreement">User Privacy Agreement</string>
+    <string name="no_comment">No rate record</string>
+    <string name="user_agreement">Service agreement</string>
+    <string name="user_service_agreement">Service agreement</string>
+    <string name="user_privacy_agreement">User privacy agreement</string>
     <string name="no_network">No network at present</string>
     <string name="message_permission_rationale">Grant the following permissions to continue:\n\n%1$s</string>
     <string name="lib_language_tips">prompt</string>
@@ -127,7 +127,7 @@
     <string name="login_chat_server">Login to chat server..</string>
     <string name="enter_the_chat_room">Enter the chat page..</string>
     <string name="sure">ok</string>
-    <string name="invite_a_prize">Invitation Award</string>
+    <string name="invite_a_prize">Refer friends</string>
     <string name="install_wx">Please download and install WeChat</string>
     <string name="come_come">COME COME</string>
     <string name="view_unread_messages">View unread messages</string>

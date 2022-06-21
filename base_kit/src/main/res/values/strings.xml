@@ -100,7 +100,7 @@
     </string-array>
 
     <string name="no_comment">No comments</string>
-    <string name="user_agreement">The service agreement</string>
+    <string name="user_agreement">Service agreement</string>
     <string name="user_service_agreement">User Service Agreement</string>
     <string name="user_privacy_agreement">User Privacy Agreement</string>
     <string name="no_network">No network at present</string>
