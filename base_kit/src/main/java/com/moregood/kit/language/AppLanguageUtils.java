@@ -10,6 +10,7 @@ import android.os.LocaleList;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.moregood.kit.R;
 import com.moregood.kit.base.BaseApplication;
