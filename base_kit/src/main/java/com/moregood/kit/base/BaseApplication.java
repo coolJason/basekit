@@ -242,15 +242,26 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
         if (Locale.getDefault().getLanguage().equals("en")) {
             return "en";
         }
-
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
-        Logger.e("appLang = " + appLang);
-        return appLang;
+        if(appLang.equals("system")){//跟随系统
+            if (Locale.getDefault().getLanguage().equals("zh")) {//0 中文 1英文
+                return "zh";
+            } else {
+                return "en";
+            }
+        }else if (appLang.equals("zh")) {//0 中文 1英文
+            return "zh";
+        } else {
+            return "en";
+        }
     }
 
+
     public LangInfo getCurrentLocale() {
-        return AppLanguageUtils.getCurrentLanInfo(getAppLanguage(this));
+        String appLang = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString(getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
+        return AppLanguageUtils.getCurrentLanInfo(appLang);
     }
 
     public abstract AccountConfig getAccountConfig();

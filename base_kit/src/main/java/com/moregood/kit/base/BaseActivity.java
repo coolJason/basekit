@@ -7,6 +7,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -31,6 +33,7 @@ import com.moregood.kit.utils.ReflectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -99,9 +102,9 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         super.onCreate(savedInstanceState);
 //        Crashlytics.log(Log.DEBUG, getClass().getName(), "Crash");
-        if (!BaseApplication.getInstance().isFollowSystemLanguage()) {
-            AppLanguageUtils.changeAppLanguage(this, BaseApplication.getInstance().getAppLanguage(this));
-        }
+//        if (!BaseApplication.getInstance().isFollowSystemLanguage()) {
+//            AppLanguageUtils.changeAppLanguage(this, BaseApplication.getInstance().getAppLanguage(this));
+//        }
         setContentView(getLayoutResID());
 
         if (getSupportActionBar() != null) {
@@ -352,7 +355,18 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         if (BaseApplication.getInstance().isFollowSystemLanguage()) {
             super.attachBaseContext(newBase);
         } else {
-            super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, newBase.getString(R.string.app_language_pref_key)));
+            String appLang = PreferenceManager.getDefaultSharedPreferences(newBase)
+                    .getString(newBase.getResources().getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
+            if (appLang.equals("system") ) {
+                if (Locale.getDefault().getLanguage().equals("zh")) {
+                    super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, "zh"));
+                }else {
+                    super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, "en"));
+                }
+            } else {
+                super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, newBase.getString(R.string.app_language_pref_key)));
+            }
+
         }
     }
 
