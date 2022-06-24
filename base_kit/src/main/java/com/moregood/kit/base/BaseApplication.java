@@ -10,10 +10,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
+import android.os.LocaleList;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -238,14 +241,25 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
             AppLanguageUtils.changeAppLanguage(this, getAppLanguage(this));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public String getAppLanguage(Context context) {
+        LocaleList localeList = LocaleList.getDefault();
+        Locale locale = null;
+        for (int i = 0; i < localeList.size(); i++) {
+            if(i==0){
+                locale = localeList.get(i);
+            }
+        }
         if (Locale.getDefault().getLanguage().equals("en")) {
             return "en";
         }
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
+        if(locale==null){
+            locale=Locale.getDefault();
+        }
         if(appLang.equals("system")){//跟随系统
-            if (Locale.getDefault().getLanguage().equals("zh")) {//0 中文 1英文
+            if (locale.getLanguage().equals("zh")) {//0 中文 1英文
                 return "zh";
             } else {
                 return "en";

@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -102,9 +103,9 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         super.onCreate(savedInstanceState);
 //        Crashlytics.log(Log.DEBUG, getClass().getName(), "Crash");
-//        if (!BaseApplication.getInstance().isFollowSystemLanguage()) {
-//            AppLanguageUtils.changeAppLanguage(this, BaseApplication.getInstance().getAppLanguage(this));
-//        }
+        if (!BaseApplication.getInstance().isFollowSystemLanguage()) {
+            AppLanguageUtils.changeAppLanguage(this, BaseApplication.getInstance().getAppLanguage(this));
+        }
         setContentView(getLayoutResID());
 
         if (getSupportActionBar() != null) {
@@ -350,6 +351,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void attachBaseContext(Context newBase) {
         if (BaseApplication.getInstance().isFollowSystemLanguage()) {
@@ -358,7 +360,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
             String appLang = PreferenceManager.getDefaultSharedPreferences(newBase)
                     .getString(newBase.getResources().getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
             if (appLang.equals("system") ) {
-                if (Locale.getDefault().getLanguage().equals("zh")) {
+                if (BaseApplication.getInstance().getAppLanguage(newBase).equals("zh")) {
                     super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, "zh"));
                 }else {
                     super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, "en"));
