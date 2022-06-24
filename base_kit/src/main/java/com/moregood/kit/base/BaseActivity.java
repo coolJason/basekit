@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ActivityCollector.addActivity(this, getClass());
+        initLanguage();
         if (isSystemForTheme) {
             if (AppUtils.isMall(this)) {
                 //https://github.com/gyf-dev/ImmersionBar   属性参考链接
@@ -134,6 +136,11 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         initView();
         initData();
+    }
+
+    private void initLanguage() {
+        String currentLanguage = AppLanguageUtils.getCurrentLanguage();
+        AppLanguageUtils.changeAppLanguage(this, currentLanguage);
     }
 
     public void updateFitSystemForTheme() {
