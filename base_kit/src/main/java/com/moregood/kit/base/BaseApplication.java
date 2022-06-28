@@ -258,7 +258,7 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
             return "en";
         }
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
+                .getString(context.getString(R.string.app_language_pref_key), "system");
 
         if (appLang.equals("system")) {//跟随系统
             if (locale.getLanguage().equals("zh")) {//0 中文 1英文
@@ -276,7 +276,7 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
 
     public LangInfo getCurrentLocale() {
         String appLang = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString(getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
+                .getString(getString(R.string.app_language_pref_key),"system");
         return AppLanguageUtils.getCurrentLanInfo(appLang);
     }
 
