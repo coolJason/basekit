@@ -241,30 +241,32 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
             AppLanguageUtils.changeAppLanguage(this, getAppLanguage(this));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public String getAppLanguage(Context context) {
-        LocaleList localeList = LocaleList.getDefault();
         Locale locale = null;
-        for (int i = 0; i < localeList.size(); i++) {
-            if(i==0){
-                locale = localeList.get(i);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            LocaleList localeList = null;
+            localeList = LocaleList.getDefault();
+            for (int i = 0; i < localeList.size(); i++) {
+                if (i == 0) {
+                    locale = localeList.get(i);
+                }
             }
+        } else {
+            locale = Locale.getDefault();
         }
         if (Locale.getDefault().getLanguage().equals("en")) {
             return "en";
         }
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
-        if(locale==null){
-            locale=Locale.getDefault();
-        }
-        if(appLang.equals("system")){//跟随系统
+
+        if (appLang.equals("system")) {//跟随系统
             if (locale.getLanguage().equals("zh")) {//0 中文 1英文
                 return "zh";
             } else {
                 return "en";
             }
-        }else if (appLang.equals("zh")) {//0 中文 1英文
+        } else if (appLang.equals("zh")) {//0 中文 1英文
             return "zh";
         } else {
             return "en";
