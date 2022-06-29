@@ -30,6 +30,15 @@ public class ResourceUtil {
     private static final String RES_RAW = "raw";
     public static final String ASSETS = "assets://";
     public static final String HTTP = "http://";
+    public static Context context;
+
+    public static void init(Context context) {
+        ResourceUtil.context = context;
+    }
+
+    public static void destroyed() {
+        ResourceUtil.context = null;
+    }
 
     public static Bitmap createBitmap(String url) {
         if (url.contains("sdcard/")) {
@@ -99,8 +108,14 @@ public class ResourceUtil {
      * @return
      */
     public static String getResString(int resId) {
+        try {
+            return ResourceUtil.context.getString(resId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return BaseApplication.getInstance().getString(resId);
     }
+
 
     /**
      * 获取格式化string
