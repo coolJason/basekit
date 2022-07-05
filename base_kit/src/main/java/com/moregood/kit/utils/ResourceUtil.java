@@ -123,6 +123,11 @@ public class ResourceUtil {
      * @return
      */
     public static String getResFormatString(int resId,Object... formatArgs) {
+        try {
+            return ResourceUtil.context.getString(resId,formatArgs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return BaseApplication.getInstance().getString(resId,formatArgs);
     }
 
