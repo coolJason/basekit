@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        android:text="暂无数据"
+        android:text="@string/list_no_data_text"
         android:textColor="#444444"
         android:textSize="13sp" />
 

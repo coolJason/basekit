@@ -134,4 +134,5 @@
     <string name="come_come">拜托拜托</string>
     <string name="view_unread_messages">查看未读消息</string>
     <string name="google_play_update_tip">当前不是最新版本，请到Google Play商店更新</string>
+    <string name="list_no_data_text">暂无数据</string>
 </resources>
