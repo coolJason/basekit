@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
@@ -246,6 +247,19 @@ public class StringUtil {
             Logger.d("createMultiColorCharSequence>>" + e.getMessage());
         }
         return builder;
+    }
+
+    public static String getDiscountPercent(String discount) {
+        String discountStr = "";
+        float discountTemp = Float.parseFloat(discount);
+        if (discountTemp > 0 && discountTemp < 10) {
+            BigDecimal subtract = BigDecimal.valueOf(10).subtract(BigDecimal.valueOf(discountTemp));
+            BigDecimal discountBgDecimal = subtract.multiply(BigDecimal.valueOf(10));
+            discountStr = discountBgDecimal.setScale(0,BigDecimal.ROUND_HALF_UP)  + "%off";
+        } else {
+            discountStr = discount + "Discount";
+        }
+        return discountStr;
     }
 
     private static int getColor(Resources resources, int color) {

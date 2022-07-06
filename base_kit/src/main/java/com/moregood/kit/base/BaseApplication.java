@@ -10,10 +10,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
+import android.os.LocaleList;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -234,19 +237,47 @@ public abstract class BaseApplication<Flavor extends IFlavors> extends Applicati
     }
 
     protected void onLanguageChange() {
-        if (!isFollowSystemLanguage())
+//        if (!isFollowSystemLanguage())
             AppLanguageUtils.changeAppLanguage(this, getAppLanguage(this));
     }
 
     public String getAppLanguage(Context context) {
+        Locale locale = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            LocaleList localeList = null;
+            localeList = LocaleList.getDefault();
+            for (int i = 0; i < localeList.size(); i++) {
+                if (i == 0) {
+                    locale = localeList.get(i);
+                }
+            }
+        } else {
+            locale = Locale.getDefault();
+        }
+//        if (Locale.getDefault().getLanguage().equals("en")) {
+//            return "en";
+//        }
         String appLang = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(context.getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
-        Logger.e("appLang = " + appLang);
-        return appLang;
+                .getString(context.getString(R.string.app_language_pref_key), "system");
+
+        if (appLang.equals("system")) {//跟随系统
+            if (locale.getLanguage().equals("zh")) {//0 中文 1英文
+                return "zh";
+            } else {
+                return "en";
+            }
+        } else if (appLang.equals("zh")) {//0 中文 1英文
+            return "zh";
+        } else {
+            return "en";
+        }
     }
 
+
     public LangInfo getCurrentLocale() {
-        return AppLanguageUtils.getCurrentLanInfo(getAppLanguage(this));
+        String appLang = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString(getString(R.string.app_language_pref_key),"system");
+        return AppLanguageUtils.getCurrentLanInfo(appLang);
     }
 
     public abstract AccountConfig getAccountConfig();

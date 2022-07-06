@@ -7,6 +7,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -16,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -31,6 +35,7 @@ import com.moregood.kit.utils.ReflectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -72,6 +77,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ActivityCollector.addActivity(this, getClass());
+        initLanguage();
         if (isSystemForTheme) {
             if (AppUtils.isMall(this)) {
                 //https://github.com/gyf-dev/ImmersionBar   属性参考链接
@@ -130,6 +136,11 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
         initView();
         initData();
+    }
+
+    private void initLanguage() {
+        String currentLanguage = AppLanguageUtils.getCurrentLanguage();
+        AppLanguageUtils.changeAppLanguage(this, currentLanguage);
     }
 
     public void updateFitSystemForTheme() {
@@ -347,12 +358,24 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void attachBaseContext(Context newBase) {
         if (BaseApplication.getInstance().isFollowSystemLanguage()) {
             super.attachBaseContext(newBase);
         } else {
-            super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, newBase.getString(R.string.app_language_pref_key)));
+            String appLang = PreferenceManager.getDefaultSharedPreferences(newBase)
+                    .getString(newBase.getResources().getString(R.string.app_language_pref_key), Locale.CHINESE.getLanguage());
+            if (appLang.equals("system") ) {
+                if (BaseApplication.getInstance().getAppLanguage(newBase).equals("zh")) {
+                    super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, "zh"));
+                }else {
+                    super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, "en"));
+                }
+            } else {
+                super.attachBaseContext(AppLanguageUtils.attachBaseContext(newBase, newBase.getString(R.string.app_language_pref_key)));
+            }
+
         }
     }
 

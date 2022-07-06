@@ -32,6 +32,7 @@
 
 
     <string-array name="pref_language_titles" translatable="false">
+        <item>@string/Language_system</item>
         <item>@string/Language_cn</item>
         <item>@string/Language_en</item>
         <!--<item>@string/Language_cn_tw</item>-->
@@ -78,6 +79,7 @@
     <!--    </string-array>-->
 
     <string-array name="pref_language_values" translatable="false">
+        <item>system</item>
         <item>zh</item>
         <item>en</item>
         <!--<item>zh-hant</item>-->
@@ -99,37 +101,37 @@
         <!--<item>vi</item>-->
     </string-array>
 
-    <string name="no_comment">No comments</string>
-    <string name="user_agreement">Service agreement</string>
-    <string name="user_service_agreement">User Service Agreement</string>
-    <string name="user_privacy_agreement">User Privacy Agreement</string>
-    <string name="no_network">No network at present</string>
-    <string name="message_permission_rationale">Grant the following permissions to continue:\n\n%1$s</string>
-    <string name="lib_language_tips">prompt</string>
-    <string name="lib_language_app_requires_permission">The APP requires the following permissions</string>
-    <string name="lib_language_settings">Setting</string>
-    <string name="lib_language_cancel">Cancel</string>
-    <string name="confirm">Confirm</string>
-    <string name="support_scope_tips">Currently only dubai、sharjah、ajman、umm al quwain、ras al khaimah、fujairah delivery is supported，We tried to broaden the scope~</string>
-    <string name="refund">Refund</string>
-    <string name="contact_merchant">Contact the merchant</string>
-    <string name="contact_rider">Contact with the rider</string>
-    <string name="copy_success">Copy success</string>
+    <string name="no_comment">无评论记录</string>
+    <string name="user_agreement">服务协议</string>
+    <string name="user_service_agreement">用户服务协议</string>
+    <string name="user_privacy_agreement">用户隐私协议</string>
+    <string name="no_network">当前无网络</string>
+    <string name="message_permission_rationale">授予下列权限以继续程序:\n\n%1$s</string>
+    <string name="lib_language_tips">提示</string>
+    <string name="lib_language_app_requires_permission">App需要以下权限</string>
+    <string name="lib_language_settings">设置</string>
+    <string name="lib_language_cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="support_scope_tips">目前仅支持dubai、sharjah、ajman、umm al quwain、ras al khaimah、fujairah 区域配送，小拜会努力扩大范围的~</string>
+    <string name="refund">申请退款</string>
+    <string name="contact_merchant">联系商家</string>
+    <string name="contact_rider">联系骑手</string>
+    <string name="copy_success">复制成功</string>
     <string name="ge">个</string>
-    <string name="save_success">Save success</string>
-    <string name="save_fail">Save failed</string>
-    <string name="contact_customer">Contact customer service</string>
-    <string name="frozen_tip">Sorry, your account has been frozen,\n please contact customer service to unfreeze.</string>
-    <string name="download_complete_install_now">Downloaded, install now</string>
-    <string name="download_failed_install_now">Failed, download again</string>
-    <string name="upgrade_now">Upgrade now</string>
-    <string name="upgrade_later">Upgrade later</string>
-    <string name="login_chat_server">Login to chat server..</string>
-    <string name="enter_the_chat_room">Enter the chat page..</string>
-    <string name="sure">ok</string>
-    <string name="invite_a_prize">Invitation Award</string>
-    <string name="install_wx">Please download and install WeChat</string>
+    <string name="save_success">保存成功</string>
+    <string name="save_fail">保存失败</string>
+    <string name="contact_customer">联系客服</string>
+    <string name="frozen_tip">很抱歉，您的账号已被冻结,\n请联系客服解冻。</string>
+    <string name="download_complete_install_now">下载完成,立即安装</string>
+    <string name="download_failed_install_now">下载失败，重新下载</string>
+    <string name="upgrade_now">立即更新</string>
+    <string name="upgrade_later">暂不更新</string>
+    <string name="login_chat_server">登录聊天服务器..</string>
+    <string name="enter_the_chat_room">进入聊天页面..</string>
+    <string name="sure">确定</string>
+    <string name="invite_a_prize">邀请有奖</string>
+    <string name="install_wx">请下载安装微信</string>
     <string name="come_come">拜托拜托</string>
     <string name="view_unread_messages">查看未读消息</string>
-    <string name="google_play_update_tip">To Google Play update</string>
+    <string name="google_play_update_tip">当前不是最新版本，请到Google Play商店更新</string>
 </resources>
