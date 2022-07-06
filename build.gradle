@@ -10,7 +10,9 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
-        maven { url MAVEN_REPO_RELEASE_URL }
+        maven { 
+       allowInsecureProtocol = true
+        url MAVEN_REPO_RELEASE_URL }
         jcenter()
         mavenCentral()
         google()
@@ -46,7 +48,9 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
-        maven { url MAVEN_REPO_RELEASE_URL }
+        maven { 
+allowInsecureProtocol = true
+url MAVEN_REPO_RELEASE_URL }
         jcenter()
         mavenCentral()
         google()
