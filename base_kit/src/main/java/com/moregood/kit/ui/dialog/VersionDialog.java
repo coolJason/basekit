@@ -23,7 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moregood.kit.R;
+import com.moregood.kit.base.BaseApplication;
+import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.FileDownloader;
+import com.moregood.kit.utils.ToastUtil;
 
 import java.io.File;
 
@@ -90,6 +93,9 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         progress_bar = view.findViewById(R.id.progress_bar);
         tv_title = view.findViewById(R.id.tv_title);
         tv_title.setText(title);
+        if (AppUtils.getChannelName(BaseApplication.getInstance()).equals("google")) {
+            tv_update.setText(getContext().getString(R.string.google_play_update_tip));
+        }
         tv_content.setText(content.replace("\\n", "\n"));
         tv_version_name.setText(versionName);
         iv_finish.setOnClickListener(this);
@@ -116,8 +122,23 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         if (v.getId() == R.id.tv_no_update || v.getId() == R.id.iv_finish) {
             dismiss();
         } else if (v.getId() == R.id.tv_update) {
-            updata();
+            if (AppUtils.getChannelName(BaseApplication.getInstance()).equals("google")) {
+                startGooglePlay(BaseApplication.getInstance().getPackageName(), getContext());
+            } else {
+                updata();
+            }
         }
+    }
+
+    public static void startGooglePlay(String packageName, Context context) {
+        if ((packageName == null) || (packageName.length() == 0)) {
+            return;
+        }
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.setPackage("com.android.vending");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setData(Uri.parse("market://details?id=" + packageName));
+        context.startActivity(intent);
     }
 
     public void updata() {
