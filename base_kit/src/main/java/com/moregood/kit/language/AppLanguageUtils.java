@@ -1,10 +1,12 @@
 package com.moregood.kit.language;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.LocaleList;
 import android.preference.PreferenceManager;
@@ -127,5 +129,23 @@ public class AppLanguageUtils {
         String key = BaseApplication.getInstance().getString(R.string.app_language_pref_key);
         String language = PreferenceManager.getDefaultSharedPreferences(BaseApplication.getInstance()).getString(key, "en");
         return language;
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public static Drawable getCountryDrawable(Context context, String lang) {
+        switch (lang) {
+            case "zh":
+                return context.getDrawable(R.drawable.ic_country_china);
+            case "brazil":
+                return context.getDrawable(R.drawable.ic_country_brazil);
+            case "in":
+                return context.getDrawable(R.drawable.ic_country_indonesia);
+            case "thailand":
+                return context.getDrawable(R.drawable.ic_country_thailand);
+            case "turkey":
+                return context.getDrawable(R.drawable.ic_country_turkey);
+            default:
+                return context.getDrawable(R.drawable.ic_country_en);
+        }
     }
 }
