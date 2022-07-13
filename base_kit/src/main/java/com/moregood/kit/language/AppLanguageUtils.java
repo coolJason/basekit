@@ -28,8 +28,11 @@ import java.util.Locale;
  */
 
 public class AppLanguageUtils {
-
+    private static final String CHINESE_KEY = "CN";
+    private static final String ARAB_KEY = "AE";
+    private static final String THAILAND_KEY = "TH";
     private static HashMap<String, LangInfo> mAllLanguages = new HashMap<String, LangInfo>();
+    private static HashMap<String, String> mServiceLanguage = new HashMap<>();
 
     public static void init(String[] languageTitle, String[] languageValue, TypedArray ar, Locale[] locales) {
         for (int i = 0; i < languageTitle.length; i++) {
@@ -38,6 +41,9 @@ public class AppLanguageUtils {
             int icon = ar.getResourceId(i, 0);
             mAllLanguages.put(languageValue[i], new LangInfo(title, value, icon, locales[i]));
         }
+        mServiceLanguage.put(CHINESE_KEY, "CN");
+        mServiceLanguage.put(ARAB_KEY, "AE");
+        mServiceLanguage.put(THAILAND_KEY, "TH");
     }
 
 
@@ -133,17 +139,38 @@ public class AppLanguageUtils {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public static Drawable getCountryDrawable(Context context, String lang) {
+        /*String tempLang = " ";
+        if (lang.contains("86")) {
+            tempLang = "86";
+        } else if (lang.contains("90")) {
+            tempLang = "90";
+        } else if (lang.contains("55")) {
+            tempLang = "55";
+        } else if (lang.contains("66")) {
+            tempLang = "66";
+        } else if (lang.contains("44")) {
+            tempLang = "44";
+        } else if (lang.contains("62")) {
+            tempLang = "62";
+        }*/
         switch (lang) {
             case "zh":
+            case "中国":
+            case CHINESE_KEY:
                 return context.getDrawable(R.drawable.ic_country_china);
             case "brazil":
                 return context.getDrawable(R.drawable.ic_country_brazil);
             case "in":
                 return context.getDrawable(R.drawable.ic_country_indonesia);
             case "thailand":
+            case THAILAND_KEY:
                 return context.getDrawable(R.drawable.ic_country_thailand);
             case "turkey":
                 return context.getDrawable(R.drawable.ic_country_turkey);
+            case "阿联酋":
+            case "阿拉伯联合酋长国":
+            case ARAB_KEY:
+                return context.getDrawable(R.drawable.ic_country_arab);
             default:
                 return context.getDrawable(R.drawable.ic_country_en);
         }
