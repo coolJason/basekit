@@ -55,6 +55,7 @@ public interface Constans {
     int USER_TYPE_GROUP_BUG = 2;
     String LBS = "lbs";
     String DEL_ADDRESS = "delAddress";
+    String DEL_EDIT_ADDRESS = "delEditAddress";
     String IS_ALL_GESTURES_ENABLED = "isAllGesturesEnabled";
     String TYPE = "type";
     String ORDER_REFRESH = "order_refresh";

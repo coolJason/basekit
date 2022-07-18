@@ -66,6 +66,10 @@ public class AppUtils {
         return "";
     }
 
+    public static boolean isGoogleChannel(Context mContext) {
+        return AppUtils.getChannelName(mContext).equals("google");
+    }
+
     /**
      * 获取渠道名
      *
