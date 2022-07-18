@@ -58,5 +58,7 @@ public interface Constans {
     String IS_ALL_GESTURES_ENABLED = "isAllGesturesEnabled";
     String TYPE = "type";
     String ORDER_REFRESH = "order_refresh";
+    String TIME = "time";//后台时间
+    String REFRESH_FOREGROUND = "refresh_foreground";//后台时间
 
 }
