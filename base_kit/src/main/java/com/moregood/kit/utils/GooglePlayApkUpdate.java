@@ -26,6 +26,7 @@ public class GooglePlayApkUpdate {
     public static int UPDATE_APK_REQUEST_CODE = 20081;
     public static AppUpdateManager appUpdateManager;
     public static Activity activity;
+    private static InstallStateUpdatedListener listener;
     private static int UPDATE_TYPE;
 
     public static void update(final Activity context) {
@@ -67,7 +68,7 @@ public class GooglePlayApkUpdate {
             });
 
             //创建监听器跟踪请求状态更新
-            InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
+            listener = new InstallStateUpdatedListener() {
                 @Override
                 public void onStateUpdate(@NonNull InstallState state) {
                     //（可选）提供下载进度栏
@@ -83,6 +84,7 @@ public class GooglePlayApkUpdate {
                     }
                     if (state.installStatus() == InstallStatus.CANCELED) {
                         Log.e("Octo","CANCELED");
+                        appUpdateManager.unregisterListener(listener);
                     }
                     if (state.installStatus() == InstallStatus.FAILED) {
                         Log.e("Octo","FAILED");
@@ -137,5 +139,6 @@ public class GooglePlayApkUpdate {
 
     public static void onDestroy() {
         activity = null;
+        appUpdateManager.unregisterListener(listener);
     }
 }
