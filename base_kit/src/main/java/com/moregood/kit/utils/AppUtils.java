@@ -67,6 +67,7 @@ public class AppUtils {
     }
 
     public static boolean isGoogleChannel(Context mContext) {
+//        return false;
         return AppUtils.getChannelName(mContext).equals("google");
     }
 
