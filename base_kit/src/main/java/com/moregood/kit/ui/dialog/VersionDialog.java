@@ -1,5 +1,6 @@
 package com.moregood.kit.ui.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 
@@ -24,20 +25,23 @@ import android.widget.Toast;
 
 import com.moregood.kit.R;
 import com.moregood.kit.base.BaseApplication;
+import com.moregood.kit.dialog.LoadingDialog;
 import com.moregood.kit.utils.AppUtils;
 import com.moregood.kit.utils.FileDownloader;
+import com.moregood.kit.utils.GooglePlayApkUpdate;
 import com.moregood.kit.utils.ToastUtil;
 
 import java.io.File;
 
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
 
 
 /**
  * 提示版本升级
  */
 public class VersionDialog extends Dialog implements View.OnClickListener {
-    private Context context;
+    private Activity context;
     private String content;//升级内容
     private String apkUrl;//apk下载地址
     private String versionName;
@@ -57,7 +61,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
 
     private boolean isInstall = false;
 
-    public VersionDialog(Context context, String apkUrl, String content, String versionName, String title, boolean isShow, boolean isBack) {
+    public VersionDialog(Activity context, String apkUrl, String content, String versionName, String title, boolean isShow, boolean isBack) {
         super(context);
         this.context = context;
         this.content = content;
@@ -71,7 +75,7 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
         initView();
     }
 
-    public VersionDialog(Context context) {
+    public VersionDialog(Activity context) {
         super(context);
         this.context = context;
         sdcardPath = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/";
@@ -123,7 +127,11 @@ public class VersionDialog extends Dialog implements View.OnClickListener {
             dismiss();
         } else if (v.getId() == R.id.tv_update) {
             if (AppUtils.getChannelName(BaseApplication.getInstance()).equals("google")) {
-                startGooglePlay(BaseApplication.getInstance().getPackageName(), getContext());
+//                startGooglePlay(BaseApplication.getInstance().getPackageName(), getContext());
+                GooglePlayApkUpdate.update(context, isBack ? 0 : 1);
+                if (isBack) {
+                    dismiss();
+                }
             } else {
                 updata();
             }
