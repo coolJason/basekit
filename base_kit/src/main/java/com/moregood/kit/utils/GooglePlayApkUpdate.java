@@ -139,6 +139,8 @@ public class GooglePlayApkUpdate {
 
     public static void onDestroy() {
         activity = null;
-        appUpdateManager.unregisterListener(listener);
+        if (appUpdateManager != null) {
+            appUpdateManager.unregisterListener(listener);
+        }
     }
 }
