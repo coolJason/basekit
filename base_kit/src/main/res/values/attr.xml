@@ -43,6 +43,42 @@
 
     </declare-styleable>
 
+    <!--行文本内容-->
+    <declare-styleable name="DeliveryVoucherRowView">
+        <attr name="dvRowTitle" format="string" />
+        <attr name="dvRowTitleSize" format="dimension" />
+        <attr name="dvRowValueSize" format="dimension" />
+        <attr name="dvRowIconSize" format="dimension" />
+        <attr name="dvRowValue" format="string" />
+        <attr name="dvRowTitleColor" format="reference" />
+        <attr name="dvRowIconColor" format="reference" />
+        <attr name="dvRowValueColor" format="reference" />
+        <attr name="dvRowStartTitleIcon" format="reference" />
+        <attr name="dvRowTitleIconPadding" format="dimension" />
+        <attr name="dvRowValueIconPadding" format="dimension" />
+        <attr name="dvRowEndTitleIcon" format="reference" />
+        <attr name="dvRowStartValueIcon" format="reference" />
+        <attr name="dvRowEndValueIcon" format="reference" />
+        <attr name="dvRowIconBg" format="reference" />
+        <attr name="dvRowIconWidth" format="dimension" />
+        <attr name="dvRowIconPadding" format="dimension" />
+
+        <attr name="dvRowSelectedVoucherBg" format="reference" />
+        <attr name="dvRowSelectedText" format="reference" />
+        <attr name="dvRowSelectedColor" format="reference" />
+        <attr name="dvRowSelectedSize" format="reference" />
+
+        <attr name="dvRowShareBg" format="reference" />
+        <attr name="dvRowShareColor" format="reference" />
+        <attr name="dvRowShareText" format="reference" />
+        <attr name="dvRowShareSize" format="reference" />
+
+        <attr name="dvRowNoVoucherTipColor" format="reference" />
+        <attr name="dvRowNoVoucherTipSize" format="dimension" />
+        <attr name="dvRowNoVoucherTipText" format="reference" />
+
+    </declare-styleable>
+
     <declare-styleable name="TagsLayout">
         <attr name="tagVerticalSpace" format="dimension" />
         <attr name="tagHorizontalSpace" format="dimension" />
