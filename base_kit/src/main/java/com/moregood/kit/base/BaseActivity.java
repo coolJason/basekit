@@ -358,7 +358,6 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void attachBaseContext(Context newBase) {
         if (BaseApplication.getInstance().isFollowSystemLanguage()) {
