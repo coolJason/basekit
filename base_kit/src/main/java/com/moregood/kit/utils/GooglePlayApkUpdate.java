@@ -16,6 +16,7 @@ import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
+import com.moregood.kit.base.BaseApplication;
 import com.moregood.kit.dialog.LoadingDialog;
 
 import static com.google.android.play.core.install.model.AppUpdateType.FLEXIBLE;
@@ -40,7 +41,7 @@ public class GooglePlayApkUpdate {
             } else {
                 UPDATE_TYPE = FLEXIBLE;
             }
-            appUpdateManager = AppUpdateManagerFactory.create(context);
+            appUpdateManager = AppUpdateManagerFactory.create(BaseApplication.getInstance());
             Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
             appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
                 @Override
