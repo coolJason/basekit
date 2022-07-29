@@ -97,7 +97,7 @@ public class DeliveryVoucherRowView extends MGHLinearLayout {
         //已选优惠券
         int selectedVoucherBg = tya.getResourceId(R.styleable.DeliveryVoucherRowView_dvRowSelectedVoucherBg, 0);
         String selectedVoucherText = tya.getString(R.styleable.DeliveryVoucherRowView_dvRowSelectedText);
-        int selectedVoucherColor = tya.getColor(R.styleable.DeliveryVoucherRowView_dvRowSelectedColor, Color.parseColor("#666666"));
+        int selectedVoucherColor = tya.getColor(R.styleable.DeliveryVoucherRowView_dvRowSelectedColor, Color.parseColor("#FC3748"));
         float selectedVoucherSize = tya.getDimension(R.styleable.DeliveryVoucherRowView_dvRowSelectedSize, getResources().getDimension(R.dimen.sp_24));
 
         mTvSelected.setTextSize(TypedValue.COMPLEX_UNIT_PX, selectedVoucherSize);
@@ -106,8 +106,8 @@ public class DeliveryVoucherRowView extends MGHLinearLayout {
         if (!TextUtils.isEmpty(selectedVoucherText))
             mTvSelected.setText(selectedVoucherText);
 
-//        if (selectedVoucherBg != 0)
-//            mTvSelected.setBackgroundResource(selectedVoucherBg);
+        if (selectedVoucherBg != 0)
+            mTvSelected.setBackgroundResource(selectedVoucherBg);
 
         //分享领券
         int shareBg = tya.getResourceId(R.styleable.DeliveryVoucherRowView_dvRowShareBg, 0);
@@ -153,7 +153,7 @@ public class DeliveryVoucherRowView extends MGHLinearLayout {
         }
 
         iconView.setBackgroundResource(iconBg);
-        ConstraintLayout.LayoutParams layoutParam = new ConstraintLayout.LayoutParams(iconWidth, iconWidth);
+        LinearLayout.LayoutParams layoutParam = new LinearLayout.LayoutParams(iconWidth, iconWidth);
         layoutParam.rightMargin = (int) getResources().getDimension(R.dimen.dp_10);
         iconView.setLayoutParams(layoutParam);
         iconView.setPadding(rowIconPadding, rowIconPadding, rowIconPadding, rowIconPadding);
@@ -162,9 +162,9 @@ public class DeliveryVoucherRowView extends MGHLinearLayout {
     public void setValue(String value) {
         valueView.setText(value);
     }
-    public void setDeliveryValue(String value) {
-        mTvSelected.setText(value);
-    }
+//    public void setDeliveryValue(String value) {
+//        mTvSelected.setText(value);
+//    }
 
     public void setTitle(String value) {
         titleView.setText(value);
