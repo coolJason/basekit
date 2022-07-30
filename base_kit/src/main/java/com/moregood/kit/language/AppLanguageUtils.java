@@ -169,10 +169,11 @@ public class AppLanguageUtils {
                 return context.getDrawable(R.drawable.ic_country_turkey);
             case "阿联酋":
             case "阿拉伯联合酋长国":
+            case "United Arab Emirates":
             case ARAB_KEY:
-                return context.getDrawable(R.drawable.ic_country_arab);
+                context.getDrawable(R.drawable.ic_country_arab);
             default:
-                return context.getDrawable(R.drawable.ic_country_en);
+                return context.getDrawable(R.drawable.ic_country_arab);
         }
     }
 }

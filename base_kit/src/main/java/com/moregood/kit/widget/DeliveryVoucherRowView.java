@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.moregood.kit.R;
 import com.moregood.kit.utils.LogUtils;
@@ -152,7 +153,7 @@ public class DeliveryVoucherRowView extends MGHLinearLayout {
         }
 
         iconView.setBackgroundResource(iconBg);
-        LayoutParams layoutParam = new LinearLayout.LayoutParams(iconWidth, iconWidth);
+        LinearLayout.LayoutParams layoutParam = new LinearLayout.LayoutParams(iconWidth, iconWidth);
         layoutParam.rightMargin = (int) getResources().getDimension(R.dimen.dp_10);
         iconView.setLayoutParams(layoutParam);
         iconView.setPadding(rowIconPadding, rowIconPadding, rowIconPadding, rowIconPadding);
@@ -161,6 +162,9 @@ public class DeliveryVoucherRowView extends MGHLinearLayout {
     public void setValue(String value) {
         valueView.setText(value);
     }
+//    public void setDeliveryValue(String value) {
+//        mTvSelected.setText(value);
+//    }
 
     public void setTitle(String value) {
         titleView.setText(value);
