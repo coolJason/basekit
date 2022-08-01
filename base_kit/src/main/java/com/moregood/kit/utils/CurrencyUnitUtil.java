@@ -45,7 +45,7 @@ public class CurrencyUnitUtil {
      */
     public static String checkUnit(String unit) {
         if (TextUtils.isEmpty(unit)) {
-            return "AED";
+            return getUnit();
         }
         return unit;
     }
