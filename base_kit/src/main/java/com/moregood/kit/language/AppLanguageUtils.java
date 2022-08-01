@@ -28,9 +28,11 @@ import java.util.Locale;
  */
 
 public class AppLanguageUtils {
-    private static final String CHINESE_KEY = "CN";
-    private static final String ARAB_KEY = "AE";
-    private static final String THAILAND_KEY = "TH";
+    //服务端定义的国家标识
+    private static final String CHINESE_KEY = "CN";//中国
+    private static final String ARAB_KEY = "AE";//迪拜
+    private static final String THAILAND_KEY = "TH";//泰国
+    private static final String INDONESIA_KEY = "ID";//印尼
     private static HashMap<String, LangInfo> mAllLanguages = new HashMap<String, LangInfo>();
     private static HashMap<String, String> mServiceLanguage = new HashMap<>();
 
@@ -161,6 +163,7 @@ public class AppLanguageUtils {
             case "brazil":
                 return context.getDrawable(R.drawable.ic_country_brazil);
             case "in":
+            case INDONESIA_KEY:
                 return context.getDrawable(R.drawable.ic_country_indonesia);
             case "thailand":
             case THAILAND_KEY:
