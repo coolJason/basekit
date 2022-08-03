@@ -11,6 +11,7 @@ import android.text.TextUtils;
 public class CurrencyUnitUtil {
 
     private static final String KEY_CURRENCY_UNI = "KEY_CURRENCY_UNI";
+    public static final String TYPE_UNI_IDR = "IDR";//印度尼西亚货币单位
     private static String unit = "";
 
     /**

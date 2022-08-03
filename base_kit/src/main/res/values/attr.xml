@@ -118,4 +118,8 @@
         </attr>
         <attr name="offset" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="CurrencyTextView">
+        <attr name="enableAutoUnit" format="boolean" />
+    </declare-styleable>
 </resources>
