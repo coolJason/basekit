@@ -1,6 +1,7 @@
 package com.moregood.kit.utils;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,8 +15,9 @@ import java.math.RoundingMode;
 public class PriceFormatUtil {
 
     public static String format(float price) {
+        Log.e("xxxxxxx", "float-price:" + price);
         try {
-            return format(new BigDecimal(price), null);
+            return format(new BigDecimal("" + price), null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -23,8 +25,9 @@ public class PriceFormatUtil {
     }
 
     public static String format(double price) {
+        Log.e("xxxxxxx", "double-price:" + price);
         try {
-            return format(new BigDecimal(price), null);
+            return format(new BigDecimal("" + price), null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,8 +35,9 @@ public class PriceFormatUtil {
     }
 
     public static String format(int price) {
+        Log.e("xxxxxxx", "int-price:" + price);
         try {
-            return format(new BigDecimal(price), null);
+            return format(new BigDecimal("" + price), null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,8 +45,9 @@ public class PriceFormatUtil {
     }
 
     public static String format(long price) {
+        Log.e("xxxxxxx", "long-price:" + price);
         try {
-            return format(new BigDecimal(price), null);
+            return format(new BigDecimal("" + price), null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,6 +55,7 @@ public class PriceFormatUtil {
     }
 
     public static String format(String price) {
+        Log.e("xxxxxxx", "String-price:" + price);
         try {
             return format(new BigDecimal(price), null);
         } catch (Exception e) {
@@ -59,6 +65,7 @@ public class PriceFormatUtil {
     }
 
     public static String format(BigDecimal price) {
+        Log.e("xxxxxxx", "BigDecimal-price:" + price.toPlainString());
         try {
             return format(price, null);
         } catch (Exception e) {
@@ -68,22 +75,23 @@ public class PriceFormatUtil {
     }
 
     /**
-     * 格式化金额
+     * 格式化金额-允许小数位末尾带0
      *
      * @param price 需要格式化的金额
      * @param unit  金额的单位，传空的话，默认取上次储存的单位
      * @return
      */
     public static String format(BigDecimal price, String unit) {
+        Log.e("xxxxxxx", "price:" + price.toPlainString() + "|unit:" + unit + "|getUnit:" + CurrencyUnitUtil.getUnit());
         try {
             if (TextUtils.isEmpty(unit)) {
                 unit = CurrencyUnitUtil.getUnit();
             }
             if (unit.equals(CurrencyUnitUtil.TYPE_UNI_IDR)) {
-                //印尼货币，需要把金额转为整数
-                String price1 = price.setScale(0, RoundingMode.HALF_UP).toPlainString();
+                //印尼货币，需要把金额转为整数,向下取整
+                String priceIDR = price.setScale(0, RoundingMode.DOWN).toPlainString();
                 //每隔三位加一个"."
-                return getFileAddSpace(price1);
+                return strAddComma(priceIDR);
             } else {
                 return compareNumber(price);
             }
@@ -94,24 +102,25 @@ public class PriceFormatUtil {
     }
 
     /**
-     * 格式化数字
+     * 格式化金额-不允许小数位末尾带0
      *
-     * @param number 需要格式化的数字
+     * @param price 需要格式化的金额
+     * @param unit  金额的单位，传空的话，默认取上次储存的单位
      * @return
      */
-    private static String compareNumber(BigDecimal number) {
+    public static String formatNoZeros(BigDecimal price, String unit) {
+        Log.e("xxxxxxx", "price:" + price.toPlainString() + "|unit:" + unit + "|getUnit:" + CurrencyUnitUtil.getUnit());
         try {
-            if (number != null) {
-                if (new BigDecimal(number.intValue()).compareTo(number) == 0) {
-                    //整数
-                    return number.toPlainString();
-                } else {//小数
-                    if (number.scale() > 1) {//超过一位小数
-                        return number.setScale(2, RoundingMode.HALF_UP).toPlainString();
-                    } else {//只有一位小数
-                        return number.toPlainString();
-                    }
-                }
+            if (TextUtils.isEmpty(unit)) {
+                unit = CurrencyUnitUtil.getUnit();
+            }
+            if (unit.equals(CurrencyUnitUtil.TYPE_UNI_IDR)) {
+                //印尼货币，需要把金额转为整数,向下取整
+                String priceIDR = price.setScale(0, RoundingMode.DOWN).toPlainString();
+                //每隔三位加一个"."
+                return strAddComma(priceIDR);
+            } else {
+                return compareNumberNoZeros(price);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,14 +129,41 @@ public class PriceFormatUtil {
     }
 
     /**
-     * 每隔3位添加一个.
+     * 格式化数字-允许小数位末尾带0
      *
-     * @param replace 需要更改的内容
+     * @param number 需要格式化的数字
      * @return
      */
-    private static String getFileAddSpace(String replace) {
+    public static String compareNumber(BigDecimal number) {
         try {
-            return strAddComma(replace);
+            if (number != null) {
+//                if (number.scale() > 2) {//超过2位小数，四舍五入只显示两位小数，并且去掉末尾的0
+                    return number.setScale(2, RoundingMode.HALF_UP).toPlainString();
+//                } else {//低于两位小数去掉末尾的0
+//                    return number.toPlainString();
+//                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * 格式化数字-不允许小数位末尾带0
+     *
+     * @param number 需要格式化的数字
+     * @return
+     */
+    public static String compareNumberNoZeros(BigDecimal number) {
+        try {
+            if (number != null) {
+                if (number.scale() > 2) {//超过2位小数，四舍五入只显示两位小数，并且去掉末尾的0
+                    return number.setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString();
+                } else {//低于两位小数去掉末尾的0
+                    return number.stripTrailingZeros().toPlainString();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -138,7 +174,8 @@ public class PriceFormatUtil {
      * 将每三个数字（或字符）加上逗号处理（通常使用金额方面的编辑）
      * 5000000.00 --> 5,000,000.00
      * 20000000 --> 20,000,000
-     * @param str  无逗号的数字
+     *
+     * @param str 无逗号的数字
      * @return 加上逗号的数字
      */
     public static String strAddComma(String str) {
@@ -186,7 +223,8 @@ public class PriceFormatUtil {
      * 将加上逗号处理的数字（字符）的逗号去掉 （通常使用金额方面的编辑）
      * 5,000,000.00 --> 5000000.00
      * 20,000,000 --> 20000000
-     * @param str  加上逗号的数字（字符）
+     *
+     * @param str 加上逗号的数字（字符）
      * @return 无逗号的数字（字符）
      */
     public static String strRemoveComma(String str) {
@@ -194,7 +232,8 @@ public class PriceFormatUtil {
             if (str == null) {
                 str = "";
             }
-            String resultStr = str.replaceAll(",", ""); // 需要去除逗号的字符串（整数）
+//            String resultStr = str.replaceAll(",", ""); // 需要去除逗号的字符串（整数）
+            String resultStr = str.replaceAll(".", "");
             return resultStr;
         } catch (Exception e) {
             e.printStackTrace();
